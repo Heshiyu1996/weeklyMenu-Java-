@@ -29,8 +29,13 @@ public class StaffDaoImpl implements StaffDao {
 //	}
 
 	@Override
-	public Staff queryStaff(int sid) {
+	public Staff queryStaff(String sid) {
 		return sqlSession.selectOne("selectStaff", sid);
+	}
+
+	@Override
+	public Staff queryBySid(String sid) {
+		return sqlSession.selectOne("queryBySid", sid);
 	}
 
 

@@ -3,27 +3,30 @@ package com.entity;
 
 public class Staff {
 
-	private int sid;
+	private String sid;
 	
 	private String sname; //员工名字
 	
 	private String smobile; //员工手机
 	
+	
+    private String spassword;
+	
 	public Staff() {
 	}
 	
-	public Staff(int sid, String sname, String smobile) {
+	public Staff(String sid, String sname, String smobile) {
 		super();
 		this.sid = sid;
 		this.sname = sname;
 		this.smobile = smobile;
 	}
 
-	public int getsid() {
+	public String getsid() {
 		return sid;
 	}
 
-	public void setsid(int sid) {
+	public void setsid(String sid) {
 		this.sid = sid;
 	}
 
@@ -41,6 +44,15 @@ public class Staff {
 
 	public void setSmobile(String smobile) {
 		this.smobile = smobile;
+	}
+
+    
+	public String getSpassword() {
+		return spassword;
+	}
+
+	public void setSpassword(String spassword) {
+		this.spassword = spassword;
 	}
 
 
