@@ -37,12 +37,17 @@ public class StaffController {
 //	查询员工
 	@ResponseBody
 	@RequestMapping(value ="/queryStaff.do")
-	public Map<String, Object> queryStaff(String sid){
+	public Map<String, Object> queryStaff(String sid, HttpSession seesion){
 		Staff staff = staffService.queryStaff(sid);
+		String sid_session=(String)seesion.getAttribute("sid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("sid",staff.getsid());
-		map.put("sname", staff.getSname());
-		map.put("smobile", staff.getSmobile());
+		if(sid_session==null){
+			map.put("msg", "请先登录");
+		} else {
+			map.put("sid",staff.getsid());
+			map.put("sname", staff.getSname());
+			map.put("smobile", staff.getSmobile());
+		}
 		return map;
 	}
 //	登录
@@ -54,7 +59,7 @@ public class StaffController {
 		Staff checkUser = staffService.checkPassword(sid, spassword);
 		// 登录成功
 		if (checkUser != null) {
-			session.setAttribute("sid", checkUser.getsid());
+			session.setAttribute("sid_session", checkUser.getsid());
 			map.put("status", true);
 			map.put("msg", "登录成功");
 			map.put("uid", checkUser.getsid());
