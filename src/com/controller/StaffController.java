@@ -37,13 +37,13 @@ public class StaffController {
 //	查询员工
 	@ResponseBody
 	@RequestMapping(value ="/queryStaff.do")
-	public Map<String, Object> queryStaff(String sid, HttpSession seesion){
-		Staff staff = staffService.queryStaff(sid);
-		String sid_session=(String)seesion.getAttribute("sid_session");
+	public Map<String, Object> queryStaff(HttpSession session){
+		String sid=(String)session.getAttribute("sid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(sid_session==null){
+		if(sid==null){
 			map.put("msg", "请先登录");
 		} else {
+			Staff staff = staffService.getStaffBySid(sid);
 			map.put("sid",staff.getsid());
 			map.put("sname", staff.getSname());
 			map.put("smobile", staff.getSmobile());

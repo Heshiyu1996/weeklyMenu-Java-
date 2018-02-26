@@ -9,7 +9,7 @@ public interface StaffService {
 	 * @param 	sid   工号
 	 * @return  Staff 员工
 	 */
-	public Staff queryStaff(String sid);
+	public Staff getStaffBySid(String sid);
 	
 	/**
 	 * 根据昵称和密码获取用户

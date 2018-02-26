@@ -26,7 +26,7 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public Staff queryStaff(String sid) {
+	public Staff getStaffBySid(String sid) {
 		return staffDao.queryStaff(sid);
 	}
 
