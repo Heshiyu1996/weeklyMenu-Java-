@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.inject.New;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,7 +36,7 @@ public class StaffController {
 	}
 //	查询员工
 	@ResponseBody
-	@RequestMapping(value ="/queryStaff.do")
+	@RequestMapping(value ="/getUserInfo")
 	public Map<String, Object> queryStaff(HttpSession session){
 		String sid=(String)session.getAttribute("sid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
@@ -57,7 +56,7 @@ public class StaffController {
 		return map;
 	}
 //	登录
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody
 	Map<String, Object> loginUser(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="sid")String sid, @RequestParam(value="spassword")String spassword) {
 		System.out.println("用户名："+sid);
@@ -66,12 +65,12 @@ public class StaffController {
 		// 登录成功
 		if (checkUser != null) {
 			session.setAttribute("sid_session", checkUser.getsid());
-			map.put("status", true);
 			map.put("msg", "登录成功");
 			map.put("uid", checkUser.getsid());
+			map.put("success", true);
 		} else {
-			map.put("status", false);
-			map.put("msg", "登录失败");
+			map.put("msg", "登录失败，请检查密码是否正确");
+			map.put("success", false);
 		}
 
 		return map;
