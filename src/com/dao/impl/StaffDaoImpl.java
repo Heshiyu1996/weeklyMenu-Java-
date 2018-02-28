@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.dao.DBAccess;
 import com.dao.StaffDao;
 import com.entity.Staff;
-@Repository
+@Repository("staffDao")
 public class StaffDaoImpl implements StaffDao {
 
 	

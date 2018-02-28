@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
@@ -27,6 +27,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="com/dao/StaffMapper.xml" />
 		<mapper class="com.entity.Staff" />
+		<mapper resource="com/dao/FeedBackMapper.xml" />
+		<mapper class="com.entity.FeedBack" />
 	</mappers>
 	
 </configuration>
