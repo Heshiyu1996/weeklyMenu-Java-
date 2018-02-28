@@ -9,9 +9,10 @@ public class Staff {
 	
 	private String smobile; //员工手机
 	
-	
     private String spassword;
-	
+    
+    private int stype; //员工身份类型
+
 	public Staff() {
 	}
 	
@@ -20,6 +21,7 @@ public class Staff {
 		this.sid = sid;
 		this.sname = sname;
 		this.smobile = smobile;
+		this.stype = stype;
 	}
 
 	public String getsid() {
@@ -54,11 +56,19 @@ public class Staff {
 	public void setSpassword(String spassword) {
 		this.spassword = spassword;
 	}
+	
+	public int getStype() {
+		return stype;
+	}
+
+	public void setStype(int stype) {
+		this.stype = stype;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Staff [sid=" + sid + ", sname=" + sname + ", smobile=" + smobile +"]";
+		return "Staff [sid=" + sid + ", sname=" + sname + ", smobile=" + smobile +", stype=" + stype +"]";
 	}
 	
 	

@@ -49,7 +49,8 @@ public class StaffController {
 			userMap.put("sid",staff.getsid());
 			userMap.put("sname", staff.getSname());
 			userMap.put("smobile", staff.getSmobile());
-			map.put("msg", "获取用户信息");
+			userMap.put("stype", staff.getStype());
+			map.put("msg", "获取用户信息成功");
 			map.put("relatedObject", userMap);
 			map.put("success", true);
 		}

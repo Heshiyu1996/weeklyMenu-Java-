@@ -30,12 +30,6 @@ public class StaffServiceImpl implements StaffService {
 		return staffDao.queryStaff(sid);
 	}
 
-	/**
-	 * 根据昵称和密码获取用户
-	 * @param 	sid  		工号
-	 * @param	spassword   密码
-	 * @return  Staff 		员工
-	 */
 	@Override
 	public Staff checkPassword(String sid,String spassword) {
 
