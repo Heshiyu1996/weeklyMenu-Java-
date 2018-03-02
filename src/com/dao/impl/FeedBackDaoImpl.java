@@ -28,5 +28,12 @@ public class FeedBackDaoImpl implements FeedBackDao {
 		return list;
 	}
 
+	@Override
+	public int insertFeedBack(FeedBack fb) {
+		int row =sqlSession.insert("insertFeedBack", fb);
+		sqlSession.commit();
+		return row;
+	}
+
 
 }

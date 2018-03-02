@@ -6,10 +6,10 @@ import com.entity.FeedBack;
 
 public interface FeedBackService {
 
-	/**
-	 * 获取反馈列表
-	 * @param 	sid   工号
-	 * @return  Staff 员工
-	 */
+	// 获取反馈列表
 	public List<FeedBack> getFeedBackList();
+
+	// 新增反馈
+	public boolean insertFeedBack(FeedBack fb);
+	
 }

@@ -1,5 +1,8 @@
 package com.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,15 +27,16 @@ import com.service.FeedBackService;
 public class FeedBackController {
 
 	@Autowired
-	private FeedBackService FeedBackService = null;
+	private FeedBackService feedBackService = null;
 
 	public FeedBackService getFeedBackService() {
-		return FeedBackService;
+		return feedBackService;
 	}
 
-	public void setFeedBackService(FeedBackService FeedBackService) {
-		this.FeedBackService = FeedBackService;
+	public void setFeedBackService(FeedBackService feedBackService) {
+		this.feedBackService = feedBackService;
 	}
+	
 //	获取反馈列表
 	@ResponseBody
 	@RequestMapping(value ="/getFeedBackList")
@@ -43,13 +47,35 @@ public class FeedBackController {
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
-			List<FeedBack> feedBack = FeedBackService.getFeedBackList();
+			List<FeedBack> feedBack = feedBackService.getFeedBackList();
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
 			map.put("msg", "获取反馈列表成功");
 			map.put("relatedObject", listMap);
 			map.put("success", true);
 		}
+		return map;
+	}
+
+//	新增反馈
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> insertFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="userId")String userId, @RequestParam(value="user")String user, @RequestParam(value="content")String content) {
+		FeedBack fb = new FeedBack();
+		fb.setTime(new Date());
+		fb.setUserId(userId);
+		fb.setUser(user);
+		fb.setContent(content);
+		boolean isAdd = feedBackService.insertFeedBack(fb);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "提交反馈成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "提交反馈失败");
+			map.put("success", false);
+		}
+
 		return map;
 	}
 }

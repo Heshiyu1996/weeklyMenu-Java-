@@ -28,5 +28,15 @@ public class FeedBackServiceImpl implements FeedBackService {
 	public List<FeedBack> getFeedBackList() {
 		return feedBackDao.getFeedBackList();
 	}
+
+	@Override
+	public boolean insertFeedBack(FeedBack fb) {
+		boolean flag=false;
+		try {
+			flag=(feedBackDao.insertFeedBack(fb)==1)?true:false;
+		} catch (Exception e) {
+		}
+		return flag;
+	}
 	
 }
