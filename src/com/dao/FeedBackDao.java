@@ -13,4 +13,6 @@ public interface FeedBackDao {
 	
     int insertFeedBack(FeedBack fb);
 	
+    int updateFeedBack(FeedBack fb);
+	
 }

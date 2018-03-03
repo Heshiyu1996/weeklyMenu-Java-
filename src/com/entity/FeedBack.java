@@ -9,7 +9,7 @@ import com.tool.DateSerializer;
 
 public class FeedBack {
 
-	private String fid;
+	private int fid;
 
     @JsonSerialize(using=DateSerializer.class)
 	private Date time; //反馈时间
@@ -22,14 +22,15 @@ public class FeedBack {
     
     private int isReplied; //是否得到回复
     
-    private int repliedMsg; //回复的内容
-    
-    private int repliedTime; //回复的时间
+    private String repliedMsg; //回复的内容
+
+    @JsonSerialize(using=DateSerializer.class)
+    private Date repliedTime; //回复的时间
 
 	public FeedBack() {
 	}
 
-	public FeedBack(String fid, String content, Date time, String user,
+	public FeedBack(int fid, String content, Date time, String user,
 			int isReplied) {
 		super();
 		this.fid = fid;
@@ -39,11 +40,11 @@ public class FeedBack {
 		this.isReplied = isReplied;
 	}
 
-	public String getFid() {
+	public int getFid() {
 		return fid;
 	}
 
-	public void setFid(String fid) {
+	public void setFid(int fid) {
 		this.fid = fid;
 	}
 
@@ -87,19 +88,19 @@ public class FeedBack {
 		this.isReplied = isReplied;
 	}
 
-	public int getRepliedMsg() {
+	public String getRepliedMsg() {
 		return repliedMsg;
 	}
 
-	public void setRepliedMsg(int repliedMsg) {
+	public void setRepliedMsg(String repliedMsg) {
 		this.repliedMsg = repliedMsg;
 	}
 
-	public int getRepliedTime() {
+	public Date getRepliedTime() {
 		return repliedTime;
 	}
 
-	public void setRepliedTime(int repliedTime) {
+	public void setRepliedTime(Date repliedTime) {
 		this.repliedTime = repliedTime;
 	}
 

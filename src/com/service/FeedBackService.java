@@ -12,4 +12,7 @@ public interface FeedBackService {
 	// 新增反馈
 	public boolean insertFeedBack(FeedBack fb);
 	
+	// 回复反馈
+	public boolean updateFeedBack(FeedBack fb);
+	
 }

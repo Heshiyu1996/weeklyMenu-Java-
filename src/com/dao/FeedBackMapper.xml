@@ -15,19 +15,12 @@
 	  #{content,jdbcType=VARCHAR})
 	</insert>
   
-<!-- 
 	<update id="updateFeedBack" parameterType="com.entity.FeedBack" >
 	  update feedback
-	  set fid = #{aname,jdbcType=VARCHAR},
-	    time = #{apassword,jdbcType=VARCHAR},
-	    userId = #{atype,jdbcType=VARCHAR},
-	    user = #{atype,jdbcType=VARCHAR},
-	    content = #{atype,jdbcType=VARCHAR},
-	    isReplied = #{atype,jdbcType=VARCHAR},
-	    repliedMsg = #{atype,jdbcType=VARCHAR},
-	    repliedTime = #{atype,jdbcType=VARCHAR}
-	  where fid = #{aid,jdbcType=INTEGER}
+	  set isReplied = #{isReplied,jdbcType=VARCHAR},
+	    repliedMsg = #{repliedMsg,jdbcType=VARCHAR},
+	    repliedTime = #{repliedTime,jdbcType=TIMESTAMP}
+	  where fid = #{fid,jdbcType=INTEGER}
 	</update>
- -->	
 	
 </mapper> 

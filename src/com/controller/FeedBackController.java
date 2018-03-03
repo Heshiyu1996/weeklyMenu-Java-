@@ -78,4 +78,26 @@ public class FeedBackController {
 
 		return map;
 	}
+
+//	回复反馈
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="fid")int fid, @RequestParam(value="isReplied")int isReplied, @RequestParam(value="repliedMsg")String repliedMsg) {
+		FeedBack fb = new FeedBack();
+		fb.setFid(fid);
+		fb.setIsReplied(isReplied);
+		fb.setRepliedMsg(repliedMsg);
+		fb.setRepliedTime(new Date());
+		boolean isAdd = feedBackService.updateFeedBack(fb);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "回复反馈成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "回复反馈失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
 }
