@@ -20,7 +20,7 @@ public class FeedBack {
 	
 	private String content; //反馈内容
     
-    private int isReplied; //是否得到回复
+    private Integer isReplied; //是否得到回复
     
     private String repliedMsg; //回复的内容
 
@@ -80,11 +80,11 @@ public class FeedBack {
 		this.user = user;
 	}
 
-	public int getIsReplied() {
+	public Integer getIsReplied() {
 		return isReplied;
 	}
 
-	public void setIsReplied(int isReplied) {
+	public void setIsReplied(Integer isReplied) {
 		this.isReplied = isReplied;
 	}
 

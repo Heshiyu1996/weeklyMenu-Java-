@@ -25,8 +25,8 @@ public class FeedBackServiceImpl implements FeedBackService {
 	}
 
 	@Override
-	public List<FeedBack> getFeedBackList() {
-		return feedBackDao.getFeedBackList();
+	public List<FeedBack> getFeedBackList(FeedBack fb) {
+		return feedBackDao.getFeedBackList(fb);
 	}
 
 	@Override

@@ -22,8 +22,9 @@ public class FeedBackDaoImpl implements FeedBackDao {
 	}
 
 	@Override
-	public List<FeedBack> getFeedBackList() {
-		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack");
+	public List<FeedBack> getFeedBackList(FeedBack fb) {
+		System.out.println(fb);
+		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack", fb);
 		return list;
 	}
 
