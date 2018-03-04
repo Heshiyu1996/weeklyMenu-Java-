@@ -8,6 +8,12 @@ public interface FeedBackService {
 
 	// 获取反馈列表
 	public List<FeedBack> getFeedBackList();
+	
+	// 根据userId获取反馈列表
+	public List<FeedBack> getFeedBackListByUserId(String userId);
+	
+	// 根据fid获取反馈详情
+	public FeedBack getFeedBackListById(int fid);
 
 	// 新增反馈
 	public boolean insertFeedBack(FeedBack fb);

@@ -10,7 +10,6 @@ import com.dao.FeedBackDao;
 import com.entity.FeedBack;
 @Repository("feedBackDao")
 public class FeedBackDaoImpl implements FeedBackDao {
-
 	
 	private SqlSession sqlSession = DBAccess.getSqlSession();
 
@@ -26,6 +25,18 @@ public class FeedBackDaoImpl implements FeedBackDao {
 	public List<FeedBack> getFeedBackList() {
 		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack");
 		return list;
+	}
+
+	@Override
+	public List<FeedBack> getFeedBackListByUserId(String userId) {
+		List<FeedBack> list = sqlSession.selectList("selectFeedBackListByUserId", userId);
+		return list;
+	}
+
+	@Override
+	public FeedBack getFeedBackById(int fid) {
+		FeedBack fb = sqlSession.selectOne("selectFeedBackListById", fid);
+		return fb;
 	}
 
 	@Override

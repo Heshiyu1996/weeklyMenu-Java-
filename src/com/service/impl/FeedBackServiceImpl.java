@@ -30,6 +30,16 @@ public class FeedBackServiceImpl implements FeedBackService {
 	}
 
 	@Override
+	public List<FeedBack> getFeedBackListByUserId(String userId) {
+		return feedBackDao.getFeedBackListByUserId(userId);
+	}
+
+	@Override
+	public FeedBack getFeedBackListById(int fid) {
+		return feedBackDao.getFeedBackById(fid);
+	}
+
+	@Override
 	public boolean insertFeedBack(FeedBack fb) {
 		boolean flag=false;
 		try {

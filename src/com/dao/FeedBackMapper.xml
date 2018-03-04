@@ -5,7 +5,17 @@
 	<select id="selectAllFeedBack" resultType="com.entity.FeedBack">
 			select * from feedback
 	</select>
+
+	<select id="selectFeedBackListByUserId" resultType="com.entity.FeedBack" parameterType="java.lang.String" >
+			select * from feedback
+			where userId = #{userId,jdbcType=VARCHAR}
+	</select>
 	
+	<select id="selectFeedBackListById" resultType="com.entity.FeedBack" parameterType="java.lang.Integer" >
+			select * from feedback
+			where fid = #{fid,jdbcType=INTEGER}
+	</select>
+  
 	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" >
 	  insert into feedback (time, userId, user, content)
 	  values (
@@ -14,7 +24,7 @@
 	  #{user,jdbcType=VARCHAR}, 
 	  #{content,jdbcType=VARCHAR})
 	</insert>
-  
+
 	<update id="updateFeedBack" parameterType="com.entity.FeedBack" >
 	  update feedback
 	  set isReplied = #{isReplied,jdbcType=VARCHAR},

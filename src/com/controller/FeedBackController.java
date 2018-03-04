@@ -57,6 +57,44 @@ public class FeedBackController {
 		return map;
 	}
 
+//	根据userId获取反馈列表
+	@ResponseBody
+	@RequestMapping(value ="/getFeedBackListByUserId")
+	public Map<String, Object> getFeedBackListByUserId(HttpSession session){
+		String sid=(String)session.getAttribute("sid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(sid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			List<FeedBack> feedBack = feedBackService.getFeedBackListByUserId(sid);
+			Map<String, Object> listMap=new HashMap<String, Object>();
+			listMap.put("myList", feedBack);
+			map.put("msg", "获取我的反馈列表成功");
+			map.put("relatedObject", listMap);
+			map.put("success", true);
+		}
+		return map;
+	}
+
+//	根据fid获取反馈详情
+	@ResponseBody
+	@RequestMapping(value ="/getFeedBackListById")
+	public Map<String, Object> getFeedBackListById(HttpSession session, @RequestParam(value="fid")int fid){
+		String sid=(String)session.getAttribute("sid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(sid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			FeedBack feedBack = feedBackService.getFeedBackListById(fid);
+			map.put("msg", "获取反馈详情成功");
+			map.put("relatedObject", feedBack);
+			map.put("success", true);
+		}
+		return map;
+	}
+	
 //	新增反馈
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody

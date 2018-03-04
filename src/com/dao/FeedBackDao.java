@@ -11,6 +11,10 @@ public interface FeedBackDao {
 	
 	public List<FeedBack> getFeedBackList();
 	
+	public List<FeedBack> getFeedBackListByUserId(String userId);
+	
+	public FeedBack getFeedBackById(int fid);
+	
     int insertFeedBack(FeedBack fb);
 	
     int updateFeedBack(FeedBack fb);
