@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FeedBackDao {
 	
-	public List<FeedBack> getFeedBackList(FeedBack fb);
+	public List<FeedBack> getFeedBackList(Integer isReplied, String order);
 	
 	public List<FeedBack> getFeedBackListByUserId(String userId);
 	

@@ -40,17 +40,16 @@ public class FeedBackController {
 //	获取反馈列表
 	@ResponseBody
 	@RequestMapping(value ="/getFeedBackList")
-	public Map<String, Object> getFeedBackList(HttpSession session, @RequestParam(value="isReplied", required=false)Integer isReplied){
+	public Map<String, Object> getFeedBackList(HttpSession session, @RequestParam(value="isReplied", required=false)Integer isReplied, @RequestParam(value="order", required=false)String order){
 		String sid=(String)session.getAttribute("sid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
 		if(sid==null){
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
-			FeedBack fb = new FeedBack();
-			fb.setIsReplied(isReplied);
 			System.out.println("controller:" + isReplied);
-			List<FeedBack> feedBack = feedBackService.getFeedBackList(fb);
+			System.out.println("controller:" + order);
+			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
 			map.put("msg", "获取反馈列表成功");

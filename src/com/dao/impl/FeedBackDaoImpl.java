@@ -1,6 +1,8 @@
 package com.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -22,9 +24,12 @@ public class FeedBackDaoImpl implements FeedBackDao {
 	}
 
 	@Override
-	public List<FeedBack> getFeedBackList(FeedBack fb) {
-		System.out.println(fb);
-		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack", fb);
+	public List<FeedBack> getFeedBackList(Integer isReplied, String order) {
+		System.out.println("我看到了order：" + order);
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("isReplied", isReplied);
+		args.put("order", order);
+		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack", args);
 		return list;
 	}
 

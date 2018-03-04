@@ -7,7 +7,7 @@ import com.entity.FeedBack;
 public interface FeedBackService {
 
 	// 获取反馈列表
-	public List<FeedBack> getFeedBackList(FeedBack fb);
+	public List<FeedBack> getFeedBackList(Integer isReplied, String order);
 	
 	// 根据userId获取反馈列表
 	public List<FeedBack> getFeedBackListByUserId(String userId);
