@@ -43,15 +43,4 @@ public class FeedBackServiceImpl implements FeedBackService {
 		}
 		return flag;
 	}
-
-	@Override
-	public boolean updateFeedBack(FeedBack fb) {
-		boolean flag=false;
-		try {
-			flag=(feedBackDao.updateFeedBack(fb)==1)?true:false;
-		} catch (Exception e) {
-		}
-		return flag;
-	}
-
 }

@@ -30,4 +30,14 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.loadFeedBackList(isReplied, order);
 	}
 
+	@Override
+	public boolean updateFeedBack(FeedBack fb) {
+		boolean flag=false;
+		try {
+			flag=(adminDao.updateFeedBack(fb)==1)?true:false;
+		} catch (Exception e) {
+		}
+		return flag;
+	}
+
 }

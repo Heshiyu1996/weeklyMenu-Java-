@@ -35,13 +35,5 @@
 	  #{user,jdbcType=VARCHAR}, 
 	  #{content,jdbcType=VARCHAR})
 	</insert>
-
-	<update id="updateFeedBack" parameterType="com.entity.FeedBack" >
-	  update feedback
-	  set isReplied = #{isReplied,jdbcType=VARCHAR},
-	    repliedMsg = #{repliedMsg,jdbcType=VARCHAR},
-	    repliedTime = #{repliedTime,jdbcType=TIMESTAMP}
-	  where fid = #{fid,jdbcType=INTEGER}
-	</update>
 	
 </mapper> 

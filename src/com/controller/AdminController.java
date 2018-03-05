@@ -68,7 +68,7 @@ public class AdminController {
 		fb.setIsReplied(isReplied);
 		fb.setRepliedMsg(repliedMsg);
 		fb.setRepliedTime(new Date());
-		boolean isAdd = feedBackService.updateFeedBack(fb);
+		boolean isAdd = adminService.updateFeedBack(fb);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
 			map.put("msg", "回复反馈成功");

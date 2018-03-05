@@ -11,4 +11,6 @@ public interface AdminDao {
 	
 	public List<FeedBack> loadFeedBackList(Integer isReplied, String order);
 	
+    int updateFeedBack(FeedBack fb);
+	
 }

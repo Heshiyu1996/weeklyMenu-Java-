@@ -33,5 +33,12 @@ public class AdminDaoImpl implements AdminDao {
 		return list;
 	}
 
+	@Override
+	public int updateFeedBack(FeedBack fb) {
+		int result = sqlSession.update("updateFeedBackAdmin", fb);
+		sqlSession.commit();
+		return result;
+	}
+
 
 }

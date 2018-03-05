@@ -13,5 +13,13 @@
 				order by time ${order}
 			</if>
 	</select>
+
+	<update id="updateFeedBackAdmin" parameterType="com.entity.FeedBack" >
+	  update feedback
+	  set isReplied = #{isReplied,jdbcType=VARCHAR},
+	    repliedMsg = #{repliedMsg,jdbcType=VARCHAR},
+	    repliedTime = #{repliedTime,jdbcType=TIMESTAMP}
+	  where fid = #{fid,jdbcType=INTEGER}
+	</update>
 	
 </mapper> 
