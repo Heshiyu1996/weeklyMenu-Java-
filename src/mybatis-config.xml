@@ -25,12 +25,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	
 	<mappers>
-		<mapper resource="com/dao/StaffMapper.xml" />
-		<mapper class="com.entity.Staff" />
+		<mapper resource="com/dao/UserMapper.xml" />
+		<mapper class="com.entity.User" />
 		<mapper resource="com/dao/FeedBackMapper.xml" />
 		<mapper class="com.entity.FeedBack" />
 		<mapper resource="com/dao/AdminMapper.xml" />
-		<mapper class="com.entity.FeedBack" />
 	</mappers>
 	
 </configuration>

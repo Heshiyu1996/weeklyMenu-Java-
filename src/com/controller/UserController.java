@@ -16,23 +16,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.entity.Staff;
-import com.service.StaffService;
+import com.entity.User;
+import com.service.UserService;
 
 @Controller
 @RequestMapping("/staff")
-public class StaffController {
+public class UserController {
 
 
 	@Autowired
-	private StaffService staffService = null;
+	private UserService userService = null;
 
-	public StaffService getStaffService() {
-		return staffService;
+	public UserService getStaffService() {
+		return userService;
 	}
 
-	public void setStaffService(StaffService staffService) {
-		this.staffService = staffService;
+	public void setStaffService(UserService userService) {
+		this.userService = userService;
 	}
 //	查询员工
 	@ResponseBody
@@ -44,12 +44,12 @@ public class StaffController {
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
-			Staff staff = staffService.getStaffBySid(sid);
+			User user = userService.getStaffBySid(sid);
 			Map<String, Object> userMap=new HashMap<String, Object>();
-			userMap.put("sid",staff.getsid());
-			userMap.put("sname", staff.getSname());
-			userMap.put("smobile", staff.getSmobile());
-			userMap.put("stype", staff.getStype());
+			userMap.put("sid",user.getsid());
+			userMap.put("sname", user.getSname());
+			userMap.put("smobile", user.getSmobile());
+			userMap.put("stype", user.getStype());
 			map.put("msg", "获取用户信息成功");
 			map.put("relatedObject", userMap);
 			map.put("success", true);
@@ -62,7 +62,7 @@ public class StaffController {
 	Map<String, Object> loginUser(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="sid")String sid, @RequestParam(value="spassword")String spassword) {
 		System.out.println("用户名："+sid);
 		Map<String, Object> map = new HashMap<String, Object>();
-		Staff checkUser = staffService.checkPassword(sid, spassword);
+		User checkUser = userService.checkPassword(sid, spassword);
 		// 登录成功
 		if (checkUser != null) {
 			session.setAttribute("sid_session", checkUser.getsid());

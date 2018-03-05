@@ -3,7 +3,7 @@
 <mapper namespace="com.dao.FeedBackMapper">
 
 	<select id="selectAllFeedBack" resultType="com.entity.FeedBack" parameterType="java.util.Map" >
-			select * from feedback
+			select * from feedbacks
 			<where>
 	     		<if test="isReplied != -1" >
 					and isReplied = #{isReplied,jdbcType=INTEGER}
@@ -18,17 +18,17 @@
 	</select>
 
 	<select id="selectFeedBackListByUserId" resultType="com.entity.FeedBack" parameterType="java.lang.String" >
-			select * from feedback
+			select * from feedbacks
 			where userId = #{userId,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectFeedBackListById" resultType="com.entity.FeedBack" parameterType="java.lang.Integer" >
-			select * from feedback
+			select * from feedbacks
 			where fid = #{fid,jdbcType=INTEGER}
 	</select>
   
 	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" >
-	  insert into feedback (time, userId, user, content)
+	  insert into feedbacks (time, userId, user, content)
 	  values (
 	  #{time,jdbcType=TIMESTAMP}, 
 	  #{userId,jdbcType=VARCHAR}, 

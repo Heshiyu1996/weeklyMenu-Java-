@@ -6,10 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dao.DBAccess;
-import com.dao.StaffDao;
-import com.entity.Staff;
-@Repository("staffDao")
-public class StaffDaoImpl implements StaffDao {
+import com.dao.UserDao;
+import com.entity.User;
+@Repository("userDao")
+public class UserDaoImpl implements UserDao {
 
 	
 	private SqlSession sqlSession = DBAccess.getSqlSession();
@@ -29,12 +29,12 @@ public class StaffDaoImpl implements StaffDao {
 //	}
 
 	@Override
-	public Staff queryStaff(String sid) {
+	public User queryStaff(String sid) {
 		return sqlSession.selectOne("selectStaff", sid);
 	}
 
 	@Override
-	public Staff queryBySid(String sid) {
+	public User queryBySid(String sid) {
 		return sqlSession.selectOne("queryBySid", sid);
 	}
 

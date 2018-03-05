@@ -1,15 +1,15 @@
 package com.service;
 
-import com.entity.Staff;
+import com.entity.User;
 
-public interface StaffService {
+public interface UserService {
 
 	/**
 	 * 根据工号获取用户
 	 * @param 	sid   工号
 	 * @return  Staff 员工
 	 */
-	public Staff getStaffBySid(String sid);
+	public User getStaffBySid(String sid);
 	
 	/**
 	 * 根据昵称和密码获取用户
@@ -17,5 +17,5 @@ public interface StaffService {
 	 * @param	spassword   密码
 	 * @return  Staff 		员工
 	 */
-	Staff checkPassword(String sid,String spassword);
+	User checkPassword(String sid,String spassword);
 }

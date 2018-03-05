@@ -3,7 +3,7 @@
 <mapper namespace="com.dao.AdminMapper">
 
 	<select id="selectAllFeedBackAdmin" resultType="com.entity.FeedBack" parameterType="java.util.Map" >
-			select * from feedback
+			select * from feedbacks
 			<where>
 	     		<if test="isReplied != -1" >
 					and isReplied = #{isReplied,jdbcType=INTEGER}
@@ -15,7 +15,7 @@
 	</select>
 
 	<update id="updateFeedBackAdmin" parameterType="com.entity.FeedBack" >
-	  update feedback
+	  update feedbacks
 	  set isReplied = #{isReplied,jdbcType=VARCHAR},
 	    repliedMsg = #{repliedMsg,jdbcType=VARCHAR},
 	    repliedTime = #{repliedTime,jdbcType=TIMESTAMP}

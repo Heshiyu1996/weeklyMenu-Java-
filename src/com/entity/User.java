@@ -1,7 +1,7 @@
 package com.entity;
 
 
-public class Staff {
+public class User {
 
 	private String sid;
 	
@@ -13,10 +13,10 @@ public class Staff {
     
     private int stype; //员工身份类型
 
-	public Staff() {
+	public User() {
 	}
 	
-	public Staff(String sid, String sname, String smobile) {
+	public User(String sid, String sname, String smobile) {
 		super();
 		this.sid = sid;
 		this.sname = sname;

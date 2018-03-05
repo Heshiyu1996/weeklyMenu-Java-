@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dao.StaffMapper">
+<mapper namespace="com.dao.UserMapper">
 
-	<resultMap id="BaseResultMap" type="com.entity.Staff" >
+	<resultMap id="BaseResultMap" type="com.entity.User" >
 	  <id column="sid" property="sid" jdbcType="INTEGER" />
 	  <result column="sname" property="sname" jdbcType="VARCHAR" />
 	  <result column="spassword" property="spassword" jdbcType="VARCHAR" />
@@ -15,17 +15,17 @@
 	</sql>
 	
 	<!-- 类的属性和表的列名是一致的，所以可以正常运行 -->
-	<select id="selectAllStaff" resultType="Staff">
-			select * from staff
+	<select id="selectAllStaff" resultType="com.entity.User">
+			select * from users
 	</select>
-	<select id="selectStaff" resultType="com.entity.Staff">
-			select sid,sname,smobile,stype from staff where sid = #{sid}
+	<select id="selectStaff" resultType="com.entity.User">
+			select sid,sname,smobile,stype from users where sid = #{sid}
 	</select>
 	
 	<select id="queryBySid" resultMap="BaseResultMap" parameterType="java.lang.String" >
 	  select 
 	  <include refid="Base_Column_List" />
-	  from staff
+	  from users
 	  where sid = #{sid,jdbcType=INTEGER}
 	</select>
 	
