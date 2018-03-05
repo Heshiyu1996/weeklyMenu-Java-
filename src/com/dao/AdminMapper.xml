@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.AdminMapper">
+
+	<select id="selectAllFeedBackAdmin" resultType="com.entity.FeedBack" parameterType="java.util.Map" >
+			select * from feedback
+			<where>
+	     		<if test="isReplied != -1" >
+					and isReplied = #{isReplied,jdbcType=INTEGER}
+				</if>
+			</where>
+     		<if test="order != null" >
+				order by time ${order}
+			</if>
+	</select>
+	
+</mapper> 

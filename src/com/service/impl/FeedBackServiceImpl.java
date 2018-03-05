@@ -25,13 +25,8 @@ public class FeedBackServiceImpl implements FeedBackService {
 	}
 
 	@Override
-	public List<FeedBack> getFeedBackList(Integer isReplied, String order) {
-		return feedBackDao.getFeedBackList(isReplied, order);
-	}
-
-	@Override
-	public List<FeedBack> getFeedBackListByUserId(String userId) {
-		return feedBackDao.getFeedBackListByUserId(userId);
+	public List<FeedBack> getFeedBackList(Integer isReplied, String order, String userId) {
+		return feedBackDao.getFeedBackList(isReplied, order, userId);
 	}
 
 	@Override

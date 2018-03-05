@@ -24,18 +24,12 @@ public class FeedBackDaoImpl implements FeedBackDao {
 	}
 
 	@Override
-	public List<FeedBack> getFeedBackList(Integer isReplied, String order) {
-		System.out.println("我看到了order：" + order);
+	public List<FeedBack> getFeedBackList(Integer isReplied, String order, String userId) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("isReplied", isReplied);
 		args.put("order", order);
+		args.put("userId", userId);
 		List<FeedBack> list = sqlSession.selectList("selectAllFeedBack", args);
-		return list;
-	}
-
-	@Override
-	public List<FeedBack> getFeedBackListByUserId(String userId) {
-		List<FeedBack> list = sqlSession.selectList("selectFeedBackListByUserId", userId);
 		return list;
 	}
 

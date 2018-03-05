@@ -66,6 +66,7 @@ public class StaffController {
 		// 登录成功
 		if (checkUser != null) {
 			session.setAttribute("sid_session", checkUser.getsid());
+			session.setAttribute("stype_session", checkUser.getStype());
 			map.put("msg", "登录成功");
 			map.put("uid", checkUser.getsid());
 			map.put("success", true);

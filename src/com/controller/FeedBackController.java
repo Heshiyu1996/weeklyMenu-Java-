@@ -49,30 +49,11 @@ public class FeedBackController {
 		} else {
 			System.out.println("controller:" + isReplied);
 			System.out.println("controller:" + order);
-			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order);
+			System.out.println("controller:" + sid);
+			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order, sid);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
 			map.put("msg", "获取反馈列表成功");
-			map.put("relatedObject", listMap);
-			map.put("success", true);
-		}
-		return map;
-	}
-
-//	根据userId获取反馈列表
-	@ResponseBody
-	@RequestMapping(value ="/getFeedBackListByUserId")
-	public Map<String, Object> getFeedBackListByUserId(HttpSession session){
-		String sid=(String)session.getAttribute("sid_session");
-		Map<String,Object> map=new HashMap<String, Object>();
-		if(sid==null){
-			map.put("success", false);
-			map.put("msg", "Session已过期，请重新登录！");
-		} else {
-			List<FeedBack> feedBack = feedBackService.getFeedBackListByUserId(sid);
-			Map<String, Object> listMap=new HashMap<String, Object>();
-			listMap.put("myList", feedBack);
-			map.put("msg", "获取我的反馈列表成功");
 			map.put("relatedObject", listMap);
 			map.put("success", true);
 		}
