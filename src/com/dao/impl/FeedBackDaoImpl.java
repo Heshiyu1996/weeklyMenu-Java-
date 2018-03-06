@@ -35,7 +35,7 @@ public class FeedBackDaoImpl implements FeedBackDao {
 
 	@Override
 	public FeedBack getFeedBackById(int fid) {
-		FeedBack fb = sqlSession.selectOne("selectFeedBackListById", fid);
+		FeedBack fb = sqlSession.selectOne("selectFeedBackById", fid);
 		return fb;
 	}
 

@@ -18,9 +18,12 @@
 			</if>
 	</select>
 	
-	<select id="selectFeedBackListById" resultType="com.entity.FeedBack" parameterType="java.lang.Integer" >
-			select * from feedbacks
-			where fid = #{fid,jdbcType=INTEGER}
+	<select id="selectFeedBackById" resultType="com.entity.FeedBack" parameterType="java.lang.Integer" >
+			select *, uname as user
+			from feedbacks as A
+			natural join users as B
+			where A.userId = B.uid
+			and fid = #{fid,jdbcType=INTEGER}
 	</select>
   
 	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" >
