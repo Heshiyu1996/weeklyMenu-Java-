@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,26 @@ public class FoodController {
 		map.put("msg", "获取食物信息成功");
 		map.put("relatedObject", food);
 		map.put("success", true);
+		return map;
+	}
+
+
+//	新增浏览量
+	@RequestMapping(value = "/addVisitCount", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId) {
+		Food food = new Food();
+		food.setFoodId(foodId);
+		boolean isAdd = foodService.addVisitCount(food);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "新增浏览量成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "新增浏览量失败");
+			map.put("success", false);
+		}
+
 		return map;
 	}
 }

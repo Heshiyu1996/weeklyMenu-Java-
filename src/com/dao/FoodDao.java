@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface FoodDao {
 	
     Food queryByFoodId(int foodId);
+    
+    int addVisitCount(Food food);
 	
 }

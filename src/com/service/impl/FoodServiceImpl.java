@@ -29,4 +29,14 @@ public class FoodServiceImpl implements FoodService {
 		return foodDao.queryByFoodId(foodId);
 	}
 
+	@Override
+	public boolean addVisitCount(Food food) {
+		boolean flag=false;
+		try {
+			flag=(foodDao.addVisitCount(food)==1)?true:false;
+		} catch (Exception e) {
+		}
+		return flag;
+	}
+
 }

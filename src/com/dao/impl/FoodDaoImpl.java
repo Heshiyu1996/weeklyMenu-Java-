@@ -27,5 +27,12 @@ public class FoodDaoImpl implements FoodDao {
 		return sqlSession.selectOne("queryByFoodId", foodId);
 	}
 
+	@Override
+	public int addVisitCount(Food food) {
+		int result = sqlSession.update("addVisitCount", food);
+		sqlSession.commit();
+		return result;
+	}
+
 
 }

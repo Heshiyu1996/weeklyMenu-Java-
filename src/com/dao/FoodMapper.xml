@@ -25,4 +25,10 @@
 		and foodId = #{foodId,jdbcType=INTEGER}
 	</select>
 	
+	<select id="addVisitCount" parameterType="com.entity.Food" >
+		update foods
+		set visitCount=visitCount+1
+		where foodId = #{foodId,jdbcType=INTEGER}
+	</select>
+	
 </mapper>

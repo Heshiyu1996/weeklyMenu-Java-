@@ -41,16 +41,16 @@ public class FeedBackController {
 	@ResponseBody
 	@RequestMapping(value ="/getFeedBackList")
 	public Map<String, Object> getFeedBackList(HttpSession session, @RequestParam(value="isReplied", required=false)Integer isReplied, @RequestParam(value="order", required=false)String order){
-		String sid=(String)session.getAttribute("sid_session");
+		String uid=(String)session.getAttribute("uid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(sid==null){
+		if(uid==null){
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
 			System.out.println("controller:" + isReplied);
 			System.out.println("controller:" + order);
-			System.out.println("controller:" + sid);
-			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order, sid);
+			System.out.println("controller:" + uid);
+			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order, uid);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
 			map.put("msg", "获取反馈列表成功");
@@ -64,9 +64,9 @@ public class FeedBackController {
 	@ResponseBody
 	@RequestMapping(value ="/getFeedBackListById")
 	public Map<String, Object> getFeedBackListById(HttpSession session, @RequestParam(value="fid")int fid){
-		String sid=(String)session.getAttribute("sid_session");
+		String uid=(String)session.getAttribute("uid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(sid==null){
+		if(uid==null){
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {

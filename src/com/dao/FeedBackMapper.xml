@@ -3,23 +3,19 @@
 <mapper namespace="com.dao.FeedBackMapper">
 
 	<select id="selectAllFeedBack" resultType="com.entity.FeedBack" parameterType="java.util.Map" >
-			select * from feedbacks
-			<where>
-	     		<if test="isReplied != -1" >
-					and isReplied = #{isReplied,jdbcType=INTEGER}
-				</if>
-	     		<if test="userId != null" >
-					and userId = #{userId,jdbcType=VARCHAR}
-				</if>
-			</where>
+			select *, uname as user
+			from feedbacks as A
+			natural join users as B
+			where A.userId = B.uid
+     		<if test="isReplied != -1" >
+				and isReplied = #{isReplied,jdbcType=INTEGER}
+			</if>
+     		<if test="userId != null" >
+				and userId = #{userId,jdbcType=VARCHAR}
+			</if>
      		<if test="order != null" >
 				order by createTime ${order}
 			</if>
-	</select>
-
-	<select id="selectFeedBackListByUserId" resultType="com.entity.FeedBack" parameterType="java.lang.String" >
-			select * from feedbacks
-			where userId = #{userId,jdbcType=VARCHAR}
 	</select>
 	
 	<select id="selectFeedBackListById" resultType="com.entity.FeedBack" parameterType="java.lang.Integer" >
