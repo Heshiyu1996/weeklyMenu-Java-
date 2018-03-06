@@ -16,11 +16,11 @@ public class FeedBackServiceImpl implements FeedBackService {
 	@Autowired
 	private FeedBackDao feedBackDao = null;
 
-	public FeedBackDao getfeedBackDao() {
+	public FeedBackDao getFeedBackDao() {
 		return feedBackDao;
 	}
 
-	public void setfeedBackDao(FeedBackDao feedBackDao) {
+	public void setFeedBackDao(FeedBackDao feedBackDao) {
 		this.feedBackDao = feedBackDao;
 	}
 

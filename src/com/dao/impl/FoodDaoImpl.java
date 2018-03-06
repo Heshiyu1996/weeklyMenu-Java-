@@ -10,7 +10,6 @@ import com.dao.FoodDao;
 import com.entity.Food;
 @Repository("foodDao")
 public class FoodDaoImpl implements FoodDao {
-
 	
 	private SqlSession sqlSession = DBAccess.getSqlSession();
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.SearchMapper">
+
+	<select id="selectHotKeywords" resultType="java.lang.String">
+			select keyword from hotkeywords
+			order by count desc
+			limit 0,10
+	</select>
+	
+	<select id="ifExistKeyword" resultType="java.lang.Integer" parameterType="java.lang.String" >
+		select count(*) from hotkeywords where keyword = #{keyword,jdbcType=VARCHAR}
+	</select>
+
+	<select id="recordKeyword" resultType="java.lang.Integer" parameterType="java.lang.String" >
+		insert into hotkeywords (keyword, count)
+		values (
+				#{keyword,jdbcType=VARCHAR}, 1 
+		)
+	</select>
+
+	<select id="addKeywordCount" resultType="java.lang.Integer" parameterType="java.lang.String" >
+		update hotkeywords
+		set count=count+1
+		where keyword = #{keyword,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

@@ -17,11 +17,11 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao adminDao = null;
 
-	public AdminDao getfeedBackDao() {
+	public AdminDao getAdminDao() {
 		return adminDao;
 	}
 
-	public void setadminDao(AdminDao adminDao) {
+	public void setAdminDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
 	}
 

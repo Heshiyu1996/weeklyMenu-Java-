@@ -16,11 +16,11 @@ public class FoodServiceImpl implements FoodService {
 	@Autowired
 	private FoodDao foodDao = null;
 
-	public FoodDao getStaffDao() {
+	public FoodDao getFoodDao() {
 		return foodDao;
 	}
 
-	public void setStaffDao(FoodDao foodDao) {
+	public void setFoodDao(FoodDao foodDao) {
 		this.foodDao = foodDao;
 	}
 
