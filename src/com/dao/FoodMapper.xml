@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.FoodMapper">
+
+	<resultMap id="BaseResultMap" type="com.entity.Food" >
+	  <id column="foodId" property="foodId" jdbcType="INTEGER" />
+	  <result column="name" property="name" jdbcType="VARCHAR" />
+	  <result column="imgUrl" property="imgUrl" jdbcType="VARCHAR" />
+	  <result column="material" property="material" jdbcType="VARCHAR" />
+	  <result column="desc" property="desc" jdbcType="VARCHAR" />
+	  <result column="markCount" property="markCount" jdbcType="INTEGER" />
+	  <result column="visitCount" property="visitCount" jdbcType="INTEGER" />
+	  <result column="categoryId" property="categoryId" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+		foodId, name, imgUrl, material, desc, markCount, visitCount
+	</sql>
+	
+	<select id="queryByFoodId" resultType="com.entity.Food" parameterType="java.lang.Integer" >
+		select *, cname as category
+		from foods as A
+		natural join categories as B
+		where A.categoryId = B.cid
+		and foodId = #{foodId,jdbcType=INTEGER}
+	</select>
+	
+</mapper>
