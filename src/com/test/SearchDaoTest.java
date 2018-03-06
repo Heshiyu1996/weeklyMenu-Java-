@@ -7,20 +7,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.service.FoodService;
+import com.service.SearchService;
 
 
-public class FoodDaoTest {
+public class SearchDaoTest {
 	ApplicationContext context = null;
-	FoodService foodService = null;
+	SearchService searchService = null;
 	@Before
 	public void init(){
 		String[] configs = {"applicationContext.xml"};
 		context = new ClassPathXmlApplicationContext(configs);
-		foodService = (FoodService)context.getBean("foodService");
+		searchService = (SearchService)context.getBean("searchService");
 	}
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.getFoodsByKeyword("黄桃"));
+		System.out.println("员工号为1000的员工信息：" + searchService.getKeywords());
 	}
 }

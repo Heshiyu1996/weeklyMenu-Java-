@@ -5,7 +5,7 @@
 	<select id="selectHotKeywords" resultType="java.lang.String">
 			select keyword from hotkeywords
 			order by count desc
-			limit 0,10
+			limit 0,2
 	</select>
 	
 	<select id="ifExistKeyword" resultType="java.lang.Integer" parameterType="java.lang.String" >

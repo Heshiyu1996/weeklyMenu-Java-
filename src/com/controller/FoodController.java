@@ -1,10 +1,13 @@
 package com.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,6 +39,23 @@ public class FoodController {
 	public void setFoodService(FoodService foodService) {
 		this.foodService = foodService;
 	}
+	
+//	根据keyword获取食物详情
+	@ResponseBody
+	@RequestMapping(value ="/getFoodsByKeyword")
+	public Map<String, Object> getFeedBackListById(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
+		String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
+		System.out.println("拿到word了：" +word+","+keyword);
+		Map<String,Object> map=new HashMap<String, Object>();
+		List<Food> food = foodService.getFoodsByKeyword(word);
+		Map<String, Object> listMap=new HashMap<String, Object>();
+		listMap.put("myList", food);
+		map.put("msg", "获取食物信息成功");
+		map.put("relatedObject", listMap);
+		map.put("success", true);
+		return map;
+	}
+
 	
 //	根据foodId获取食物详情
 	@ResponseBody

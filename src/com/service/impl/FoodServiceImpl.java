@@ -39,4 +39,9 @@ public class FoodServiceImpl implements FoodService {
 		return flag;
 	}
 
+	@Override
+	public List<Food> getFoodsByKeyword(String keyword) {
+		return foodDao.queryByKeyword(keyword);
+	}
+
 }

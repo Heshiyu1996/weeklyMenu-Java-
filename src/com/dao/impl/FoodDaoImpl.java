@@ -1,6 +1,8 @@
 package com.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -33,5 +35,12 @@ public class FoodDaoImpl implements FoodDao {
 		return result;
 	}
 
+	@Override
+	public List<Food> queryByKeyword(String keyword) {
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("keyword", keyword);
+		List<Food> list = sqlSession.selectList("queryByKeyword", args);
+		return list;
+	}
 
 }

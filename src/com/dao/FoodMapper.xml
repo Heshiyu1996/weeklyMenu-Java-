@@ -17,6 +17,14 @@
 		foodId, name, imgUrl, material, desc, markCount, visitCount
 	</sql>
 	
+	<select id="queryByKeyword" resultType="com.entity.Food" parameterType="java.util.Map" >
+		select *, cname as category
+		from foods as A
+		natural join categories as B
+		where A.categoryId = B.cid
+		and name like '%${keyword}%'
+	</select>
+	
 	<select id="queryByFoodId" resultType="com.entity.Food" parameterType="java.lang.Integer" >
 		select *, cname as category
 		from foods as A
