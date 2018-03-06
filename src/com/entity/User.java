@@ -3,72 +3,72 @@ package com.entity;
 
 public class User {
 
-	private String sid;
+	private String uid;
 	
-	private String sname; //员工名字
+	private String uname; //员工名字
 	
-	private String smobile; //员工手机
+	private String umobile; //员工手机
 	
-    private String spassword;
+    private String upassword;
     
-    private int stype; //员工身份类型
+    private int utype; //员工身份类型
 
 	public User() {
 	}
 	
-	public User(String sid, String sname, String smobile) {
+	public User(String uid, String uname, String umobile, int utype) {
 		super();
-		this.sid = sid;
-		this.sname = sname;
-		this.smobile = smobile;
-		this.stype = stype;
+		this.uid = uid;
+		this.uname = uname;
+		this.umobile = umobile;
+		this.utype = utype;
 	}
 
-	public String getsid() {
-		return sid;
+	public String getUid() {
+		return uid;
 	}
 
-	public void setsid(String sid) {
-		this.sid = sid;
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 
-	public String getSname() {
-		return sname;
+	public String getUname() {
+		return uname;
 	}
 
-	public void setSname(String sname) {
-		this.sname = sname;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 
-	public String getSmobile() {
-		return smobile;
+	public String getUmobile() {
+		return umobile;
 	}
 
-	public void setSmobile(String smobile) {
-		this.smobile = smobile;
+	public void setUmobile(String umobile) {
+		this.umobile = umobile;
 	}
 
     
-	public String getSpassword() {
-		return spassword;
+	public String getUpassword() {
+		return upassword;
 	}
 
-	public void setSpassword(String spassword) {
-		this.spassword = spassword;
+	public void setUpassword(String upassword) {
+		this.upassword = upassword;
 	}
 	
-	public int getStype() {
-		return stype;
+	public int getUtype() {
+		return utype;
 	}
 
-	public void setStype(int stype) {
-		this.stype = stype;
+	public void setUtype(int utype) {
+		this.utype = utype;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Staff [sid=" + sid + ", sname=" + sname + ", smobile=" + smobile +", stype=" + stype +"]";
+		return "Staff [uid=" + uid + ", uname=" + uname + ", umobile=" + umobile +", utype=" + utype +"]";
 	}
 	
 	

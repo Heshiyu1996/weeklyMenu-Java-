@@ -29,13 +29,13 @@ public class UserDaoImpl implements UserDao {
 //	}
 
 	@Override
-	public User queryStaff(String sid) {
-		return sqlSession.selectOne("selectStaff", sid);
+	public User queryStaff(String Uid) {
+		return sqlSession.selectOne("selectStaff", Uid);
 	}
 
 	@Override
-	public User queryBySid(String sid) {
-		return sqlSession.selectOne("queryBySid", sid);
+	public User queryByUid(String Uid) {
+		return sqlSession.selectOne("queryBySid", Uid);
 	}
 
 

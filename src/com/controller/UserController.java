@@ -38,18 +38,18 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value ="/getUserInfo")
 	public Map<String, Object> queryStaff(HttpSession session){
-		String sid=(String)session.getAttribute("sid_session");
+		String uid=(String)session.getAttribute("uid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(sid==null){
+		if(uid==null){
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
-			User user = userService.getStaffBySid(sid);
+			User user = userService.getStaffByUid(uid);
 			Map<String, Object> userMap=new HashMap<String, Object>();
-			userMap.put("sid",user.getsid());
-			userMap.put("sname", user.getSname());
-			userMap.put("smobile", user.getSmobile());
-			userMap.put("stype", user.getStype());
+			userMap.put("uid",user.getUid());
+			userMap.put("uname", user.getUname());
+			userMap.put("umobile", user.getUmobile());
+			userMap.put("utype", user.getUtype());
 			map.put("msg", "获取用户信息成功");
 			map.put("relatedObject", userMap);
 			map.put("success", true);
@@ -59,16 +59,16 @@ public class UserController {
 //	登录
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> loginUser(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="sid")String sid, @RequestParam(value="spassword")String spassword) {
-		System.out.println("用户名："+sid);
+	Map<String, Object> loginUser(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="uid")String uid, @RequestParam(value="upassword")String upassword) {
+		System.out.println("用户名："+uid);
 		Map<String, Object> map = new HashMap<String, Object>();
-		User checkUser = userService.checkPassword(sid, spassword);
+		User checkUser = userService.checkPassword(uid, upassword);
 		// 登录成功
 		if (checkUser != null) {
-			session.setAttribute("sid_session", checkUser.getsid());
-			session.setAttribute("stype_session", checkUser.getStype());
+			session.setAttribute("uid_session", checkUser.getUid());
+			session.setAttribute("utype_session", checkUser.getUtype());
 			map.put("msg", "登录成功");
-			map.put("uid", checkUser.getsid());
+			map.put("uid", checkUser.getUid());
 			map.put("success", true);
 		} else {
 			map.put("msg", "登录失败，请检查密码是否正确");
@@ -82,8 +82,8 @@ public class UserController {
 	public @ResponseBody
 	Map<String, Object> logoutUser(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		session.setAttribute("sid_session", null);
-		if((String)session.getAttribute("sid_session")==null){
+		session.setAttribute("uid_session", null);
+		if((String)session.getAttribute("uid_session")==null){
 			map.put("msg", "注销成功");
 			map.put("success", true);
 		}else {

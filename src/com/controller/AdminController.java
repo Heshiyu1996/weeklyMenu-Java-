@@ -41,14 +41,14 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value ="/loadFeedBackList")
 	public Map<String, Object> getFeedBackList(HttpSession session, @RequestParam(value="isReplied", required=false)Integer isReplied, @RequestParam(value="order", required=false)String order){
-		Integer stype=(Integer)session.getAttribute("stype_session");
+		Integer utype=(Integer)session.getAttribute("utype_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(stype==null){
+		if(utype==null){
 			map.put("success", false);
 			map.put("msg", "权限不足，接口调用失败！");
 		} else {
 			System.out.println("controller（order）:" + order);
-			System.out.println("controller（stype）:" + stype);
+			System.out.println("controller（utype）:" + utype);
 			List<FeedBack> feedBack = adminService.loadFeedBackList(isReplied, order);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);

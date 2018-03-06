@@ -3,15 +3,15 @@
 <mapper namespace="com.dao.UserMapper">
 
 	<resultMap id="BaseResultMap" type="com.entity.User" >
-	  <id column="sid" property="sid" jdbcType="INTEGER" />
-	  <result column="sname" property="sname" jdbcType="VARCHAR" />
-	  <result column="spassword" property="spassword" jdbcType="VARCHAR" />
-	  <result column="smobile" property="smobile" jdbcType="VARCHAR" />
-	  <result column="stype" property="stype" jdbcType="INTEGER" />
+	  <id column="uid" property="uid" jdbcType="INTEGER" />
+	  <result column="uname" property="uname" jdbcType="VARCHAR" />
+	  <result column="upassword" property="upassword" jdbcType="VARCHAR" />
+	  <result column="umobile" property="umobile" jdbcType="VARCHAR" />
+	  <result column="utype" property="utype" jdbcType="INTEGER" />
 	</resultMap>
 	
 	<sql id="Base_Column_List" >
-	  sid, spassword,sname, smobile, stype
+	  uid, upassword,uname, umobile, utype
 	</sql>
 	
 	<!-- 类的属性和表的列名是一致的，所以可以正常运行 -->
@@ -19,14 +19,14 @@
 			select * from users
 	</select>
 	<select id="selectStaff" resultType="com.entity.User">
-			select sid,sname,smobile,stype from users where sid = #{sid}
+			select uid,uname,umobile,utype from users where uid = #{uid}
 	</select>
 	
 	<select id="queryBySid" resultMap="BaseResultMap" parameterType="java.lang.String" >
 	  select 
 	  <include refid="Base_Column_List" />
 	  from users
-	  where sid = #{sid,jdbcType=INTEGER}
+	  where uid = #{uid,jdbcType=INTEGER}
 	</select>
 	
 </mapper>

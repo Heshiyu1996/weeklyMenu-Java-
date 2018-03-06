@@ -25,21 +25,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getStaffBySid(String sid) {
-		return userDao.queryStaff(sid);
+	public User getStaffByUid(String uid) {
+		return userDao.queryStaff(uid);
 	}
 
 	@Override
-	public User checkPassword(String sid,String spassword) {
+	public User checkPassword(String uid,String upassword) {
 
-		User user = userDao.queryBySid(sid.trim());
+		User user = userDao.queryByUid(uid.trim());
 		// 不存在用户
 		if (user == null)
 			return null;
 		// 密码相同，使用MD5
 		System.out.println("密码验证");
-//		if (staff.getSpassword().equals(Encryption.getMD5Encryption(spassword)))
-		if (user.getSpassword().equals(spassword))
+//		if (staff.getSpassword().equals(Encryption.getMD5Encryption(upassword)))
+		if (user.getUpassword().equals(upassword))
 			return user;
 
 		return null;

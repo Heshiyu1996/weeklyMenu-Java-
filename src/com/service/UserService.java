@@ -9,7 +9,7 @@ public interface UserService {
 	 * @param 	sid   工号
 	 * @return  Staff 员工
 	 */
-	public User getStaffBySid(String sid);
+	public User getStaffByUid(String uid);
 	
 	/**
 	 * 根据昵称和密码获取用户
@@ -17,5 +17,5 @@ public interface UserService {
 	 * @param	spassword   密码
 	 * @return  Staff 		员工
 	 */
-	User checkPassword(String sid,String spassword);
+	User checkPassword(String uid,String upassword);
 }

@@ -12,7 +12,7 @@ public class FeedBack {
 	private int fid;
 
     @JsonSerialize(using=DateSerializer.class)
-	private Date time; //反馈时间
+	private Date createTime; //反馈时间
 	
     private String userId; //反馈员工Id
 	
@@ -30,12 +30,12 @@ public class FeedBack {
 	public FeedBack() {
 	}
 
-	public FeedBack(int fid, String content, Date time, String user,
+	public FeedBack(int fid, String content, Date createTime, String user,
 			int isReplied) {
 		super();
 		this.fid = fid;
 		this.content = content;
-		this.time = time;
+		this.createTime = createTime;
 		this.user = user;
 		this.isReplied = isReplied;
 	}
@@ -56,12 +56,12 @@ public class FeedBack {
 		this.content = content;
 	}
 
-	public Date getTime() {
-		return time;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getUser() {
@@ -106,8 +106,8 @@ public class FeedBack {
 
 	@Override
 	public String toString() {
-		return "FeedBack [fid=" + fid + ", content=" + content + ", time="
-				+ time + ", user=" + user + ", isReplied=" + isReplied
+		return "FeedBack [fid=" + fid + ", content=" + content + ", createTime="
+				+ createTime + ", user=" + user + ", isReplied=" + isReplied
 				+ ", repliedMsg=" + repliedMsg + ", repliedTime=" + repliedTime
 				+ "]";
 	}

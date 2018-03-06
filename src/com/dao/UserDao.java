@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao {
 	
-	public User queryStaff(String sid);
+	public User queryStaff(String uid);
 	
-    User queryBySid(String sid);
+    User queryByUid(String uid);
 	
 }

@@ -13,7 +13,7 @@
 				</if>
 			</where>
      		<if test="order != null" >
-				order by time ${order}
+				order by createTime ${order}
 			</if>
 	</select>
 
@@ -28,11 +28,10 @@
 	</select>
   
 	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" >
-	  insert into feedbacks (time, userId, user, content)
+	  insert into feedbacks (createTime, userId, content)
 	  values (
-	  #{time,jdbcType=TIMESTAMP}, 
+	  #{createTime,jdbcType=TIMESTAMP}, 
 	  #{userId,jdbcType=VARCHAR}, 
-	  #{user,jdbcType=VARCHAR}, 
 	  #{content,jdbcType=VARCHAR})
 	</insert>
 	

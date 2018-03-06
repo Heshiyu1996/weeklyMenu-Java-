@@ -81,11 +81,10 @@ public class FeedBackController {
 //	新增反馈
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> insertFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="userId")String userId, @RequestParam(value="user")String user, @RequestParam(value="content")String content) {
+	Map<String, Object> insertFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="userId")String userId, @RequestParam(value="content")String content) {
 		FeedBack fb = new FeedBack();
-		fb.setTime(new Date());
+		fb.setCreateTime(new Date());
 		fb.setUserId(userId);
-		fb.setUser(user);
 		fb.setContent(content);
 		boolean isAdd = feedBackService.insertFeedBack(fb);
 		Map<String, Object> map = new HashMap<String, Object>();
