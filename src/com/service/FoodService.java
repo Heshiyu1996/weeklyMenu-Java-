@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.entity.FeedBack;
@@ -11,6 +12,12 @@ public interface FoodService {
 	
 	public Food getFoodDetailByFoodId(int foodId);
 
-	public boolean addVisitCount(Food food);
+	public boolean addVisitCount(int foodId);
+
+	public boolean insertMarks(Integer foodId, Integer userId, Date createTime); // 插入“收藏表”，包含了收藏数加1
+
+	public boolean removeMarks(Integer foodId, Integer userId); // 从“收藏表”移除，包含了收藏数减1
+	
+	public boolean ifExistsMarks(Integer foodId, Integer userId);
 	
 }

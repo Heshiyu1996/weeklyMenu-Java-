@@ -1,6 +1,8 @@
 package com.test;
 
 
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,6 +23,6 @@ public class FoodDaoTest {
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.getFoodsByKeyword("黄桃"));
+		System.out.println("测试结果为：" + foodService.ifExistsMarks(5, 2));
 	}
 }

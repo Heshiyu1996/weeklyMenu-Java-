@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.entity.Food;
@@ -13,6 +14,16 @@ public interface FoodDao {
     
     Food queryByFoodId(int foodId);
     
-    int addVisitCount(Food food);
+    int addVisitCount(int foodId);
+    
+    int addMarkCount(int foodId);
+    
+    int insertMarks(Integer foodId, Integer userId, Date createTime);
+    
+    int decMarkCount(int foodId);
+    
+    int removeMarks(Integer foodId, Integer userId);
+	
+    int ifExistsMarks(Integer foodId, Integer userId);
 	
 }

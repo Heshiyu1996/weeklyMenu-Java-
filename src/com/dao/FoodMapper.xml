@@ -33,9 +33,42 @@
 		and foodId = #{foodId,jdbcType=INTEGER}
 	</select>
 	
-	<select id="addVisitCount" parameterType="com.entity.Food" >
+	<select id="addVisitCount" parameterType="java.lang.Integer" >
 		update foods
 		set visitCount=visitCount+1
 		where foodId = #{foodId,jdbcType=INTEGER}
 	</select>
+	
+	<select id="addMarkCount" parameterType="java.lang.Integer" >
+		update foods
+		set markCount=markCount+1
+		where foodId = #{foodId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="decMarkCount" parameterType="java.lang.Integer" >
+		update foods
+		set markCount=markCount-1
+		where foodId = #{foodId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="insertMarks" parameterType="java.util.Map" >
+		insert into marks (foodId, userId, createTime)
+		values (
+		#{foodId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP})
+	</select>
+	
+	<select id="removeMarks" parameterType="java.util.Map" >
+		delete from marks
+		where foodId = #{foodId,jdbcType=INTEGER}
+		and userId = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="ifExistMarks" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		select count(*) from marks
+		where foodId = #{foodId,jdbcType=INTEGER}
+		and userId = #{userId,jdbcType=INTEGER}
+	</select>
+
 </mapper>

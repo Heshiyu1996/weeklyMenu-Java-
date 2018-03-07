@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.entity.FeedBack;
 import com.entity.Food;
+import com.entity.Search;
+import com.entity.User;
 import com.service.FoodService;
 
 @Controller
@@ -70,14 +72,13 @@ public class FoodController {
 		return map;
 	}
 
-
 //	新增浏览量
 	@RequestMapping(value = "/addVisitCount", method = RequestMethod.POST)
 	public @ResponseBody
 	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId) {
 		Food food = new Food();
 		food.setFoodId(foodId);
-		boolean isAdd = foodService.addVisitCount(food);
+		boolean isAdd = foodService.addVisitCount(foodId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
 			map.put("msg", "新增浏览量成功");
@@ -89,4 +90,59 @@ public class FoodController {
 
 		return map;
 	}
+	
+//	加入收藏
+	@RequestMapping(value = "/insertMarks", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> insertFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
+		boolean isAdd = foodService.insertMarks(foodId, userId, new Date());
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "加入收藏成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "加入收藏失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
+	
+//	加入收藏
+	@RequestMapping(value = "/removeMarks", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> removeFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
+		boolean isAdd = foodService.removeMarks(foodId, userId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "删除收藏成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "删除收藏失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
+
+//	检查是否已收藏
+	@ResponseBody
+	@RequestMapping(value ="/checkMarks")
+	public Map<String, Object> checkMarks(HttpSession session, @RequestParam(value="foodId")int foodId){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			boolean isExist = foodService.ifExistsMarks(foodId, Integer.valueOf(uid));
+			Map<String, Object> existMap = new HashMap<String, Object>();
+			existMap.put("isExist", isExist);
+			map.put("msg", "检查“是否被收藏”成功");
+			map.put("relatedObject", existMap);
+			map.put("success", true);
+		}
+		return map;
+	}
 }
+
