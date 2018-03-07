@@ -8,21 +8,22 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.service.FoodService;
+import com.entity.Food;
+import com.service.AdminService;
 
 
-public class FoodDaoTest {
+public class AdminDaoTest {
 	ApplicationContext context = null;
-	FoodService foodService = null;
+	AdminService adminService = null;
 	@Before
 	public void init(){
 		String[] configs = {"applicationContext.xml"};
 		context = new ClassPathXmlApplicationContext(configs);
-		foodService = (FoodService)context.getBean("foodService");
+		adminService = (AdminService)context.getBean("adminService");
 	}
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.getAllCategories());
+//		System.out.println("测试结果为：" + adminService.insertFood("a", "b", "c", "0", 1));
 	}
 }

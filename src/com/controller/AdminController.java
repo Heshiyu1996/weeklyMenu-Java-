@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.entity.FeedBack;
+import com.entity.Food;
 import com.service.AdminService;
+import com.service.FoodService;
 
 @Controller
 @RequestMapping("/admin")
@@ -75,6 +77,29 @@ public class AdminController {
 			map.put("success", true);
 		} else {
 			map.put("msg", "回复反馈失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
+
+//	新增菜品
+	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
+		Food food = new Food();
+		food.setName(name);
+		food.setImgUrl(imgUrl);
+		food.setMaterial(material);
+		food.setDescription(description);
+		food.setCategoryId(categoryId);
+		boolean isAdd = adminService.insertFood(food);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "添加菜品成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "添加菜品失败");
 			map.put("success", false);
 		}
 

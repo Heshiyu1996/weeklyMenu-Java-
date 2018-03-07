@@ -42,6 +42,7 @@ public class FeedBackDaoImpl implements FeedBackDao {
 	@Override
 	public int insertFeedBack(FeedBack fb) {
 		int row =sqlSession.insert("insertFeedBack", fb);
+		System.out.println("啊啊啊啊" + row);
 		sqlSession.commit();
 		return row;
 	}

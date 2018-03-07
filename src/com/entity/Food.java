@@ -17,7 +17,7 @@ public class Food {
 	
 	private String material; //食材
     
-    private String desc; //描述
+    private String description; //描述
     
     private int markCount; //收藏量
     
@@ -31,13 +31,13 @@ public class Food {
 	}
 
 	public Food(int foodId, String name, String imgUrl, String material,
-			String desc, int markCount, int visitCount, int categoryId, String category) {
+			String description, int markCount, int visitCount, int categoryId, String category) {
 		super();
 		this.foodId = foodId;
 		this.name = name;
 		this.imgUrl = imgUrl;
 		this.material = material;
-		this.desc = desc;
+		this.description = description;
 		this.markCount = markCount;
 		this.visitCount = visitCount;
 		this.categoryId = categoryId;
@@ -76,12 +76,12 @@ public class Food {
 		this.material = material;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public int getMarkCount() {
@@ -119,7 +119,7 @@ public class Food {
 	@Override
 	public String toString() {
 		return "Food [foodId=" + foodId + ", name=" + name + ", imgUrl="
-				+ imgUrl + ", material=" + material + ", desc=" + desc
+				+ imgUrl + ", material=" + material + ", description=" + description
 				+ ", markCount=" + markCount + ", visitCount=" + visitCount
 				+ ", categoryId=" + categoryId
 				+ ", category=" + category + "]";

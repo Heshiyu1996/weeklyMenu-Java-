@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.entity.Category;
 import com.entity.FeedBack;
 import com.entity.Food;
 import com.entity.Search;
@@ -58,7 +59,6 @@ public class FoodController {
 		return map;
 	}
 
-	
 //	根据foodId获取食物详情
 	@ResponseBody
 	@RequestMapping(value ="/getFoodInfoById")
@@ -160,6 +160,18 @@ public class FoodController {
 			map.put("relatedObject", foodList);
 			map.put("success", true);
 		}
+		return map;
+	}
+
+//	获取所有食品类别
+	@ResponseBody
+	@RequestMapping(value ="/getAllCategories")
+	public Map<String, Object> getAllCategories(HttpSession session){
+		Map<String,Object> map=new HashMap<String, Object>();
+		List<Category> category = foodService.getAllCategories();
+		map.put("msg", "获取所有菜品分类成功");
+		map.put("relatedObject", category);
+		map.put("success", true);
 		return map;
 	}
 }

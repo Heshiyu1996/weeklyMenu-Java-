@@ -3,6 +3,7 @@ package com.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.entity.Category;
 import com.entity.Food;
 
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,7 @@ public interface FoodDao {
     int ifExistsMarks(Integer foodId, Integer userId);
     
 	List<Food> getMyMarksList(Integer userId);
+    
+	List<Category> getAllCategories();
 	
 }

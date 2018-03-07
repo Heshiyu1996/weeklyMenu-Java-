@@ -11,6 +11,7 @@ import com.dao.AdminDao;
 import com.dao.DBAccess;
 import com.dao.FeedBackDao;
 import com.entity.FeedBack;
+import com.entity.Food;
 @Repository("adminDao")
 public class AdminDaoImpl implements AdminDao {
 	
@@ -38,6 +39,13 @@ public class AdminDaoImpl implements AdminDao {
 		int result = sqlSession.update("updateFeedBackAdmin", fb);
 		sqlSession.commit();
 		return result;
+	}
+	
+	@Override
+	public int insertFood(Food food) {
+		int row =sqlSession.insert("insertFood", food);
+		sqlSession.commit();
+		return row;
 	}
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.AdminDao;
 import com.entity.FeedBack;
+import com.entity.Food;
 import com.tool.Encryption;
 import com.service.AdminService;
 import com.service.FeedBackService;
@@ -36,6 +37,17 @@ public class AdminServiceImpl implements AdminService {
 		try {
 			flag=(adminDao.updateFeedBack(fb)==1)?true:false;
 		} catch (Exception e) {
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean insertFood(Food food) {
+		boolean flag=false;
+		try {
+			flag=(adminDao.insertFood(food)==1)?true:false;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return flag;
 	}

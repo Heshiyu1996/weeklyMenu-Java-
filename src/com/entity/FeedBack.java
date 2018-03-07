@@ -14,7 +14,7 @@ public class FeedBack {
     @JsonSerialize(using=DateSerializer.class)
 	private Date createTime; //反馈时间
 	
-    private String userId; //反馈员工Id
+    private Integer userId; //反馈员工Id
 	
     private String user; //反馈员工
 	
@@ -30,14 +30,18 @@ public class FeedBack {
 	public FeedBack() {
 	}
 
-	public FeedBack(int fid, String content, Date createTime, String user,
-			int isReplied) {
+	public FeedBack(int fid, Date createTime, Integer userId, String user,
+			String content, Integer isReplied, String repliedMsg,
+			Date repliedTime) {
 		super();
 		this.fid = fid;
-		this.content = content;
 		this.createTime = createTime;
+		this.userId = userId;
 		this.user = user;
+		this.content = content;
 		this.isReplied = isReplied;
+		this.repliedMsg = repliedMsg;
+		this.repliedTime = repliedTime;
 	}
 
 	public int getFid() {
@@ -48,14 +52,6 @@ public class FeedBack {
 		this.fid = fid;
 	}
 
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -64,20 +60,28 @@ public class FeedBack {
 		this.createTime = createTime;
 	}
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public String getUser() {
 		return user;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public void setUser(String user) {
 		this.user = user;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public Integer getIsReplied() {
@@ -106,10 +110,11 @@ public class FeedBack {
 
 	@Override
 	public String toString() {
-		return "FeedBack [fid=" + fid + ", content=" + content + ", createTime="
-				+ createTime + ", user=" + user + ", isReplied=" + isReplied
-				+ ", repliedMsg=" + repliedMsg + ", repliedTime=" + repliedTime
-				+ "]";
+		return "FeedBack [fid=" + fid + ", createTime=" + createTime
+				+ ", userId=" + userId + ", user=" + user + ", content="
+				+ content + ", isReplied=" + isReplied + ", repliedMsg="
+				+ repliedMsg + ", repliedTime=" + repliedTime + "]";
 	}
+
 	
 }

@@ -40,6 +40,8 @@ public class FeedBackServiceImpl implements FeedBackService {
 		try {
 			flag=(feedBackDao.insertFeedBack(fb)==1)?true:false;
 		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("错误！！！");
 		}
 		return flag;
 	}

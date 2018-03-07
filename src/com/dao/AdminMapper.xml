@@ -28,4 +28,14 @@
 	  where fid = #{fid,jdbcType=INTEGER}
 	</update>
 	
+	<insert id="insertFood" parameterType="com.entity.Food"  useGeneratedKeys="true" keyProperty="foodId">
+		insert into foods (name, imgUrl, material, description, categoryId)
+		values (
+		#{name,jdbcType=VARCHAR},
+		#{imgUrl,jdbcType=VARCHAR},
+		#{material,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{categoryId,jdbcType=INTEGER})
+	</insert>
+	
 </mapper> 

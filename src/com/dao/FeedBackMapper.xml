@@ -26,11 +26,11 @@
 			and fid = #{fid,jdbcType=INTEGER}
 	</select>
   
-	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" >
+	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" useGeneratedKeys="true" keyProperty="fid">
 	  insert into feedbacks (createTime, userId, content)
 	  values (
 	  #{createTime,jdbcType=TIMESTAMP}, 
-	  #{userId,jdbcType=VARCHAR}, 
+	  #{userId,jdbcType=INTEGER}, 
 	  #{content,jdbcType=VARCHAR})
 	</insert>
 	

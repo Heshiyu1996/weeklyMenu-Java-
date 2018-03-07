@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dao.DBAccess;
 import com.dao.FoodDao;
+import com.entity.Category;
 import com.entity.FeedBack;
 import com.entity.Food;
 @Repository("foodDao")
@@ -91,6 +92,12 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public List<Food> getMyMarksList(Integer userId) {
 		List<Food> list = sqlSession.selectList("getMyMarksList", userId);
+		return list;
+	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		List<Category> list = sqlSession.selectList("getAllCategories");
 		return list;
 	}
 

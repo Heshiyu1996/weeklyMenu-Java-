@@ -72,9 +72,13 @@
 	</select>
 
 	<select id="getMyMarksList" resultType="com.entity.Food" parameterType="java.lang.Integer" >
-		SELECT * FROM marks as A
+		select * from marks as A
 		natural join foods as B
 		where A.foodId = B.foodId
 		and A.userId = #{userId,jdbcType=INTEGER};
+	</select>
+	
+	<select id="getAllCategories" resultType="com.entity.Category">
+		select * from categories
 	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.service;
 import java.util.Date;
 import java.util.List;
 
+import com.entity.Category;
 import com.entity.FeedBack;
 import com.entity.Food;
 
@@ -21,5 +22,7 @@ public interface FoodService {
 	public boolean ifExistsMarks(Integer foodId, Integer userId);
 
 	public List<Food> getMyMarksList(Integer userId);
+
+	public List<Category> getAllCategories();
 	
 }
