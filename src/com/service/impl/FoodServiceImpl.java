@@ -82,4 +82,9 @@ public class FoodServiceImpl implements FoodService {
 		return flag;
 	}
 
+	@Override
+	public List<Food> getMyMarksList(Integer userId) {
+		return foodDao.getMyMarksList(userId);
+	}
+
 }

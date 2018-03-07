@@ -71,4 +71,10 @@
 		and userId = #{userId,jdbcType=INTEGER}
 	</select>
 
+	<select id="getMyMarksList" resultType="com.entity.Food" parameterType="java.lang.Integer" >
+		SELECT * FROM marks as A
+		natural join foods as B
+		where A.foodId = B.foodId
+		and A.userId = #{userId,jdbcType=INTEGER};
+	</select>
 </mapper>

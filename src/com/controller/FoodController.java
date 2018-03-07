@@ -144,5 +144,23 @@ public class FoodController {
 		}
 		return map;
 	}
+	
+//	根据userId获取收藏列表
+	@ResponseBody
+	@RequestMapping(value ="/getMyMarksList")
+	public Map<String, Object> getMyMarksList(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			List<Food> foodList = foodService.getMyMarksList(Integer.valueOf(uid));
+			map.put("msg", "获取我的收藏成功");
+			map.put("relatedObject", foodList);
+			map.put("success", true);
+		}
+		return map;
+	}
 }
 

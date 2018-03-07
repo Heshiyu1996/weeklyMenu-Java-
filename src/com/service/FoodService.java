@@ -19,5 +19,7 @@ public interface FoodService {
 	public boolean removeMarks(Integer foodId, Integer userId); // 从“收藏表”移除，包含了收藏数减1
 	
 	public boolean ifExistsMarks(Integer foodId, Integer userId);
+
+	public List<Food> getMyMarksList(Integer userId);
 	
 }

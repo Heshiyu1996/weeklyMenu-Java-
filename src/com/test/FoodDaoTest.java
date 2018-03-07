@@ -23,6 +23,6 @@ public class FoodDaoTest {
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.ifExistsMarks(5, 2));
+		System.out.println("测试结果为：" + foodService.getMyMarksList(3));
 	}
 }

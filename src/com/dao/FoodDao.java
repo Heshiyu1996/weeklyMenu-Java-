@@ -25,5 +25,7 @@ public interface FoodDao {
     int removeMarks(Integer foodId, Integer userId);
 	
     int ifExistsMarks(Integer foodId, Integer userId);
+    
+	List<Food> getMyMarksList(Integer userId);
 	
 }

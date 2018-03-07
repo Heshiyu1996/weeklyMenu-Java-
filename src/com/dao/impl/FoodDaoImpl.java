@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.dao.DBAccess;
 import com.dao.FoodDao;
+import com.entity.FeedBack;
 import com.entity.Food;
 @Repository("foodDao")
 public class FoodDaoImpl implements FoodDao {
@@ -85,6 +86,12 @@ public class FoodDaoImpl implements FoodDao {
 		args.put("foodId", foodId);
 		args.put("userId", userId);
 		return sqlSession.selectOne("ifExistMarks", args);
+	}
+
+	@Override
+	public List<Food> getMyMarksList(Integer userId) {
+		List<Food> list = sqlSession.selectList("getMyMarksList", userId);
+		return list;
 	}
 
 }
