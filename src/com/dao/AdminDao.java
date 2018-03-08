@@ -16,4 +16,8 @@ public interface AdminDao {
 
 	int insertFood(Food food);
 	
+    int updateFood(Food food);
+	
+    int deleteFood(int foodId);
+	
 }

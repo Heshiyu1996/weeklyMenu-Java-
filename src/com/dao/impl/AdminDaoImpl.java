@@ -48,5 +48,19 @@ public class AdminDaoImpl implements AdminDao {
 		return row;
 	}
 
+	@Override
+	public int updateFood(Food food) {
+		int result = sqlSession.update("updateFoodAdmin", food);
+		sqlSession.commit();
+		return result;
+	}
+
+	@Override
+	public int deleteFood(int foodId) {
+		int row =sqlSession.delete("deleteFood", foodId);
+		sqlSession.commit();
+		return row;
+	}
+
 
 }

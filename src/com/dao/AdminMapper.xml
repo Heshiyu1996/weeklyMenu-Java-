@@ -37,5 +37,20 @@
 		#{description,jdbcType=VARCHAR},
 		#{categoryId,jdbcType=INTEGER})
 	</insert>
+
+	<update id="updateFoodAdmin" parameterType="com.entity.Food" >
+	  update foods
+	  set name = #{name,jdbcType=VARCHAR},
+		imgUrl = #{imgUrl,jdbcType=VARCHAR},
+		material = #{material,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		categoryId = #{categoryId,jdbcType=INTEGER}
+	  where foodId = #{foodId,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="deleteFood" parameterType="java.lang.Integer" >
+		delete from foods
+		where foodId = #{foodId,jdbcType=INTEGER}
+	</delete>
 	
 </mapper> 

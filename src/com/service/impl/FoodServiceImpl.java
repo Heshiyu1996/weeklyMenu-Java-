@@ -37,7 +37,7 @@ public class FoodServiceImpl implements FoodService {
 		try {
 			flag=(foodDao.addVisitCount(foodId)==1)?true:false;
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return flag;
 	}

@@ -25,5 +25,7 @@ public class AdminDaoTest {
 	@Test
 	public void testQueryOne(){
 //		System.out.println("测试结果为：" + adminService.insertFood("a", "b", "c", "0", 1));
+		int[] foodsId= {9, 10}; 
+		adminService.deleteFood(foodsId);
 	}
 }

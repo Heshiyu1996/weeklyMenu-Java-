@@ -105,4 +105,44 @@ public class AdminController {
 
 		return map;
 	}
+
+//	编辑菜品
+	@RequestMapping(value = "/updateFood", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
+		Food food = new Food();
+		food.setFoodId(foodId);
+		food.setName(name);
+		food.setImgUrl(imgUrl);
+		food.setMaterial(material);
+		food.setDescription(description);
+		food.setCategoryId(categoryId);
+		boolean isAdd = adminService.updateFood(food);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "编辑菜品成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "编辑菜品失败");
+			map.put("success", false);
+		}
+		return map;
+	}
+
+
+//	删除菜品
+	@RequestMapping(value = "/deleteFood", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> deleteFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodsId")int[] foodsId) {
+		boolean isAdd = adminService.deleteFood(foodsId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (isAdd == true) {
+			map.put("msg", "删除菜品成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "删除菜品失败");
+			map.put("success", false);
+		}
+		return map;
+	}
 }

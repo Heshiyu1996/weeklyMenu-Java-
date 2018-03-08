@@ -37,6 +37,7 @@ public class AdminServiceImpl implements AdminService {
 		try {
 			flag=(adminDao.updateFeedBack(fb)==1)?true:false;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return flag;
 	}
@@ -48,6 +49,30 @@ public class AdminServiceImpl implements AdminService {
 			flag=(adminDao.insertFood(food)==1)?true:false;
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateFood(Food food) {
+		boolean flag=false;
+		try {
+			flag=(adminDao.updateFood(food)==1)?true:false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteFood(int[] foodsId) {
+		boolean flag=false;
+		try {
+			for (int i=0; i<foodsId.length; i++) {
+				flag=(adminDao.deleteFood(foodsId[i])==1)?true:false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		return flag;
 	}

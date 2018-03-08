@@ -76,8 +76,6 @@ public class FoodController {
 	@RequestMapping(value = "/addVisitCount", method = RequestMethod.POST)
 	public @ResponseBody
 	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId) {
-		Food food = new Food();
-		food.setFoodId(foodId);
 		boolean isAdd = foodService.addVisitCount(foodId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
