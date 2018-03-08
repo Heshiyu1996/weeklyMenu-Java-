@@ -47,9 +47,6 @@ public class FeedBackController {
 			map.put("success", false);
 			map.put("msg", "Session已过期，请重新登录！");
 		} else {
-			System.out.println("controller:" + isReplied);
-			System.out.println("controller:" + order);
-			System.out.println("controller:" + uid);
 			List<FeedBack> feedBack = feedBackService.getFeedBackList(isReplied, order, uid);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
@@ -87,7 +84,6 @@ public class FeedBackController {
 		fb.setCreateTime(new Date());
 		fb.setUserId(Integer.valueOf(uid));
 		fb.setContent(content);
-		System.out.println(fb);
 		boolean isAdd = feedBackService.insertFeedBack(fb);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {

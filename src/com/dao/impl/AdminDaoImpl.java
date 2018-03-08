@@ -50,6 +50,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public int updateFood(Food food) {
+		System.out.println("在在在");
 		int result = sqlSession.update("updateFoodAdmin", food);
 		sqlSession.commit();
 		return result;
@@ -60,6 +61,18 @@ public class AdminDaoImpl implements AdminDao {
 		int row =sqlSession.delete("deleteFood", foodId);
 		sqlSession.commit();
 		return row;
+	}
+
+	@Override
+	public List<Food> getFoodsList() {
+		List<Food> list = sqlSession.selectList("selectAllFood");
+		return list;
+	}
+
+	@Override
+	public List<Food> getFoodsByKeyword(String keyword) {
+		List<Food> list = sqlSession.selectList("queryFoodsByKeyword", keyword);
+		return list;
 	}
 
 

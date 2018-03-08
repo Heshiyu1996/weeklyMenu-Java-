@@ -17,5 +17,9 @@ public interface AdminService {
 	public boolean updateFood(Food food);
 	// 编辑菜品
 	public boolean deleteFood(int[] foodsId);
+	// 获取菜品列表
+	public List<Food> getFoodsList();
+	// 获取菜品列表
+	public List<Food> getFoodsByKeyword(String keyword);
 	
 }

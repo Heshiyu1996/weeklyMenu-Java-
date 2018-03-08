@@ -77,4 +77,14 @@ public class AdminServiceImpl implements AdminService {
 		return flag;
 	}
 
+	@Override
+	public List<Food> getFoodsList() {
+		return adminDao.getFoodsList();
+	}
+
+	@Override
+	public List<Food> getFoodsByKeyword(String keyword) {
+		return adminDao.getFoodsByKeyword(keyword);
+	}
+
 }

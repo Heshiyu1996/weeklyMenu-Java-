@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -49,8 +51,6 @@ public class AdminController {
 			map.put("success", false);
 			map.put("msg", "权限不足，接口调用失败！");
 		} else {
-			System.out.println("controller（order）:" + order);
-			System.out.println("controller（utype）:" + utype);
 			List<FeedBack> feedBack = adminService.loadFeedBackList(isReplied, order);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", feedBack);
@@ -109,7 +109,7 @@ public class AdminController {
 //	编辑菜品
 	@RequestMapping(value = "/updateFood", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
+	Map<String, Object> updateFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
 		Food food = new Food();
 		food.setFoodId(foodId);
 		food.setName(name);
@@ -143,6 +143,41 @@ public class AdminController {
 			map.put("msg", "删除菜品失败");
 			map.put("success", false);
 		}
+		return map;
+	}
+
+//	获取菜品列表
+	@ResponseBody
+	@RequestMapping(value ="/getFoodsList")
+	public Map<String, Object> getFoodsList(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			List<Food> food = adminService.getFoodsList();
+			Map<String, Object> listMap=new HashMap<String, Object>();
+			listMap.put("myList", food);
+			map.put("msg", "获取菜品列表成功");
+			map.put("relatedObject", listMap);
+			map.put("success", true);
+		}
+		return map;
+	}
+	
+//	根据keyword获取食物详情
+	@ResponseBody
+	@RequestMapping(value ="/getFoodsByKeyword")
+	public Map<String, Object> getFoodsByKeyword(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
+		String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
+		Map<String,Object> map=new HashMap<String, Object>();
+		List<Food> food = adminService.getFoodsByKeyword(word);
+		Map<String, Object> listMap=new HashMap<String, Object>();
+		listMap.put("myList", food);
+		map.put("msg", "根据keyword获取食物信息成功呀呀呀");
+		map.put("relatedObject", listMap);
+		map.put("success", true);
 		return map;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminDao {
+	List<Food> getFoodsByKeyword(String keyword);
 	
 	public List<FeedBack> loadFeedBackList(Integer isReplied, String order);
 	
@@ -19,5 +20,7 @@ public interface AdminDao {
     int updateFood(Food food);
 	
     int deleteFood(int foodId);
+    
+	public List<Food> getFoodsList();
 	
 }

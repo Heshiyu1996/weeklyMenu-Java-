@@ -53,4 +53,18 @@
 		where foodId = #{foodId,jdbcType=INTEGER}
 	</delete>
 	
+	<select id="selectAllFood" resultType="com.entity.Food">
+		select *, cname as category
+		from foods as A
+		natural join categories as B
+		where A.categoryId = B.cid
+	</select>
+	
+	<select id="queryFoodsByKeyword" resultType="com.entity.Food" parameterType="java.lang.String" >
+		select *, cname as category
+		from foods as A
+		natural join categories as B
+		where A.categoryId = B.cid
+		 and name like CONCAT('%', #{keyword,jdbcType=VARCHAR}, '%')
+	</select>
 </mapper> 

@@ -42,27 +42,47 @@ public class FoodController {
 	public void setFoodService(FoodService foodService) {
 		this.foodService = foodService;
 	}
-	
+
 //	根据keyword获取食物详情
+//	@ResponseBody
+//	@RequestMapping(value ="/getFoodsByKeyword")
+//	public Map<String, Object> getFoodsByKeyword(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
+//		String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
+//		Map<String,Object> map=new HashMap<String, Object>();
+//		List<Food> food = foodService.getFoodsByKeyword(word);
+//		Map<String, Object> listMap=new HashMap<String, Object>();
+//		listMap.put("myList", food);
+//		map.put("msg", "根据keyword获取食物信息成功");
+//		map.put("relatedObject", listMap);
+//		map.put("success", true);
+//		return map;
+//	}
+
+//	获取菜品列表
 	@ResponseBody
 	@RequestMapping(value ="/getFoodsByKeyword")
-	public Map<String, Object> getFeedBackListById(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
-		String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
-		System.out.println("拿到word了：" +word+","+keyword);
+	public Map<String, Object> getFoodsByKeyword(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
+		String uid=(String)session.getAttribute("uid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		List<Food> food = foodService.getFoodsByKeyword(word);
-		Map<String, Object> listMap=new HashMap<String, Object>();
-		listMap.put("myList", food);
-		map.put("msg", "获取食物信息成功");
-		map.put("relatedObject", listMap);
-		map.put("success", true);
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
+			List<Food> food = foodService.getFoodsByKeyword();
+			Map<String, Object> listMap=new HashMap<String, Object>();
+			listMap.put("myList", food);
+			map.put("msg", "根据keyword获取食物信息成功");
+			map.put("relatedObject", listMap);
+			map.put("success", true);
+		}
 		return map;
 	}
-
+	
 //	根据foodId获取食物详情
 	@ResponseBody
 	@RequestMapping(value ="/getFoodInfoById")
-	public Map<String, Object> getFeedBackListById(HttpSession session, @RequestParam(value="foodId")int foodId){
+	public Map<String, Object> getFoodInfoById(HttpSession session, @RequestParam(value="foodId")int foodId){
 		Map<String,Object> map=new HashMap<String, Object>();
 
 		Food food = foodService.getFoodDetailByFoodId(foodId);
@@ -75,7 +95,7 @@ public class FoodController {
 //	新增浏览量
 	@RequestMapping(value = "/addVisitCount", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId) {
+	Map<String, Object> addVisitCount(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId) {
 		boolean isAdd = foodService.addVisitCount(foodId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
@@ -92,7 +112,7 @@ public class FoodController {
 //	加入收藏
 	@RequestMapping(value = "/insertMarks", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> insertFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
+	Map<String, Object> insertMarks(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
 		boolean isAdd = foodService.insertMarks(foodId, userId, new Date());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {

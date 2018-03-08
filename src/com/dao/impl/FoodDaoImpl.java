@@ -46,10 +46,9 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public List<Food> queryByKeyword(String keyword) {
-		Map<String, Object> args = new HashMap<String, Object>();
-		args.put("keyword", keyword);
-		List<Food> list = sqlSession.selectList("queryByKeyword", args);
+	public List<Food> getFoodsByKeyword() {
+		List<Food> list = sqlSession.selectList("queryByKeyword");
+		System.out.println(list);
 		return list;
 	}
 
