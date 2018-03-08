@@ -25,7 +25,7 @@
 			where A.userId = B.uid
 			and fid = #{fid,jdbcType=INTEGER}
 	</select>
-  
+	
 	<insert id="insertFeedBack" parameterType="com.entity.FeedBack" useGeneratedKeys="true" keyProperty="fid">
 	  insert into feedbacks (createTime, userId, content)
 	  values (

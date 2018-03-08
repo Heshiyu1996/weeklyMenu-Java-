@@ -28,6 +28,7 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public Food getFoodDetailByFoodId(int foodId) {
+//		foodDao.addVisitCount(-1);// 未知，一定要这个才能查到最新数据
 		return foodDao.queryByFoodId(foodId);
 	}
 
@@ -43,8 +44,9 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public List<Food> getFoodsByKeyword() {
-		return foodDao.getFoodsByKeyword();
+	public List<Food> getFoodsByKeyword(String keyword) {
+//		foodDao.addVisitCount(-1);// 未知，一定要这个才能查到最新数据
+		return foodDao.getFoodsByKeyword(keyword);
 	}
 
 	@Override

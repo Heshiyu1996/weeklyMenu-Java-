@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FoodDao {
 
-//	List<Food> getFoodsByKeyword(String keyword);
+	List<Food> getFoodsByKeyword(String keyword);
 
-	List<Food> getFoodsByKeyword();
+//	List<Food> getFoodsByKeyword();
     
     Food queryByFoodId(int foodId);
     

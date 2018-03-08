@@ -62,20 +62,20 @@ public class FoodController {
 	@ResponseBody
 	@RequestMapping(value ="/getFoodsByKeyword")
 	public Map<String, Object> getFoodsByKeyword(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
-		String uid=(String)session.getAttribute("uid_session");
+//		String uid=(String)session.getAttribute("uid_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(uid==null){
-			map.put("success", false);
-			map.put("msg", "Session已过期，请重新登录！");
-		} else {
+//		if(uid==null){
+//			map.put("success", false);
+//			map.put("msg", "Session已过期，请重新登录！");
+//		} else {
 			String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
-			List<Food> food = foodService.getFoodsByKeyword();
+			List<Food> food = foodService.getFoodsByKeyword(word);
 			Map<String, Object> listMap=new HashMap<String, Object>();
 			listMap.put("myList", food);
 			map.put("msg", "根据keyword获取食物信息成功");
 			map.put("relatedObject", listMap);
 			map.put("success", true);
-		}
+//		}
 		return map;
 	}
 	

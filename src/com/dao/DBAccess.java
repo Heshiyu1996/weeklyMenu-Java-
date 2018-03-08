@@ -10,11 +10,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 public class DBAccess {
-	
+	static SqlSession sqlSession = null;
 	public static SqlSession getSqlSession() {
 
 		Reader reader;
-		SqlSession sqlSession = null;
+		if(sqlSession!=null){
+			return sqlSession;
+		}
 		try {
 			reader = Resources.getResourceAsReader("mybatis-config.xml");
 

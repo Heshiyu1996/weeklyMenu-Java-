@@ -34,6 +34,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper class="com.entity.Food" />
 		<mapper class="com.entity.Keyword" />
 		<mapper resource="com/dao/SearchMapper.xml" />
+		<mapper resource="com/dao/CommonMapper.xml" />
+		<mapper class="com.entity.Common" />
 	</mappers>
 	
 </configuration>

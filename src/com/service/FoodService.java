@@ -9,8 +9,8 @@ import com.entity.Food;
 
 public interface FoodService {
 
-	public List<Food> getFoodsByKeyword();
-//	public List<Food> getFoodsByKeyword(String keyword);
+//	public List<Food> getFoodsByKeyword();
+	public List<Food> getFoodsByKeyword(String keyword);
 	
 	public Food getFoodDetailByFoodId(int foodId);
 
