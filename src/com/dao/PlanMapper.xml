@@ -2,8 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.PlanMapper">
 	
-	<select id="getCommon" resultType="com.entity.Plan">
-			select nowTime from common
-			where id = 1
+	<select id="queryCidssByDayPid" resultType="com.entity.Category" parameterType="java.util.Map"  >
+		SELECT distinct cid FROM plans as A
+		natural join foods as B
+		natural join categories as C
+		where A.foodId = B.foodId
+		and B.categoryId = C.cid
+		and A.day = #{day,jdbcType=INTEGER}
+		and A.pid = #{pid,jdbcType=INTEGER};
+	</select>	
+	
+	<select id="queryFoodsByDayPidCid" resultType="com.entity.Food" parameterType="java.util.Map"  >
+		SELECT *, cname as category FROM plans as A
+		natural join foods as B
+		natural join categories as C
+		where A.foodId = B.foodId
+		and B.categoryId = C.cid
+		and A.day = #{day,jdbcType=INTEGER}
+		and A.pid = #{pid,jdbcType=INTEGER}
+		and C.cid = #{cid,jdbcType=INTEGER};
 	</select>
 </mapper> 

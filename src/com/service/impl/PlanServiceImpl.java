@@ -2,12 +2,15 @@ package com.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.PlanDao;
 import com.dao.FeedBackDao;
+import com.entity.Category;
+import com.entity.Food;
 import com.entity.Plan;
 import com.entity.FeedBack;
 import com.tool.Encryption;
@@ -29,8 +32,17 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
-	public Plan getNowTime() {
-		// TODO 自动生成的方法存根
-		return null;
+	public List<Food> getFoodsByDayPidCid(Integer day, Integer pid, Integer cid) {
+		return planDao.queryFoodsByDayPidCid(day, pid, cid);
 	}
+
+	@Override
+	public Map<String, Object> getWeekCalendar() {
+		return planDao.queryWeekCalendar();
+	}
+
+//	@Override
+//	public List<Category> getCidssByDayPid(Integer day, Integer pid) {
+//		return planDao.queryCategoriesByDayPid(day, pid);
+//	}
 }

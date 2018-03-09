@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.dao.PlanDao;
 import com.dao.DBAccess;
 import com.dao.FeedBackDao;
+import com.entity.Category;
+import com.entity.Food;
 import com.entity.Plan;
 import com.entity.FeedBack;
 import com.tool.WeekCalendar;
@@ -29,7 +31,27 @@ public class PlanDaoImpl implements PlanDao {
 	}
 
 	@Override
-	public Map<String, Object> getThisWeek() {
+	public Map<String, Object> queryWeekCalendar() {
 		return WeekCalendar.getWeekCalendar();
+	}
+
+	@Override
+	public List<Category> queryCidssByDayPid(Integer day, Integer pid) {
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("day", day);
+		args.put("pid", pid);
+		List<Category> list = sqlSession.selectList("queryCidssByDayPid", args);
+		return list;
+	}
+
+	@Override
+	public List<Food> queryFoodsByDayPidCid(Integer day, Integer pid,
+			Integer cid) {
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("day", day);
+		args.put("pid", pid);
+		args.put("cid", cid);
+		List<Food> list = sqlSession.selectList("queryFoodsByDayPidCid", args);
+		return list;
 	}
 }
