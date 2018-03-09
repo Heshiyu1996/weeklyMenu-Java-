@@ -28,6 +28,6 @@ public class PlanTest {
 	@Test
 	public void testQueryOne(){
 //		System.out.println(planService.getFoodsByDayPidCid(1, 1, 1));
-		System.out.println(planService.getWeekCalendar());
+		System.out.println(planService.getCidsByDayPid(1, 1));
 	}
 }

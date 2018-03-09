@@ -14,7 +14,7 @@ public interface PlanService {
 
 	public Map<String,Object> getWeekCalendar();
 	
-//	public List<Category> getCidssByDayPid(Integer day, Integer pid);
+	public List<Category> getCidsByDayPid(Integer day, Integer pid);
 	
 	public List<Food> getFoodsByDayPidCid(Integer day, Integer pid, Integer cid);
 }

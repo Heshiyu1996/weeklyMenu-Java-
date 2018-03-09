@@ -41,8 +41,8 @@ public class PlanServiceImpl implements PlanService {
 		return planDao.queryWeekCalendar();
 	}
 
-//	@Override
-//	public List<Category> getCidssByDayPid(Integer day, Integer pid) {
-//		return planDao.queryCategoriesByDayPid(day, pid);
-//	}
+	@Override
+	public List<Category> getCidsByDayPid(Integer day, Integer pid) {
+		return planDao.queryCidsByDayPid(day, pid);
+	}
 }

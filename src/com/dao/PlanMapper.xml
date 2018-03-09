@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.PlanMapper">
 	
-	<select id="queryCidssByDayPid" resultType="com.entity.Category" parameterType="java.util.Map"  >
-		SELECT distinct cid FROM plans as A
+	<select id="queryCidsByDayPid" resultType="com.entity.Category" parameterType="java.util.Map"  >
+		SELECT distinct cid, cname FROM plans as A
 		natural join foods as B
 		natural join categories as C
 		where A.foodId = B.foodId

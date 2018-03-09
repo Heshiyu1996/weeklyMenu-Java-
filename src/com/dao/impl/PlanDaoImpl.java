@@ -36,17 +36,16 @@ public class PlanDaoImpl implements PlanDao {
 	}
 
 	@Override
-	public List<Category> queryCidssByDayPid(Integer day, Integer pid) {
+	public List<Category> queryCidsByDayPid(Integer day, Integer pid) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("day", day);
 		args.put("pid", pid);
-		List<Category> list = sqlSession.selectList("queryCidssByDayPid", args);
+		List<Category> list = sqlSession.selectList("queryCidsByDayPid", args);
 		return list;
 	}
 
 	@Override
-	public List<Food> queryFoodsByDayPidCid(Integer day, Integer pid,
-			Integer cid) {
+	public List<Food> queryFoodsByDayPidCid(Integer day, Integer pid, Integer cid) {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("day", day);
 		args.put("pid", pid);

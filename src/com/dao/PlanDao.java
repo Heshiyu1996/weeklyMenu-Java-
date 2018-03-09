@@ -17,7 +17,7 @@ public interface PlanDao {
 	// 获取本周日历
 	public Map<String,Object> queryWeekCalendar();
 	
-	List<Category> queryCidssByDayPid(Integer day, Integer pid);
+	List<Category> queryCidsByDayPid(Integer day, Integer pid);
 	
 	List<Food> queryFoodsByDayPidCid(Integer day, Integer pid, Integer cid);
 	
