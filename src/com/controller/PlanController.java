@@ -19,36 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.entity.Common;
+import com.entity.Plan;
 import com.entity.FeedBack;
-import com.service.CommonService;
+import com.service.PlanService;
 
 @Controller
-@RequestMapping("/common")
-public class CommonController {
+@RequestMapping("/plan")
+public class PlanController {
 
 	@Autowired
-	private CommonService commonService = null;
+	private PlanService planService = null;
 
-	public CommonService getCommonService() {
-		return commonService;
+	public PlanService getPlanService() {
+		return planService;
 	}
 
-	public void setCommonService(CommonService commonService) {
-		this.commonService = commonService;
+	public void setPlanService(PlanService planService) {
+		this.planService = planService;
 	}
 	
-//	获取反馈列表
-	@ResponseBody
-	@RequestMapping(value ="/getCommonInfo")
-	public Map<String, Object> getFeedBackList(HttpSession session){
-		Map<String,Object> map=new HashMap<String, Object>();
-			Date nowTime = new Date();
-			Common common = commonService.getCommon(nowTime);
-			map.put("msg", "获取反馈列表成功");
-			map.put("relatedObject", common);
-			map.put("success", true);
-
-		return map;
-	}
 }

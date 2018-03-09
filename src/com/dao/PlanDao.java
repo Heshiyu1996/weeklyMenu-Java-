@@ -1,18 +1,18 @@
 package com.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.entity.Common;
+import com.entity.Plan;
 import com.entity.FeedBack;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CommonDao {
+public interface PlanDao {
 	
-	public Common getNowTime();
-
-    int updateCommon(Date nowTime);
+	public Map<String,Object> getThisWeek();
 	
 }

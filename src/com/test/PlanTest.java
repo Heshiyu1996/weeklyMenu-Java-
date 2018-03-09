@@ -1,6 +1,8 @@
 package com.test;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -8,23 +10,23 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.service.CommonService;
+import com.service.PlanService;
 import com.service.FoodService;
+import com.tool.WeekCalendar;
 
 
-public class CommonTest {
+public class PlanTest {
 	ApplicationContext context = null;
-	CommonService commonService = null;
+	PlanService planService = null;
 	@Before
 	public void init(){
 		String[] configs = {"applicationContext.xml"};
 		context = new ClassPathXmlApplicationContext(configs);
-		commonService = (CommonService)context.getBean("commonService");
+		planService = (PlanService)context.getBean("planService");
 	}
 	
 	@Test
 	public void testQueryOne(){
-		Date nowTime = new Date();
-		System.out.println("测试结果为：" + commonService.getCommon(nowTime));
+		System.out.println(WeekCalendar.getWeekCalendar());
 	}
 }

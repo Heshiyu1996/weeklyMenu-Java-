@@ -8,13 +8,15 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.dao.CommonDao;
+import com.dao.PlanDao;
 import com.dao.DBAccess;
 import com.dao.FeedBackDao;
-import com.entity.Common;
+import com.entity.Plan;
 import com.entity.FeedBack;
-@Repository("commonDao")
-public class CommonDaoImpl implements CommonDao {
+import com.tool.WeekCalendar;
+
+@Repository("planDao")
+public class PlanDaoImpl implements PlanDao {
 	
 	private SqlSession sqlSession = DBAccess.getSqlSession();
 
@@ -25,20 +27,9 @@ public class CommonDaoImpl implements CommonDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
-	@Override
-	public Common getNowTime() {
-		Common common = sqlSession.selectOne("getCommon");
-		return common;
-	}
 
 	@Override
-	public int updateCommon(Date nowTime) {
-		Map<String, Object> args = new HashMap<String, Object>();
-		args.put("nowTime", nowTime);
-		int result = sqlSession.update("updateCommonSQL", args);
-		sqlSession.commit();
-		return result;
+	public Map<String, Object> getThisWeek() {
+		return WeekCalendar.getWeekCalendar();
 	}
-
 }
