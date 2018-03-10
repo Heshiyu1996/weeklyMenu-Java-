@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.entity.FeedBack;
 import com.entity.Food;
@@ -15,7 +16,9 @@ public interface AdminDao {
 	
     int updateFeedBack(FeedBack fb);
 
-	int insertFood(Food food);
+    Map<String, Integer> insertFood(Food food);
+    
+    int insertPlan(int day, int pid, int foodId);
 	
     int updateFood(Food food);
 	

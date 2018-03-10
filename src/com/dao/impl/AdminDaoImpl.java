@@ -42,10 +42,13 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	@Override
-	public int insertFood(Food food) {
+	public Map<String, Integer> insertFood(Food food) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		int row =sqlSession.insert("insertFood", food);
+		map.put("row", row);
+		map.put("foodId", food.getFoodId());
 		sqlSession.commit();
-		return row;
+		return map;
 	}
 
 	@Override
@@ -73,6 +76,17 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Food> getFoodsByKeyword(String keyword) {
 		List<Food> list = sqlSession.selectList("queryFoodsByKeyword", keyword);
 		return list;
+	}
+
+	@Override
+	public int insertPlan(int day, int pid, int foodId) {
+		Map<String, Integer> args = new HashMap<String, Integer>();
+		args.put("day", day);
+		args.put("pid", pid);
+		args.put("foodId", foodId);
+		int row =sqlSession.insert("insertPlan", args);
+		sqlSession.commit();
+		return row;
 	}
 
 

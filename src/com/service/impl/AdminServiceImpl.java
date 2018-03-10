@@ -1,6 +1,8 @@
 package com.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,13 +45,19 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean insertFood(Food food) {
+	public boolean insertFood(Food food, int day, int pid) {
+//		Map<String, Object> map = new HashMap<String, Object>();
 		boolean flag=false;
 		try {
-			flag=(adminDao.insertFood(food)==1)?true:false;
+			flag=(adminDao.insertFood(food).get("row")==1)?true:false;
+//			map.put("flag", flag);
+			int foodId = adminDao.insertFood(food).get("foodId");
+//			map.put("foodId", foodId);
+			flag=(adminDao.insertPlan(day, pid, foodId)==1)?true:false;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+//		return map;
 		return flag;
 	}
 

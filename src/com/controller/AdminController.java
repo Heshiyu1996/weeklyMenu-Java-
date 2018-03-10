@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.entity.FeedBack;
 import com.entity.Food;
 import com.service.AdminService;
@@ -86,23 +87,26 @@ public class AdminController {
 //	新增菜品
 	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
+	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId, @RequestParam(value="plans")String[] plans) {
 		Food food = new Food();
 		food.setName(name);
 		food.setImgUrl(imgUrl);
 		food.setMaterial(material);
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
-		boolean isAdd = adminService.insertFood(food);
+		System.out.println("收到plans");
+		System.out.println(plans);
+//		boolean isAdd = ((Boolean)adminService.insertFood(food).get("flag")).booleanValue();
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (isAdd == true) {
-			map.put("msg", "添加菜品成功");
-			map.put("success", true);
-		} else {
-			map.put("msg", "添加菜品失败");
-			map.put("success", false);
-		}
-
+//		if (isAdd == true) {
+//			map.put("msg", "添加菜品成功");
+//			map.put("foodId", adminService.insertFood(food).get("foodId"));
+//			map.put("success", true);
+//		} else {
+//			map.put("msg", "添加菜品失败");
+//			map.put("success", false);
+//		}
+//
 		return map;
 	}
 

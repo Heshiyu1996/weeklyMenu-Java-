@@ -67,4 +67,12 @@
 		where A.categoryId = B.cid
 		 and name like CONCAT('%', #{keyword,jdbcType=VARCHAR}, '%')
 	</select>
+	
+	<insert id="insertPlan" parameterType="java.util.Map">
+		insert into plans (day, pid, foodId)
+		values (
+		#{day,jdbcType=INTEGER}
+		#{pid,jdbcType=INTEGER}
+		#{foodId,jdbcType=INTEGER})
+	</insert>
 </mapper> 
