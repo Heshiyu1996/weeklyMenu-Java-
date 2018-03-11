@@ -186,5 +186,17 @@ public class FoodController {
 		map.put("success", true);
 		return map;
 	}
+
+//	获取热门菜品
+	@ResponseBody
+	@RequestMapping(value ="/getHotFoods")
+	public Map<String, Object> getHotFoods(HttpSession session){
+		Map<String,Object> map=new HashMap<String, Object>();
+		List<Food> foods = foodService.getHotFoods();
+		map.put("msg", "获取热门菜品成功");
+		map.put("relatedObject", foods);
+		map.put("success", true);
+		return map;
+	}
 }
 

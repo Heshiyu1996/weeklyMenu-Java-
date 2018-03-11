@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.FoodDao;
+import com.dao.SearchDao;
 import com.entity.Category;
 import com.entity.Food;
 import com.tool.Encryption;
@@ -93,5 +94,10 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public List<Category> getAllCategories() {
 		return foodDao.getAllCategories();
+	}
+
+	@Override
+	public List<Food> getHotFoods() {
+		return foodDao.queryHotFoods();
 	}
 }

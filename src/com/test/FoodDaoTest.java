@@ -23,6 +23,6 @@ public class FoodDaoTest {
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.getAllCategories());
+		System.out.println("测试结果为：" + foodService.getHotFoods());
 	}
 }

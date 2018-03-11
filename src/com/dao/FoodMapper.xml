@@ -77,4 +77,12 @@
 	<select id="getAllCategories" resultType="com.entity.Category">
 		select * from categories
 	</select>
+	
+	<select id="queryHotFoods" resultType="com.entity.Food">
+		select *, cname as category from foods as A
+		natural join categories as B
+		where A.categoryId = B.cid
+		order by A.visitCount desc
+		limit 0,3
+	</select>
 </mapper>

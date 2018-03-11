@@ -100,4 +100,10 @@ public class FoodDaoImpl implements FoodDao {
 		return list;
 	}
 
+	@Override
+	public List<Food> queryHotFoods() {
+		List<Food> list = sqlSession.selectList("queryHotFoods");
+		return list;
+	}
+
 }

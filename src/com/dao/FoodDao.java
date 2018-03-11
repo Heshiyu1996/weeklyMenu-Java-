@@ -13,7 +13,7 @@ public interface FoodDao {
 
 	List<Food> getFoodsByKeyword(String keyword);
 
-//	List<Food> getFoodsByKeyword();
+	List<Food> queryHotFoods();
     
     Food queryByFoodId(int foodId);
     
