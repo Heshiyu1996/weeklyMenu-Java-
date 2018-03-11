@@ -71,8 +71,14 @@
 	<insert id="insertPlan" parameterType="java.util.Map">
 		insert into plans (day, pid, foodId)
 		values (
-		#{day,jdbcType=INTEGER}
-		#{pid,jdbcType=INTEGER}
+		#{day,jdbcType=INTEGER},
+		#{pid,jdbcType=INTEGER},
 		#{foodId,jdbcType=INTEGER})
 	</insert>
+	
+	<delete id="deletePlanByFoodId" parameterType="java.lang.Integer" >
+		delete from plans
+		where foodId = #{foodId,jdbcType=INTEGER}
+	</delete>
+	
 </mapper> 

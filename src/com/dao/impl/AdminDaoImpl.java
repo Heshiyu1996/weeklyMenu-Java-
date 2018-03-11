@@ -89,5 +89,12 @@ public class AdminDaoImpl implements AdminDao {
 		return row;
 	}
 
+	@Override
+	public int deletePlan(int foodId) {
+		int row =sqlSession.delete("deletePlanByFoodId", foodId);
+		sqlSession.commit();
+		return row;
+	}
+
 
 }

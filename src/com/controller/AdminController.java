@@ -87,26 +87,36 @@ public class AdminController {
 //	新增菜品
 	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId, @RequestParam(value="plans")String[] plans) {
+	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId, @RequestParam(value="plans")List<String>plans) {
 		Food food = new Food();
 		food.setName(name);
 		food.setImgUrl(imgUrl);
 		food.setMaterial(material);
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
-		System.out.println("收到plans");
 		System.out.println(plans);
-//		boolean isAdd = ((Boolean)adminService.insertFood(food).get("flag")).booleanValue();
+		boolean isAdd = true;
+//		isAdd = ((Boolean)adminService.insertFood(food, Integer.parseInt(strs[0]), Integer.parseInt(strs[j]))).booleanValue();
+		isAdd = ((Boolean)adminService.insertFood(food, plans)).booleanValue();
+//		for (int i=0; i<plans.size(); i++) {
+//			System.out.println(plans.get(i));
+//			String str = plans.get(i);
+//			String[] strs = str.split("-");
+//			for (int j=0,len=strs.length; j<len; j++) {
+//				System.out.println(strs[j].toString());
+//				isAdd = ((Boolean)adminService.insertFood(food, Integer.parseInt(strs[0]), Integer.parseInt(strs[j]))).booleanValue();
+//			}
+// 		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-//		if (isAdd == true) {
-//			map.put("msg", "添加菜品成功");
-//			map.put("foodId", adminService.insertFood(food).get("foodId"));
-//			map.put("success", true);
-//		} else {
-//			map.put("msg", "添加菜品失败");
-//			map.put("success", false);
-//		}
-//
+		if (isAdd == true) {
+			map.put("msg", "添加菜品成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "添加菜品失败");
+			map.put("success", false);
+		}
+
 		return map;
 	}
 

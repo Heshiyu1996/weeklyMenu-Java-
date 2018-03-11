@@ -45,19 +45,25 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean insertFood(Food food, int day, int pid) {
-//		Map<String, Object> map = new HashMap<String, Object>();
+	public boolean insertFood(Food food, List<String> plans) {
 		boolean flag=false;
 		try {
-			flag=(adminDao.insertFood(food).get("row")==1)?true:false;
-//			map.put("flag", flag);
-			int foodId = adminDao.insertFood(food).get("foodId");
-//			map.put("foodId", foodId);
-			flag=(adminDao.insertPlan(day, pid, foodId)==1)?true:false;
+			Map<String, Integer> resultMap = adminDao.insertFood(food);
+			flag=(resultMap.get("row")==1)?true:false;
+			int foodId = resultMap.get("foodId");
+
+			for (int i=0; i<plans.size(); i++) {
+				System.out.println(plans.get(i));
+				String plan = plans.get(i);
+				String[] strs = plan.split("-");
+				for (int j=1,len=strs.length; j<len; j++) {
+					System.out.println(strs[j].toString());
+					flag=(adminDao.insertPlan(Integer.parseInt(strs[0]), Integer.parseInt(strs[j]), foodId)==1)?true:false;
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		return map;
 		return flag;
 	}
 
@@ -78,9 +84,11 @@ public class AdminServiceImpl implements AdminService {
 		try {
 			for (int i=0; i<foodsId.length; i++) {
 				flag=(adminDao.deleteFood(foodsId[i])==1)?true:false;
+				adminDao.deletePlan(foodsId[i]);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
+			flag=false;
 		}
 		return flag;
 	}

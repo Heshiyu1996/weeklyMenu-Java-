@@ -13,7 +13,9 @@ public interface AdminService {
 	// 回复反馈
 	public boolean updateFeedBack(FeedBack fb);
 
-	public boolean insertFood(Food food, int day, int pid);
+//	public boolean insertFood(Food food, int day, int pid);
+	
+	public boolean insertFood(Food food, List<String> plans);
 	// 编辑菜品
 	public boolean updateFood(Food food);
 	// 编辑菜品

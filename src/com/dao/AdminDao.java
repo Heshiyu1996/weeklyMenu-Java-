@@ -20,6 +20,8 @@ public interface AdminDao {
     
     int insertPlan(int day, int pid, int foodId);
 	
+    int deletePlan(int foodId);
+	
     int updateFood(Food food);
 	
     int deleteFood(int foodId);
