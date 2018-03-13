@@ -45,12 +45,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean insertFood(Food food, List<String> plans) {
+	public int insertFood(Food food, List<String> plans) {
 		boolean flag=false;
+		int newFoodId = -1;
 		try {
 			Map<String, Integer> resultMap = adminDao.insertFood(food);
 			flag=(resultMap.get("row")==1)?true:false;
 			int foodId = resultMap.get("foodId");
+			
 
 			for (int i=0; i<plans.size(); i++) {
 				System.out.println(plans.get(i));
@@ -61,10 +63,12 @@ public class AdminServiceImpl implements AdminService {
 					flag=(adminDao.insertPlan(Integer.parseInt(strs[0]), Integer.parseInt(strs[j]), foodId)==1)?true:false;
 				}
 			}
+			newFoodId = foodId;
 		} catch (Exception e) {
+			newFoodId = -1;
 			e.printStackTrace();
 		}
-		return flag;
+		return newFoodId;
 	}
 
 	@Override

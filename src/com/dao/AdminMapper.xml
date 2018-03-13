@@ -41,7 +41,9 @@
 	<update id="updateFoodAdmin" parameterType="com.entity.Food" >
 	  update foods
 	  set name = #{name,jdbcType=VARCHAR},
-		imgUrl = #{imgUrl,jdbcType=VARCHAR},
+   		<if test="imgUrl != null" >
+		  imgUrl = #{imgUrl,jdbcType=VARCHAR},
+		</if>
 		material = #{material,jdbcType=VARCHAR},
 		description = #{description,jdbcType=VARCHAR},
 		categoryId = #{categoryId,jdbcType=INTEGER}

@@ -15,7 +15,7 @@ public interface AdminService {
 
 //	public boolean insertFood(Food food, int day, int pid);
 	
-	public boolean insertFood(Food food, List<String> plans);
+	public int insertFood(Food food, List<String> plans);
 	// 编辑菜品
 	public boolean updateFood(Food food);
 	// 编辑菜品

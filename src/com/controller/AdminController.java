@@ -100,10 +100,25 @@ public class AdminController {
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
 		System.out.println(plans);
-		boolean isAdd = true;
-		isAdd = ((Boolean)adminService.insertFood(food, plans)).booleanValue();
+		int newFoodId = adminService.insertFood(food, plans);
+		System.out.println("newFoodId为：" + newFoodId);
+
+		// 图片替换操作
+        File oldfile=new File(request.getServletContext().getRealPath("/")+"img/image.jpg"); 
+        File newfile=new File(request.getServletContext().getRealPath("/")+"img/foodImg" + newFoodId + ".jpg"); 
+        if(!oldfile.exists()){
+            System.out.println("重命名文件不存在");
+        }
+        if(newfile.exists()){ 
+            System.out.println("新文件已经存在，正在尝试删除"); 
+        	newfile.delete();
+        }
+        oldfile.renameTo(newfile); 
+		food.setImgUrl("/img/foodImg" + newFoodId + ".jpg");
+		boolean isAdd = adminService.updateFood(food);
+        
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (isAdd == true) {
+		if ((isAdd) && (newFoodId != -1)) {
 			map.put("msg", "添加菜品成功");
 			map.put("success", true);
 		} else {
