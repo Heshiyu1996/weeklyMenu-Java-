@@ -23,6 +23,7 @@ public class FoodDaoTest {
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + foodService.getHotFoods());
+		System.out.println("测试结果为：" + foodService.getPlanByFoodId(42));
+//		System.out.println(QiniuUtil.getUpToken(););
 	}
 }

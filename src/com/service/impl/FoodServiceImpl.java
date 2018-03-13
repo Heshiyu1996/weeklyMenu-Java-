@@ -2,6 +2,7 @@ package com.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,5 +100,10 @@ public class FoodServiceImpl implements FoodService {
 	@Override
 	public List<Food> getHotFoods() {
 		return foodDao.queryHotFoods();
+	}
+
+	@Override
+	public List<Map<String, Object>> getPlanByFoodId(int foodId) {
+		return foodDao.queryPlanByFoodId(foodId);
 	}
 }

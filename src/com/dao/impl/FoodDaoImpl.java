@@ -33,6 +33,7 @@ public class FoodDaoImpl implements FoodDao {
 
 	@Override
 	public int addVisitCount(int foodId) {
+		System.out.println("打印foodId：" + foodId);
 		int result = sqlSession.update("addVisitCount", foodId);
 		sqlSession.commit();
 		return result;
@@ -103,6 +104,12 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public List<Food> queryHotFoods() {
 		List<Food> list = sqlSession.selectList("queryHotFoods");
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryPlanByFoodId(int foodId) {
+		List<Map<String, Object>> list = sqlSession.selectList("queryPlanByFoodId", foodId);
 		return list;
 	}
 

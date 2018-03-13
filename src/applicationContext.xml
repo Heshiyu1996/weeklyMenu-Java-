@@ -10,6 +10,8 @@
     <!-- ①：对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
     <context:component-scan base-package="com.controller" />
 	<context:component-scan base-package="com"/>
-    
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <beans:property name="maxUploadSize" value="10485760" />  
+	</beans:bean>
     <mvc:resources location="/resources/" mapping="/resources/**"/>
 </beans:beans>

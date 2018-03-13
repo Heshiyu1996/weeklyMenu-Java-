@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.entity.Category;
 import com.entity.Food;
@@ -32,5 +33,7 @@ public interface FoodDao {
 	List<Food> getMyMarksList(Integer userId);
     
 	List<Category> getAllCategories();
+	
+	List<Map<String, Object>> queryPlanByFoodId(int foodId);
 	
 }

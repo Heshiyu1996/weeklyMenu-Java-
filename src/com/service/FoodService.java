@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.entity.Category;
 import com.entity.FeedBack;
@@ -26,5 +27,7 @@ public interface FoodService {
 	public List<Food> getMyMarksList(Integer userId);
 
 	public List<Category> getAllCategories();
+
+	public List<Map<String, Object>> getPlanByFoodId(int foodId);
 	
 }

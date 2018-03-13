@@ -50,7 +50,7 @@ public class UserController {
 			userMap.put("uname", user.getUname());
 			userMap.put("umobile", user.getUmobile());
 			userMap.put("utype", user.getUtype());
-			map.put("msg", "获取用户信息成功");
+			map.put("msg", "获取用户信息成功哦哦");
 			map.put("relatedObject", userMap);
 			map.put("success", true);
 		}

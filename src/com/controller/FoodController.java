@@ -198,5 +198,18 @@ public class FoodController {
 		map.put("success", true);
 		return map;
 	}
+	
+//	根据foodId获取plans
+	@ResponseBody
+	@RequestMapping(value ="/getPlanByFoodId")
+	public Map<String, Object> getPlanByFoodId(HttpSession session, @RequestParam(value="foodId")int foodId){
+		Map<String,Object> map=new HashMap<String, Object>();
+
+		List<Map<String, Object>> plansList = foodService.getPlanByFoodId(foodId);
+		map.put("msg", "获取菜品的供餐时段成功");
+		map.put("relatedObject", plansList);
+		map.put("success", true);
+		return map;
+	}
 }
 

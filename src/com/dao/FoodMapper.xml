@@ -78,11 +78,19 @@
 		select * from categories
 	</select>
 	
-	<select id="queryHotFoods" resultType="com.entity.Food">
-		select *, cname as category from foods as A
+	<select id="queryHotFoods" resultType="java.util.Map">
+		select * from foods as A
 		natural join categories as B
 		where A.categoryId = B.cid
 		order by A.visitCount desc
 		limit 0,3
+	</select>
+	
+	<select id="queryPlanByFoodId" resultType="java.util.Map" parameterType="java.lang.Integer">
+		SELECT planId, day, pid, pname, foodId FROM plans as A
+		natural join period as B
+		where A.pid = B.pid
+		and foodId = #{foodId,jdbcType=INTEGER}
+		order by A.day asc
 	</select>
 </mapper>

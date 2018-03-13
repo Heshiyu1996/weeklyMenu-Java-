@@ -53,7 +53,6 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public int updateFood(Food food) {
-		System.out.println("在在在");
 		int result = sqlSession.update("updateFoodAdmin", food);
 		sqlSession.commit();
 		return result;

@@ -1,8 +1,8 @@
 package com.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSONObject;
 import com.entity.FeedBack;
 import com.entity.Food;
 import com.service.AdminService;
-import com.service.FoodService;
 
 @Controller
 @RequestMapping("/admin")
@@ -65,7 +64,7 @@ public class AdminController {
 //	回复反馈
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="fid")int fid, @RequestParam(value="isReplied")int isReplied, @RequestParam(value="repliedMsg")String repliedMsg) {
+	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="fid")int fid, @RequestParam(value="isReplied")int isReplied, @RequestParam(value="repliedMsg")String repliedMsg, @RequestParam(value="imageFile")MultipartFile imageFile) {
 		FeedBack fb = new FeedBack();
 		fb.setFid(fid);
 		fb.setIsReplied(isReplied);
@@ -87,7 +86,13 @@ public class AdminController {
 //	新增菜品
 	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId, @RequestParam(value="plans")List<String>plans) {
+	Map<String, Object> insertFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, 
+			@RequestParam(value="name")String name, 
+			@RequestParam(value="imgUrl")String imgUrl, 
+			@RequestParam(value="material")String material, 
+			@RequestParam(value="description")String description, 
+			@RequestParam(value="categoryId")int categoryId, 
+			@RequestParam(value="plans")List<String>plans) {
 		Food food = new Food();
 		food.setName(name);
 		food.setImgUrl(imgUrl);
@@ -96,18 +101,7 @@ public class AdminController {
 		food.setCategoryId(categoryId);
 		System.out.println(plans);
 		boolean isAdd = true;
-//		isAdd = ((Boolean)adminService.insertFood(food, Integer.parseInt(strs[0]), Integer.parseInt(strs[j]))).booleanValue();
 		isAdd = ((Boolean)adminService.insertFood(food, plans)).booleanValue();
-//		for (int i=0; i<plans.size(); i++) {
-//			System.out.println(plans.get(i));
-//			String str = plans.get(i);
-//			String[] strs = str.split("-");
-//			for (int j=0,len=strs.length; j<len; j++) {
-//				System.out.println(strs[j].toString());
-//				isAdd = ((Boolean)adminService.insertFood(food, Integer.parseInt(strs[0]), Integer.parseInt(strs[j]))).booleanValue();
-//			}
-// 		}
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
 			map.put("msg", "添加菜品成功");
@@ -116,18 +110,36 @@ public class AdminController {
 			map.put("msg", "添加菜品失败");
 			map.put("success", false);
 		}
-
 		return map;
 	}
-
+	
 //	编辑菜品
 	@RequestMapping(value = "/updateFood", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> updateFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="name")String name, @RequestParam(value="imgUrl")String imgUrl, @RequestParam(value="material")String material, @RequestParam(value="description")String description, @RequestParam(value="categoryId")int categoryId) {
+	Map<String, Object> updateFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, 
+			@RequestParam(value="foodId")int foodId, 
+			@RequestParam(value="name")String name, 
+			@RequestParam(value="imgUrl")String imgUrl, 
+			@RequestParam(value="material")String material, 
+			@RequestParam(value="description")String description, 
+			@RequestParam(value="categoryId")int categoryId) {
+		
+		// 图片替换操作
+        File oldfile=new File(request.getServletContext().getRealPath("/")+"img/image.jpg"); 
+        File newfile=new File(request.getServletContext().getRealPath("/")+"img/foodImg" + foodId + ".jpg"); 
+        if(!oldfile.exists()){
+            System.out.println("重命名文件不存在");
+        }
+        if(newfile.exists()){ 
+            System.out.println("新文件已经存在，正在尝试删除"); 
+        	newfile.delete();
+        }
+        oldfile.renameTo(newfile); 
+        
 		Food food = new Food();
 		food.setFoodId(foodId);
 		food.setName(name);
-		food.setImgUrl(imgUrl);
+		food.setImgUrl("/img/foodImg" + foodId + ".jpg");
 		food.setMaterial(material);
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
@@ -143,12 +155,39 @@ public class AdminController {
 		return map;
 	}
 
+//	上传图片
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> uploadFile(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="imageFile")MultipartFile imageFile) throws IOException {
+		String fileName="image.jpg";
+		File file=new File(request.getServletContext().getRealPath("/")+"img/"+fileName);
+		if(file.exists()){
+			System.out.println("文件重名啊");
+			file.delete();
+		}
+		System.out.println(request.getServletContext().getRealPath("/"));
+		FileOutputStream fileOutputStream=new FileOutputStream(file);
+		fileOutputStream.write(imageFile.getBytes());
+		fileOutputStream.close();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", "图片上传成功");
+		map.put("success", true);
+		return map;
+	}
 
 //	删除菜品
 	@RequestMapping(value = "/deleteFood", method = RequestMethod.POST)
 	public @ResponseBody
 	Map<String, Object> deleteFood(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodsId")int[] foodsId) {
 		boolean isAdd = adminService.deleteFood(foodsId);
+		for (int i=0; i< foodsId.length; i++) {
+	        File foodImg=new File(request.getServletContext().getRealPath("/")+"img/foodImg" + foodsId[i] + ".jpg"); 
+	        if(foodImg.exists()){ 
+	            System.out.println("要删的菜品存在图片，正在尝试删除"); 
+	            foodImg.delete();
+	        }
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
 			map.put("msg", "删除菜品成功");
