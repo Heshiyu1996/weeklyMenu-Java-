@@ -1,6 +1,8 @@
 package com.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.dao.DBAccess;
 import com.dao.UserDao;
 import com.entity.User;
+import com.entity.Character;
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
 
@@ -21,12 +24,6 @@ public class UserDaoImpl implements UserDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
-//	@Override
-//	public List<Staff> quertyAllStaff() {
-//		List<Staff> list = sqlSession.selectList("selectAllDept");
-//		return list;
-//	}
 
 	@Override
 	public User queryStaff(String Uid) {
@@ -45,5 +42,27 @@ public class UserDaoImpl implements UserDao {
 		return row;
 	}
 
+	@Override
+	public int ifExistCharacter(Integer userId) {
+		return sqlSession.selectOne("ifExistCharacter", userId);
+	}
 
+	@Override
+	public int insertCharacter(Character character) {
+		int row =sqlSession.insert("insertCharacter", character);
+		sqlSession.commit();
+		return row;
+	}
+
+	@Override
+	public Character getCharacter(Integer userId) {
+		return sqlSession.selectOne("getCharacter", userId);
+	}
+
+	@Override
+	public int updateCharacter(Character character) {
+		int result = sqlSession.update("updateCharacter", character);
+		sqlSession.commit();
+		return result;
+	}
 }

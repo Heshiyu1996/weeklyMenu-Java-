@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.entity.FeedBack;
 import com.entity.User;
+import com.entity.Character;
 import com.service.UserService;
 
 @Controller
@@ -93,6 +95,7 @@ public class UserController {
 
 		return map;
 	}
+	
 //	注册
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public @ResponseBody
@@ -117,6 +120,106 @@ public class UserController {
 			map.put("success", true);
 		} else {
 			map.put("msg", "注册失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
+	
+//	获取我的喜好
+	@ResponseBody
+	@RequestMapping(value ="/ifExistCharacter")
+	public Map<String, Object> ifExistCharacter(HttpSession session) {
+		
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("msg", "检查个人喜好失败，请重新登录！");
+			map.put("success", false);
+		} else {
+			Boolean ifExist = false;
+			ifExist = userService.ifExistCharacter(Integer.parseInt(uid));
+			Map<String,Object> resultMap=new HashMap<String, Object>();
+			resultMap.put("ifExist", ifExist);
+			map.put("msg", "检查我的喜好成功");
+			map.put("relatedObject", resultMap);
+			map.put("success", true);
+		}
+		return map;
+	}
+	
+//	获取我的喜好
+	@ResponseBody
+	@RequestMapping(value ="/getCharacter")
+	public Map<String, Object> getCharacter(HttpSession session) {
+		
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "获取个人喜好失败，请重新登录！");
+		} else {
+			Character character = userService.getCharacter(Integer.parseInt(uid));
+			map.put("msg", "获取我的喜好成功");
+			map.put("relatedObject", character);
+			map.put("success", true);
+		}
+		return map;
+	}
+	
+//	保存“我的喜好”
+	@RequestMapping(value = "/updateCharacter", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> updateCharacter(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			@RequestParam(value="provinceCode")String provinceCode,
+			@RequestParam(value="province")String province,
+			@RequestParam(value="cityCode")String cityCode,
+			@RequestParam(value="city")String city,
+			@RequestParam(value="nation")String nation,
+			@RequestParam(value="taste")String taste,
+			@RequestParam(value="tall")String tall,
+			@RequestParam(value="height")String height,
+			@RequestParam(value="eatHabit")String eatHabit,
+			@RequestParam(value="prepare")String prepare,
+			@RequestParam(value="alcohol")int alcohol,
+			@RequestParam(value="attention", required=false)String attention
+			) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		String uid=(String)session.getAttribute("uid_session");
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "获取个人喜好失败，请重新登录！");
+			return map;
+		}
+		
+		int userId = Integer.parseInt(uid);
+		boolean isExist = userService.ifExistCharacter(userId);
+		boolean isSuccess = false;
+		Character character = new Character();
+		character.setUserId(userId);
+		character.setProvince(province);
+		character.setProvinceCode(provinceCode);
+		character.setCity(city);
+		character.setCityCode(cityCode);
+		character.setNation(nation);
+		character.setTaste(taste);
+		character.setTall(tall);
+		character.setHeight(height);
+		character.setEatHabit(eatHabit);
+		character.setPrepare(prepare);
+		character.setAlcohol(alcohol);
+		character.setAttention(attention);
+		
+		if (isExist) {
+			isSuccess = userService.updateCharacter(character);
+		} else {
+			isSuccess = userService.addCharacter(character);
+		}
+		if (isSuccess) {
+			map.put("msg", "更新我的喜好成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "更新我的喜好失败");
 			map.put("success", false);
 		}
 

@@ -39,4 +39,51 @@
 		0)
 	</insert>
 	
+	<select id="ifExistCharacter" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+		select count(*) from characters
+		where userId = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getCharacter" resultType="com.entity.Character" parameterType="java.lang.Integer" >
+		select * from characters
+		where userId = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insertCharacter" parameterType="com.entity.Character">
+		insert into characters (userId, provinceCode, province, cityCode, city, nation, taste, tall, height, eatHabit, prepare, alcohol, attention)
+		values (
+		#{userId,jdbcType=INTEGER},
+		#{provinceCode,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{cityCode,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{nation,jdbcType=VARCHAR},
+		#{taste,jdbcType=VARCHAR},
+		#{tall,jdbcType=VARCHAR},
+		#{height,jdbcType=VARCHAR},
+		#{eatHabit,jdbcType=VARCHAR},
+		#{prepare,jdbcType=VARCHAR},
+		#{alcohol,jdbcType=INTEGER},
+		#{attention,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="updateCharacter" parameterType="com.entity.Character" >
+		update characters
+		set 
+			provinceCode = #{provinceCode,jdbcType=VARCHAR},
+			province = #{province,jdbcType=VARCHAR},
+			cityCode = #{cityCode,jdbcType=VARCHAR},
+			city = #{city,jdbcType=VARCHAR},
+			nation = #{nation,jdbcType=VARCHAR},
+			taste = #{taste,jdbcType=VARCHAR},
+			tall = #{tall,jdbcType=VARCHAR},
+			height = #{height,jdbcType=VARCHAR},
+			eatHabit = #{eatHabit,jdbcType=VARCHAR},
+			prepare = #{prepare,jdbcType=VARCHAR},
+			alcohol = #{alcohol,jdbcType=INTEGER},
+			attention = #{attention,jdbcType=VARCHAR}
+		where userId = #{userId,jdbcType=INTEGER}
+	</update>
+	
 </mapper>
