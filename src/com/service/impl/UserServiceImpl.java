@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User checkPassword(String uid,String upassword) {
-
 		User user = userDao.queryByUid(uid.trim());
 		// 不存在用户
 		if (user == null)
@@ -44,6 +43,15 @@ public class UserServiceImpl implements UserService {
 
 		return null;
 	}
-	
 
+	@Override
+	public boolean addtUser(User user) {
+		boolean flag=false;
+		try {
+			flag=(userDao.registUser(user)==1)?true:false;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return flag;
+	}
 }

@@ -38,5 +38,12 @@ public class UserDaoImpl implements UserDao {
 		return sqlSession.selectOne("queryBySid", Uid);
 	}
 
+	@Override
+	public int registUser(User user) {
+		int row =sqlSession.insert("registUser", user);
+		sqlSession.commit();
+		return row;
+	}
+
 
 }

@@ -93,4 +93,33 @@ public class UserController {
 
 		return map;
 	}
+//	注册
+	@RequestMapping(value = "/regist", method = RequestMethod.POST)
+	public @ResponseBody
+	Map<String, Object> regist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			@RequestParam(value="uid")String uid,
+			@RequestParam(value="uname")String uname,
+			@RequestParam(value="umobile")String umobile,
+			@RequestParam(value="upassword")String upassword
+			) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = new User();
+		user.setUid(uid);
+		user.setUname(uname);
+		user.setUmobile(umobile);
+		user.setUpassword(upassword);
+		boolean isAdd = userService.addtUser(user);
+		// 登录成功
+		if (isAdd) {
+			session.setAttribute("uid_session", uid);
+			session.setAttribute("utype_session", 0);
+			map.put("msg", "注册成功");
+			map.put("success", true);
+		} else {
+			map.put("msg", "注册失败");
+			map.put("success", false);
+		}
+
+		return map;
+	}
 }

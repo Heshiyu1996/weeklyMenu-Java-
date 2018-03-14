@@ -47,6 +47,7 @@ public class SearchServiceImpl implements SearchService {
 				flag=(searchDao.addKeywordCount(keyword)==1)?true:false;
 			} catch (Exception e) {
 				System.out.println("“增加关键词次数”出错了");
+				System.out.println(e);
 			}
 		}
 		return flag;

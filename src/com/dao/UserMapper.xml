@@ -29,4 +29,14 @@
 	  where uid = #{uid,jdbcType=INTEGER}
 	</select>
 	
+	<insert id="registUser" parameterType="com.entity.User">
+		insert into users (uid, uname, umobile, upassword, utype)
+		values (
+		#{uid,jdbcType=INTEGER},
+		#{uname,jdbcType=VARCHAR},
+		#{umobile,jdbcType=VARCHAR},
+		#{upassword,jdbcType=VARCHAR},
+		0)
+	</insert>
+	
 </mapper>
