@@ -2,6 +2,7 @@ package com.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +52,16 @@ public class OrderController {
 		} else {
 			List<Order> order = orderService.getOrdersByDateCodeUserId(dateCode, Integer.parseInt(uid));
 			System.out.println(order);
-			map.put("msg", "获取反馈详情成功");
-			map.put("relatedObject", order);
+			List<Boolean> periodList = new ArrayList<Boolean>();
+			periodList.add(true);
+			periodList.add(true);
+			periodList.add(true);
+			for (int i=0; i<order.size(); i++) {
+				periodList.set(order.get(i).getPid()-1, false);
+			}
+			
+			map.put("msg", "获取该用户在 " + dateCode + " 的订餐信息成功，注意：为false则表示用户在该时间段已经点过了");
+			map.put("relatedObject", periodList);
 			map.put("success", true);
 		}
 		return map;
