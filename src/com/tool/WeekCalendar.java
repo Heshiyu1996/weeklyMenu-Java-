@@ -68,7 +68,7 @@ public class WeekCalendar {
     		calendarMap.put("today", todayDateMap);
 
         	// json对象：本周的日期
-            for(int i=0; i<7; i++) {
+            for(int i=-1; i<6; i++) {
             	Map<String, Object> newDayMap=new HashMap<String, Object>();
             	newDayMap.put("day", i+1);
             	newDayMap.put("date", sdf.format(getThisWeek(date, i)));

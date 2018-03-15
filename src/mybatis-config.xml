@@ -36,6 +36,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/dao/SearchMapper.xml" />
 		<mapper resource="com/dao/PlanMapper.xml" />
 		<mapper class="com.entity.Plan" />
+		<mapper resource="com/dao/OrderMapper.xml" />
+		<mapper class="com.entity.Order" />
+		<mapper class="com.entity.OrderDetail" />
 	</mappers>
 	
 </configuration>
