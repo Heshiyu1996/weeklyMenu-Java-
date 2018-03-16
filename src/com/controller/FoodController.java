@@ -123,7 +123,10 @@ public class FoodController {
 //	加入收藏
 	@RequestMapping(value = "/removeMarks", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> removeFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
+	Map<String, Object> removeFeedBack(HttpServletRequest request, 
+			HttpServletResponse response, HttpSession session, 
+			@RequestParam(value="foodId")int foodId,
+			@RequestParam(value="userId")int userId) {
 		boolean isAdd = foodService.removeMarks(foodId, userId);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {

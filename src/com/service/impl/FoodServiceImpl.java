@@ -68,6 +68,7 @@ public class FoodServiceImpl implements FoodService {
 		boolean flag=false;
 		try {
 			flag=(foodDao.removeMarks(foodId, userId)==1)?true:false;
+			System.out.println("我是serviceImpl，刚刚执行完removeMarks");
 			flag=(foodDao.decMarkCount(foodId)==1)?true:false;
 		} catch (Exception e) {
 			System.out.println(e);

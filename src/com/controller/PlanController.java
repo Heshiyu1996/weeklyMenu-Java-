@@ -3,6 +3,7 @@ package com.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +70,7 @@ public class PlanController {
 	}
 	
 
-//	根据day、pid、cid获取foods列表
+//	根据day、pid、cid获取foods列表（旧）
 	@ResponseBody
 	@RequestMapping(value ="/getFoodsByDayPidCid")
 	public Map<String, Object> getFoodsByDayPidCid(HttpSession session, @RequestParam(value="day")int day, @RequestParam(value="pid")int pid, @RequestParam(value="cid")int cid) {
@@ -79,6 +80,35 @@ public class PlanController {
 			listMap.put("foods", foods);
 			map.put("msg", "根据day、pid、cid获取foods列表成功");
 			map.put("relatedObject", listMap);
+			map.put("success", true);
+		return map;
+	}
+
+//	根据day、pid获取foods列表（新）
+	@ResponseBody
+	@RequestMapping(value ="/getFoodsByDayPid")
+	public Map<String, Object> getFoodsByDayPid(HttpSession session, 
+			@RequestParam(value="day")int day, 
+			@RequestParam(value="pid")int pid) {
+			Map<String,Object> map=new HashMap<String, Object>();
+			// 先根据day、pid拿到cid
+			List<Category> cids = planService.getCidsByDayPid(day, pid);
+			List<Object> allFoodsListMap=new ArrayList<Object>();
+			System.out.println("cids:");
+			System.out.println(cids);
+			// 再根据cid一个个去拿到foods
+			for (int i=0; i < cids.size(); i++) {
+				// 获取当前cid下的所有foods
+				List<Food> foods = planService.getFoodsByDayPidCid(day, pid, cids.get(i).getCid());
+				// 新建一个cid的json对象，第一个字段cid，第二个cname，第三个foods来装“当前cid下的所有foods”
+				Map<String, Object> cidsListMap=new HashMap<String, Object>();
+				cidsListMap.put("cid", cids.get(i).getCid());
+				cidsListMap.put("cname", cids.get(i).getCname());
+				cidsListMap.put("foods", foods);
+				allFoodsListMap.add(cidsListMap);
+			}
+			map.put("msg", "获取星期" + day + "的第" + pid + "时段的菜单成功！");
+			map.put("relatedObject", allFoodsListMap);
 			map.put("success", true);
 		return map;
 	}

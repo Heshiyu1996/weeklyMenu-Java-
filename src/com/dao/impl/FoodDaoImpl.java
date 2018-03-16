@@ -76,6 +76,8 @@ public class FoodDaoImpl implements FoodDao {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("foodId", foodId);
 		args.put("userId", userId);
+		System.out.println("我是daoImpl：");
+		System.out.println(args);
 		int row =sqlSession.delete("removeMarks", args);
 		sqlSession.commit();
 		return row;
