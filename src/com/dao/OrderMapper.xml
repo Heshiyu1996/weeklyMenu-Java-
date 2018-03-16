@@ -8,4 +8,23 @@
 		and userId = #{userId,jdbcType=INTEGER}
 	</select>
 	
+	<insert id="insertOrder" parameterType="com.entity.Order">
+		insert into orders (orderId, dateCode, pid, userId, createTime)
+		values (
+			#{orderId,jdbcType=VARCHAR},
+			#{dateCode,jdbcType=VARCHAR},
+			#{pid,jdbcType=INTEGER},
+			#{userId,jdbcType=INTEGER},
+		  	#{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="java.util.Map">
+		insert into orderdetail (foodId, count, orderId)
+		values (
+			#{foodId,jdbcType=INTEGER},
+			#{count,jdbcType=INTEGER},
+			#{orderId,jdbcType=VARCHAR}
+		)
+	</insert>
 </mapper>

@@ -34,4 +34,23 @@ public class OrderDaoImpl implements OrderDao {
 		return list;
 	}
 
+	@Override
+	public int insertOrder(Order order) {
+		System.out.println("order：" + order);
+		int row = sqlSession.insert("insertOrder", order);
+		sqlSession.commit();
+		return row;
+	}
+
+	@Override
+	public int insertOrderDetail(int foodId, int count, String orderId) {
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("foodId", foodId);
+		args.put("count", count);
+		args.put("orderId", orderId);
+		int result = sqlSession.insert("insertOrderDetail", args);
+		sqlSession.commit();
+		return result;
+	}
+
 }

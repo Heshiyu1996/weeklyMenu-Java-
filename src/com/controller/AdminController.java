@@ -257,30 +257,4 @@ public class AdminController {
 		map.put("success", true);
 		return map;
 	}
-	//	测试
-	@ResponseBody
-	@RequestMapping(value ="/getTest", method = RequestMethod.POST)
-	public void getTest(HttpSession session,
-			@RequestBody JSONObject mydata){
-		String uid=(String)session.getAttribute("uid_session");
-		Map<String,Object> map=new HashMap<String, Object>();
-		if(uid==null){
-			map.put("success", false);
-			map.put("msg", "Session已过期，请重新登录！");
-		} else {
-			System.out.println("mydata");
-	        Iterator iterator = mydata.keys();
-			while(iterator.hasNext()){
-				String key = (String) iterator.next();
-				String value = mydata.getString(key);
-				System.out.println("key" + key);
-	            System.out.println("value" + value);
-				String[] strs = value.split("-");
-				int price = (Integer.parseInt(strs[0]));
-				int count = (Integer.parseInt(strs[1]));
-				System.out.println("price" + price);
-				System.out.println("count" + count);
-			}
-		}
-	}
 }

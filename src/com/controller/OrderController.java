@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,5 +69,60 @@ public class OrderController {
 			map.put("success", true);
 		}
 		return map;
+	}
+	// 新增订单order、以及orderDetail
+	@ResponseBody
+	@RequestMapping(value ="/addOrder", method = RequestMethod.POST)
+	public Map<String,Object> addOrder(HttpSession session,
+			@RequestBody JSONObject bookDetail){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+			return map;
+		}
+		
+		String dateCode = bookDetail.getString("dateCode");
+		System.out.println(bookDetail);
+		System.out.println(dateCode);
+		int pid = bookDetail.getInt("pid");
+		String orderId = dateCode + "0" + Integer.toString(pid) + uid;
+		System.out.println("orderId：" + orderId);
+		// 组件一张“新订单”
+		Order order = new Order();
+		order.setOrderId(orderId);
+		order.setDateCode(dateCode);
+		order.setPid(pid);
+		order.setUserId(Integer.parseInt(uid));
+		order.setCreateTime(new Date());
+
+		boolean isAdd = true;
+		
+		isAdd = orderService.addOrder(order);
+		
+		
+		System.out.println("mydata");
+        Iterator iterator = bookDetail.keys();
+		while(iterator.hasNext()){
+			String key = (String) iterator.next();
+			String value = bookDetail.getString(key);
+			if (key == "dateCode") break;
+			String[] strs = value.split("-");
+			int foodId = Integer.parseInt(key);
+			int price = Integer.parseInt(strs[0]);
+			int count = Integer.parseInt(strs[1]);
+			isAdd = orderService.addOrderDetail(foodId, count, orderId);
+		}
+		if (isAdd) {
+			map.put("success", true);
+			map.put("msg", "新增订单成功！");
+			return map;
+		} else {
+			map.put("success", false);
+			map.put("msg", "订单新增失败啦！");
+			return map;
+		}
+			
 	}
 }
