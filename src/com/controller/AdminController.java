@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -247,5 +251,12 @@ public class AdminController {
 		map.put("relatedObject", listMap);
 		map.put("success", true);
 		return map;
+	}
+	//	测试
+	@ResponseBody
+	@RequestMapping(value ="/getTest", method = RequestMethod.POST)
+	public void getTest(@RequestBody JSONObject mydata){
+		System.out.println("mydata");
+		System.out.println(mydata.getString("name"));
 	}
 }

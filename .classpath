@@ -26,5 +26,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hsy/Desktop/新建文件夹 (2)/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
