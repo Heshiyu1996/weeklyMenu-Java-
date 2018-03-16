@@ -26,12 +26,14 @@ public class Food {
     private int categoryId; //所属类别id
     
     private String category; //所属类别
+    
+    private int price; // 价格
 
 	public Food() {
 	}
 
 	public Food(int foodId, String name, String imgUrl, String material,
-			String description, int markCount, int visitCount, int categoryId, String category) {
+			String description, int markCount, int visitCount, int categoryId, String category, int price) {
 		super();
 		this.foodId = foodId;
 		this.name = name;
@@ -42,6 +44,7 @@ public class Food {
 		this.visitCount = visitCount;
 		this.categoryId = categoryId;
 		this.category = category;
+		this.price = price;
 	}
 
 	public int getFoodId() {
@@ -116,13 +119,22 @@ public class Food {
 		this.category = category;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "Food [foodId=" + foodId + ", name=" + name + ", imgUrl="
-				+ imgUrl + ", material=" + material + ", description=" + description
-				+ ", markCount=" + markCount + ", visitCount=" + visitCount
-				+ ", categoryId=" + categoryId
-				+ ", category=" + category + "]";
+				+ imgUrl + ", material=" + material + ", description="
+				+ description + ", markCount=" + markCount + ", visitCount="
+				+ visitCount + ", categoryId=" + categoryId + ", category="
+				+ category + ", price=" + price + "]";
 	}
+
 	
 }

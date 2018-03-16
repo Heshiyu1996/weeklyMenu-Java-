@@ -97,13 +97,15 @@ public class AdminController {
 			@RequestParam(value="material")String material, 
 			@RequestParam(value="description")String description, 
 			@RequestParam(value="categoryId")int categoryId, 
-			@RequestParam(value="plans")List<String>plans) {
+			@RequestParam(value="plans")List<String> plans, 
+			@RequestParam(value="price")int price) {
 		Food food = new Food();
 		food.setName(name);
 		food.setImgUrl(imgUrl);
 		food.setMaterial(material);
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
+		food.setPrice(price);
 		System.out.println(plans);
 		int newFoodId = adminService.insertFood(food, plans);
 		System.out.println("newFoodId为：" + newFoodId);
@@ -142,7 +144,8 @@ public class AdminController {
 			@RequestParam(value="imgUrl")String imgUrl, 
 			@RequestParam(value="material")String material, 
 			@RequestParam(value="description")String description, 
-			@RequestParam(value="categoryId")int categoryId) {
+			@RequestParam(value="categoryId")int categoryId, 
+			@RequestParam(value="price")int price) {
 		
 		// 图片替换操作
         File oldfile=new File(request.getServletContext().getRealPath("/")+"img/image.jpg"); 
@@ -163,6 +166,7 @@ public class AdminController {
 		food.setMaterial(material);
 		food.setDescription(description);
 		food.setCategoryId(categoryId);
+		food.setPrice(price);
 		boolean isAdd = adminService.updateFood(food);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
@@ -256,13 +260,27 @@ public class AdminController {
 	//	测试
 	@ResponseBody
 	@RequestMapping(value ="/getTest", method = RequestMethod.POST)
-	public void getTest(@RequestBody JSONObject mydata){
-		System.out.println("mydata");
-        Iterator iterator = mydata.keys();
-		while(iterator.hasNext()){
-			String key = (String) iterator.next();
-			System.out.println(key);
-            System.out.println(mydata.getString(key));
+	public void getTest(HttpSession session,
+			@RequestBody JSONObject mydata){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			System.out.println("mydata");
+	        Iterator iterator = mydata.keys();
+			while(iterator.hasNext()){
+				String key = (String) iterator.next();
+				String value = mydata.getString(key);
+				System.out.println("key" + key);
+	            System.out.println("value" + value);
+				String[] strs = value.split("-");
+				int price = (Integer.parseInt(strs[0]));
+				int count = (Integer.parseInt(strs[1]));
+				System.out.println("price" + price);
+				System.out.println("count" + count);
+			}
 		}
 	}
 }

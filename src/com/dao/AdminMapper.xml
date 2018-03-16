@@ -29,13 +29,14 @@
 	</update>
 	
 	<insert id="insertFood" parameterType="com.entity.Food"  useGeneratedKeys="true" keyProperty="foodId">
-		insert into foods (name, imgUrl, material, description, categoryId)
+		insert into foods (name, imgUrl, material, description, categoryId, price)
 		values (
 		#{name,jdbcType=VARCHAR},
 		#{imgUrl,jdbcType=VARCHAR},
 		#{material,jdbcType=VARCHAR},
 		#{description,jdbcType=VARCHAR},
-		#{categoryId,jdbcType=INTEGER})
+		#{categoryId,jdbcType=INTEGER},
+		#{price,jdbcType=INTEGER})
 	</insert>
 
 	<update id="updateFoodAdmin" parameterType="com.entity.Food" >
@@ -46,7 +47,8 @@
 		</if>
 		material = #{material,jdbcType=VARCHAR},
 		description = #{description,jdbcType=VARCHAR},
-		categoryId = #{categoryId,jdbcType=INTEGER}
+		categoryId = #{categoryId,jdbcType=INTEGER},
+		price = #{price,jdbcType=INTEGER}
 	  where foodId = #{foodId,jdbcType=INTEGER}
 	</update>
 	

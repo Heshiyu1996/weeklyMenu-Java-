@@ -11,6 +11,7 @@
 	  <result column="markCount" property="markCount" jdbcType="INTEGER" />
 	  <result column="visitCount" property="visitCount" jdbcType="INTEGER" />
 	  <result column="categoryId" property="categoryId" jdbcType="INTEGER" />
+	  <result column="price" property="price" jdbcType="INTEGER" />
 	</resultMap>
 	
 	<select id="queryByKeyword" resultType="com.entity.Food" parameterType="java.lang.String" >
