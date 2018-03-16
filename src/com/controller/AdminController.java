@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -257,6 +258,11 @@ public class AdminController {
 	@RequestMapping(value ="/getTest", method = RequestMethod.POST)
 	public void getTest(@RequestBody JSONObject mydata){
 		System.out.println("mydata");
-		System.out.println(mydata.getString("name"));
+        Iterator iterator = mydata.keys();
+		while(iterator.hasNext()){
+			String key = (String) iterator.next();
+			System.out.println(key);
+            System.out.println(mydata.getString(key));
+		}
 	}
 }
