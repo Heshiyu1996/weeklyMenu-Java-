@@ -53,4 +53,10 @@ public class OrderDaoImpl implements OrderDao {
 		return result;
 	}
 
+	@Override
+	public List<Order> queryOrdersByUserId(int userId) {
+		List<Order> list = sqlSession.selectList("queryOrdersByUserId", userId);
+		return list;
+	}
+
 }

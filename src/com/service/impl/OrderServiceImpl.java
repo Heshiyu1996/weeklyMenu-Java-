@@ -55,4 +55,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return flag;
 	}
+
+	@Override
+	public List<Order> getOrdersByUserId(int userId) {
+		return orderDao.queryOrdersByUserId(userId);
+	}
 }

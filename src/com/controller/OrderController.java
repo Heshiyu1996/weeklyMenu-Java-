@@ -70,6 +70,24 @@ public class OrderController {
 		}
 		return map;
 	}
+//	根据duserId获取订单条数
+	@ResponseBody
+	@RequestMapping(value ="/getMyOrders")
+	public Map<String, Object> getMyOrders(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			List<Order> order = orderService.getOrdersByUserId(Integer.parseInt(uid));
+			
+			map.put("msg", "获取该用户的订单成功");
+			map.put("relatedObject", order);
+			map.put("success", true);
+		}
+		return map;
+	}
 	// 新增订单order、以及orderDetail
 	@ResponseBody
 	@RequestMapping(value ="/addOrder", method = RequestMethod.POST)
@@ -87,6 +105,7 @@ public class OrderController {
 		System.out.println(bookDetail);
 		System.out.println(dateCode);
 		int pid = bookDetail.getInt("pid");
+		int totalMoney = bookDetail.getInt("totalMoney");
 		String orderId = dateCode + "0" + Integer.toString(pid) + uid;
 		System.out.println("orderId：" + orderId);
 		// 组件一张“新订单”
@@ -95,6 +114,7 @@ public class OrderController {
 		order.setDateCode(dateCode);
 		order.setPid(pid);
 		order.setUserId(Integer.parseInt(uid));
+		order.setTotalMoney(totalMoney);
 		order.setCreateTime(new Date());
 
 		boolean isAdd = true;

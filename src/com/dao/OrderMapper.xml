@@ -8,13 +8,20 @@
 		and userId = #{userId,jdbcType=INTEGER}
 	</select>
 	
+	<select id="queryOrdersByUserId" resultType="com.entity.Order" parameterType="java.lang.Integer" >
+		select * from orders
+		where userId = #{userId,jdbcType=INTEGER}
+		order by createTime desc
+	</select>
+	
 	<insert id="insertOrder" parameterType="com.entity.Order">
-		insert into orders (orderId, dateCode, pid, userId, createTime)
+		insert into orders (orderId, dateCode, pid, userId, totalMoney, createTime)
 		values (
 			#{orderId,jdbcType=VARCHAR},
 			#{dateCode,jdbcType=VARCHAR},
 			#{pid,jdbcType=INTEGER},
 			#{userId,jdbcType=INTEGER},
+			#{totalMoney,jdbcType=INTEGER},
 		  	#{createTime,jdbcType=TIMESTAMP}
 		)
 	</insert>

@@ -13,6 +13,8 @@ public interface OrderDao {
 	
 	public List<Order> queryOrdersByDateCodeUserId(String dateCode, int userId);
 	
+	public List<Order> queryOrdersByUserId(int userId);
+	
     int insertOrder(Order order);
 	
     int insertOrderDetail(int foodId, int count, String orderId);

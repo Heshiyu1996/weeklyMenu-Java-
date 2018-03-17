@@ -17,6 +17,8 @@ public class Order {
     
     private Integer userId; // 员工Id
     
+    private Integer totalMoney; // 订单总额
+    
     @JsonSerialize(using=DateSerializer.class)
 	private Date createTime; //提交订单时间
 
@@ -24,12 +26,13 @@ public class Order {
 	}
 
 	public Order(String orderId, String dateCode, Integer pid, Integer userId,
-			Date createTime) {
+			Integer totalMoney, Date createTime) {
 		super();
 		this.orderId = orderId;
 		this.dateCode = dateCode;
 		this.pid = pid;
 		this.userId = userId;
+		this.totalMoney = totalMoney;
 		this.createTime = createTime;
 	}
 
@@ -73,10 +76,18 @@ public class Order {
 		this.createTime = createTime;
 	}
 
+	public Integer getTotalMoney() {
+		return totalMoney;
+	}
+
+	public void setTotalMoney(Integer totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", dateCode=" + dateCode
-				+ ", pid=" + pid + ", userId=" + userId + ", createTime="
+				+ ", pid=" + pid + ", totalMoney=" + totalMoney + ", userId=" + userId + ", createTime="
 				+ createTime + "]";
 	}
 
