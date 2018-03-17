@@ -92,6 +92,6 @@
 		natural join period as B
 		where A.pid = B.pid
 		and foodId = #{foodId,jdbcType=INTEGER}
-		order by A.day asc
+		order by A.day, B.pid asc
 	</select>
 </mapper>

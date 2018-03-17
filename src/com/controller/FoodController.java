@@ -80,7 +80,13 @@ public class FoodController {
 		Map<String,Object> map=new HashMap<String, Object>();
 
 		Food food = foodService.getFoodDetailByFoodId(foodId);
-		map.put("msg", "获取食物信息成功");
+		
+		boolean isAdd = foodService.addVisitCount(foodId);
+		if (isAdd == true) {
+			map.put("msg", "获取菜品信息成功，同时也为foodID：" + foodId + "提升了1次浏览量成功");
+		} else {
+			map.put("msg", "获取菜品信息成功，但是没有为foodID：" + foodId + "提升了浏览量！！");
+		}
 		map.put("relatedObject", food);
 		map.put("success", true);
 		return map;
