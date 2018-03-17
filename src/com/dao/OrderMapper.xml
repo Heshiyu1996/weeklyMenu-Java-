@@ -8,6 +8,13 @@
 		and userId = #{userId,jdbcType=INTEGER}
 	</select>
 	
+	<select id="queryOrdersByOrderId" resultType="java.util.Map" parameterType="java.lang.String" >
+		select * from orderdetail as A
+		natural join foods as B
+		where A.foodId = B.foodId
+		and A.orderId = #{orderId,jdbcType=VARCHAR}
+	</select>
+	
 	<select id="queryOrdersByUserId" resultType="com.entity.Order" parameterType="java.lang.Integer" >
 		select * from orders
 		where userId = #{userId,jdbcType=INTEGER}

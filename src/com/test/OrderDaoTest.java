@@ -23,7 +23,7 @@ public class OrderDaoTest {
 	
 	@Test
 	public void testQueryOne(){
-		System.out.println("测试结果为：" + orderService.getOrdersByUserId(3));
+		System.out.println("测试结果为：" + orderService.getOrdersByOrderId("20180317021002"));
 //		System.out.println(QiniuUtil.getUpToken(););
 	}
 }

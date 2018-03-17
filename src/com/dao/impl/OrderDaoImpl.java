@@ -59,4 +59,10 @@ public class OrderDaoImpl implements OrderDao {
 		return list;
 	}
 
+	@Override
+	public List<Order> queryOrdersByOrderId(String orderId) {
+		List<Order> list = sqlSession.selectList("queryOrdersByOrderId", orderId);
+		return list;
+	}
+
 }

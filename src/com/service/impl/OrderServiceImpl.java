@@ -60,4 +60,9 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> getOrdersByUserId(int userId) {
 		return orderDao.queryOrdersByUserId(userId);
 	}
+
+	@Override
+	public List<Order> getOrdersByOrderId(String orderId) {
+		return orderDao.queryOrdersByOrderId(orderId);
+	}
 }

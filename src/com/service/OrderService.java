@@ -13,6 +13,9 @@ public interface OrderService {
 
 	// 获取指定用户的订单列表
 	public List<Order> getOrdersByUserId(int userId);
+
+	// 获取指定orderId的订单列表
+	public List<Order> getOrdersByOrderId(String orderId);
 	
 	// 新增订单，因为orderId是String，所以这里返回String
 	public boolean addOrder(Order order);

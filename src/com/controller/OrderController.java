@@ -70,7 +70,7 @@ public class OrderController {
 		}
 		return map;
 	}
-//	根据duserId获取订单条数
+//	根据userId获取订单条数
 	@ResponseBody
 	@RequestMapping(value ="/getMyOrders")
 	public Map<String, Object> getMyOrders(HttpSession session){
@@ -88,7 +88,28 @@ public class OrderController {
 		}
 		return map;
 	}
-	// 新增订单order、以及orderDetail
+
+//	根据orderId获取订单详情
+	@ResponseBody
+	@RequestMapping(value ="/getOrderDetail")
+	public Map<String, Object> getOrderDetail(HttpSession session,
+			@RequestParam(value="orderId")String orderId){
+		String uid=(String)session.getAttribute("uid_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid==null){
+			map.put("success", false);
+			map.put("msg", "Session已过期，请重新登录！");
+		} else {
+			List<Order> order = orderService.getOrdersByOrderId(orderId);
+			
+			map.put("msg", "获取orderId为" + orderId + "的订单详情成功！");
+			map.put("relatedObject", order);
+			map.put("success", true);
+		}
+		return map;
+	}
+	
+// 新增订单order、以及orderDetail
 	@ResponseBody
 	@RequestMapping(value ="/addOrder", method = RequestMethod.POST)
 	public Map<String,Object> addOrder(HttpSession session,

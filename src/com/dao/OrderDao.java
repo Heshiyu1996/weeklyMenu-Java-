@@ -15,6 +15,8 @@ public interface OrderDao {
 	
 	public List<Order> queryOrdersByUserId(int userId);
 	
+	public List<Order> queryOrdersByOrderId(String orderId);
+	
     int insertOrder(Order order);
 	
     int insertOrderDetail(int foodId, int count, String orderId);
