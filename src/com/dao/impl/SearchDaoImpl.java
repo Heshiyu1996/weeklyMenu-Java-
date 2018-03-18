@@ -1,6 +1,8 @@
 package com.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -45,6 +47,16 @@ public class SearchDaoImpl implements SearchDao {
 	public List<Search> getKeywords() {
 		List<Search> list = sqlSession.selectList("selectHotKeywords");
 		return list;
+	}
+
+	@Override
+	public int recordKeywordWithUserId(String keyword, int userId) {
+		Map<String, Object> args = new HashMap<String, Object>();
+		args.put("keyword", keyword);
+		args.put("userId", userId);
+		int result = sqlSession.update("recordKeywordWithUserId", args);
+		sqlSession.commit();
+		return result;
 	}
 
 

@@ -54,8 +54,11 @@ public class SearchController {
 //	新增关键词搜索次数
 	@RequestMapping(value = "/addKeywordCount", method = RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="keyword")String keyword) {
-		boolean isAdd = searchService.recordKeyword(keyword);
+	Map<String, Object> updateFeedBack(HttpServletRequest request, HttpServletResponse response, 
+			HttpSession session, 
+			@RequestParam(value="keyword")String keyword) {
+		String uid=(String)session.getAttribute("uid_session");
+		boolean isAdd = searchService.recordKeyword(keyword, Integer.parseInt(uid));
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
 			map.put("msg", "记录关键词成功");

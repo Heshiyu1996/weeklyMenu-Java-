@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.entity.FeedBack;
+import com.entity.Food;
 import com.entity.Order;
 import com.service.OrderService;
 
@@ -106,6 +107,7 @@ public class OrderController {
 			map.put("relatedObject", order);
 			map.put("success", true);
 		}
+		System.out.println(orderService.getTasteByUserId(1));
 		return map;
 	}
 	
@@ -166,4 +168,57 @@ public class OrderController {
 		}
 			
 	}
+
+//	猜你喜欢
+	@ResponseBody
+	@RequestMapping(value ="/loadRecommendFoodsByDayPid")
+	public Map<String, Object> loadRecommendFoodsByDayPid(HttpSession session, 
+			@RequestParam(value="day")int day, 
+			@RequestParam(value="pid")int pid) {
+			String uid=(String)session.getAttribute("uid_session");
+			Map<String,Object> map=new HashMap<String, Object>();
+
+			List<Food> foods = orderService.getFoodsByDayPidCid2(day, pid, null);
+			System.out.println(foods);
+			//打分环节：
+			for (int i=0; i<foods.size(); i++) {
+				int foodid = foods.get(i).getFoodId();
+				String foodname = foods.get(i).getName();
+				int userId = Integer.parseInt(uid);
+				
+				int searchPoint = 5;
+				int characterPoint = 10;
+				int markPoint = 10;
+				int buyPoint = 25;
+
+				int searchTimes = 1;
+				if (orderService.getSearchTimesByUserId(foodname, userId) > 0) {
+					searchTimes = orderService.getSearchTimesByUserId(foodname, userId);
+				}
+				
+				int characterTimes = 1;
+				if (foods.get(i).getTaste() == orderService.getTasteByUserId(1)) {
+					characterTimes = 2;
+				}
+
+				int markTimes = 1;
+				if (orderService.getMarkTimesByUserId(foodid, userId) > 0) {
+					markTimes = 2;
+				}
+				
+				int buyTimes = orderService.getBuyTimesByUserId(foodid, userId);
+				int totalPoint = (searchPoint * searchTimes) 
+						+ (characterPoint * characterTimes) 
+						+ (markPoint * markTimes)
+						+ (buyPoint * buyTimes);
+						
+				System.out.println("id=" + foodid + "的得分是：" + totalPoint);
+				foods.get(i).setTotalPoint(totalPoint);
+			}
+			map.put("msg", "获取星期" + day + "的第" + pid + "时段的菜单成功！");
+			map.put("relatedObject", foods);
+			map.put("success", true);
+		return map;
+	}
+	
 }

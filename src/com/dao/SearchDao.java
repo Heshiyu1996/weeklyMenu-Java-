@@ -15,6 +15,8 @@ public interface SearchDao {
     
     int recordKeyword(String keyword);
     
+    int recordKeywordWithUserId(String keyword, int userId);
+    
     int addKeywordCount(String keyword);
 	
 }

@@ -15,7 +15,15 @@
 	<select id="recordKeyword" resultType="java.lang.Integer" parameterType="java.lang.String" >
 		insert into hotkeywords (keyword, count)
 		values (
-				#{keyword,jdbcType=VARCHAR}, 1 
+				#{keyword,jdbcType=VARCHAR}, 1
+		)
+	</select>
+
+	<select id="recordKeywordWithUserId" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		insert into keyuserid (keyword, userId)
+		values (
+				#{keyword,jdbcType=VARCHAR},
+				#{userId,jdbcType=INTEGER}
 		)
 	</select>
 

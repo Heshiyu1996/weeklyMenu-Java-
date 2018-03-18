@@ -39,6 +39,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/dao/OrderMapper.xml" />
 		<mapper class="com.entity.Order" />
 		<mapper class="com.entity.OrderDetail" />
+		<mapper class="com.entity.Character" />
 	</mappers>
 	
 </configuration>

@@ -28,12 +28,17 @@ public class Food {
     private String category; //所属类别
     
     private int price; // 价格
+    
+    private int taste; //口味
+    
+    private int totalPoint; //口味
 
 	public Food() {
 	}
 
 	public Food(int foodId, String name, String imgUrl, String material,
-			String description, int markCount, int visitCount, int categoryId, String category, int price) {
+			String description, int markCount, int visitCount, int categoryId, String category, 
+			int price, int taste, int totalPoint) {
 		super();
 		this.foodId = foodId;
 		this.name = name;
@@ -45,6 +50,8 @@ public class Food {
 		this.categoryId = categoryId;
 		this.category = category;
 		this.price = price;
+		this.taste = taste;
+		this.totalPoint = totalPoint;
 	}
 
 	public int getFoodId() {
@@ -125,6 +132,22 @@ public class Food {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getTaste() {
+		return taste;
+	}
+
+	public void setTaste(int taste) {
+		this.taste = taste;
+	}
+
+	public int getTotalPoint() {
+		return totalPoint;
+	}
+
+	public void setTotalPoint(int totalPoint) {
+		this.totalPoint = totalPoint;
 	}
 
 	@Override

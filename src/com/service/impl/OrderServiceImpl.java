@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.OrderDao;
 import com.entity.FeedBack;
+import com.entity.Food;
 import com.entity.Order;
 import com.tool.Encryption;
 import com.service.FeedBackService;
@@ -64,5 +65,30 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> getOrdersByOrderId(String orderId) {
 		return orderDao.queryOrdersByOrderId(orderId);
+	}
+
+	@Override
+	public int getBuyTimesByUserId(int foodId, int userId) {
+		return orderDao.queryBuyTimesByUserId(foodId, userId);
+	}
+
+	@Override
+	public int getSearchTimesByUserId(String keyword, int userId) {
+		return orderDao.querySearchTimesByUserId(keyword, userId);
+	}
+
+	@Override
+	public int getMarkTimesByUserId(int foodId, int userId) {
+		return orderDao.queryMarkTimesByUserId(foodId, userId);
+	}
+
+	@Override
+	public int getTasteByUserId(int userId) {
+		return orderDao.queryTasteByUserId(userId);
+	}
+
+	@Override
+	public List<Food> getFoodsByDayPidCid2(Integer day, Integer pid, Integer cid) {
+		return orderDao.queryFoodsByDayPidCid2(day, pid, cid);
 	}
 }

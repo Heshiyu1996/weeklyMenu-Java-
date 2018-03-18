@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.entity.FeedBack;
+import com.entity.Food;
 import com.entity.Order;
 
 import org.springframework.stereotype.Repository;
@@ -20,5 +21,15 @@ public interface OrderDao {
     int insertOrder(Order order);
 	
     int insertOrderDetail(int foodId, int count, String orderId);
+    
+    int queryBuyTimesByUserId(int foodId, int userId);
+    
+    int querySearchTimesByUserId(String keyword, int userId);
+    
+    int queryMarkTimesByUserId(int foodId, int userId);
+    
+    int queryTasteByUserId(int userId);
 	
+	List<Food> queryFoodsByDayPidCid2(Integer day, Integer pid, Integer cid);
+    
 }

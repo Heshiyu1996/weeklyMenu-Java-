@@ -41,4 +41,44 @@
 			#{orderId,jdbcType=VARCHAR}
 		)
 	</insert>
+	<select id="querySearchTimesByUserId" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		SELECT count(*) FROM keyuserid as A
+		natural join foods as B
+		where A.keyword = B.name
+		and userId = #{userId,jdbcType=INTEGER}
+		and keyword = #{keyword,jdbcType=INTEGER};
+	</select>
+	
+	<select id="queryBuyTimesByUserId" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		SELECT count(*) FROM orders as A
+			natural join orderdetail as B
+			where A.orderId = B.orderId
+			and userId = #{userId,jdbcType=INTEGER}
+			and foodId = #{foodId,jdbcType=INTEGER};
+	</select>
+	
+	<select id="queryMarkTimesByUserId" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		SELECT count(*) FROM marks
+			where userId = #{userId,jdbcType=INTEGER}
+			and foodId = #{foodId,jdbcType=INTEGER};
+	</select>
+	
+	<select id="queryTasteByUserId" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+		SELECT tasteCode FROM characters
+			where userId = #{userId,jdbcType=INTEGER};
+	</select>
+	
+	
+	<select id="queryFoodsByDayPidCid2" resultType="com.entity.Food" parameterType="java.util.Map"  >
+		SELECT *, cname as category FROM plans as A
+		natural join foods as B
+		natural join categories as C
+		where A.foodId = B.foodId
+		and B.categoryId = C.cid
+		and A.day = #{day,jdbcType=INTEGER}
+		and A.pid = #{pid,jdbcType=INTEGER}
+     		<if test="cid != null" >
+			and C.cid = #{cid,jdbcType=INTEGER}
+			</if>;
+	</select>
 </mapper>

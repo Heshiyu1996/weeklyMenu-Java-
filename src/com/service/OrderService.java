@@ -22,4 +22,14 @@ public interface OrderService {
 	
 	public boolean addOrderDetail(int foodId, int count, String orderId);
 	
+	public int getBuyTimesByUserId(int foodId, int userId);
+	
+	public int getSearchTimesByUserId(String keyword, int userId);
+	
+	public int getMarkTimesByUserId(int foodId, int userId);
+	
+	public int getTasteByUserId(int userId);
+	
+	public List<Food> getFoodsByDayPidCid2(Integer day, Integer pid, Integer cid);
+	
 }

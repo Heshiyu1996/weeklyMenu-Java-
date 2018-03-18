@@ -26,7 +26,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 
 	@Override
-	public boolean recordKeyword(String keyword) {
+	public boolean recordKeyword(String keyword, int userId) {
 		boolean isExists=false;
 		boolean flag=false;
 		try {
@@ -34,6 +34,8 @@ public class SearchServiceImpl implements SearchService {
 		} catch (Exception e) {
 			System.out.println("“查询关键词”出错了");
 		}
+
+		flag=(searchDao.recordKeywordWithUserId(keyword, userId)==1)?true:false;
 		if(!isExists) {
 			// 不存在时，插入新的关键词
 			try {

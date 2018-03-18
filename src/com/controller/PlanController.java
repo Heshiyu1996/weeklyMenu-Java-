@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -107,6 +108,62 @@ public class PlanController {
 				cidsListMap.put("foods", foods);
 				allFoodsListMap.add(cidsListMap);
 			}
+			map.put("msg", "获取星期" + day + "的第" + pid + "时段的菜单成功！");
+			map.put("relatedObject", allFoodsListMap);
+			map.put("success", true);
+		return map;
+	}
+
+//	猜你喜欢
+	@ResponseBody
+	@RequestMapping(value ="/getRecommendFoodsByDayPid")
+	public Map<String, Object> getRecommendFoodsByDayPid(HttpSession session, 
+			@RequestParam(value="day")int day, 
+			@RequestParam(value="pid")int pid) {
+			String uid=(String)session.getAttribute("uid_session");
+			Map<String,Object> map=new HashMap<String, Object>();
+			List<Object> allFoodsListMap=new ArrayList<Object>();
+
+			List<Food> foods = planService.getFoodsByDayPidCid(day, pid, null);
+			System.out.println(foods);
+//			System.out.println(planService.myTest(1));
+			//打分环节：
+			for (int i=0; i<foods.size(); i++) {
+				int foodid = foods.get(i).getFoodId();
+				int userId = Integer.parseInt(uid);
+				
+				int searchPoint = 5;
+				int characterPoint = 10;
+				int markPoint = 10;
+				int buyPoint = 25;
+//				System.out.println( planService.getSearchTimesByUserId(foods.get(i).getName(), userId));
+				System.out.println(planService.getTasteByUserId3(1));
+//				int searchTimes = planService.getSearchTimesByUserId(foods.get(i).getName(), userId);
+
+				int searchTimes = 1;
+				
+				int characterTimes = 1;
+//				if (foods.get(i).getTaste() == planService.getTasteByUserId(1)) {
+//					characterTimes = 2;
+//				}
+				int markTimes = 1;
+//				if (planService.getMarkTimesByUserId(foodid, userId) > 0) {
+//					markTimes = 2;
+//				}
+				
+//				int buyTimes = planService.getBuyTimesByUserId(foodid, userId);
+				int buyTimes = 1;
+				int totalPoint = (searchPoint * searchTimes) 
+						+ (characterPoint * characterTimes) 
+						+ (markPoint * markTimes)
+						+ (buyPoint * buyTimes);
+						
+				System.out.println("id=" + foodid + "的得分是：" + totalPoint);
+				foods.get(i).setTotalPoint(totalPoint);
+			}
+
+			allFoodsListMap.add(foods);
+			System.out.println(allFoodsListMap);
 			map.put("msg", "获取星期" + day + "的第" + pid + "时段的菜单成功！");
 			map.put("relatedObject", allFoodsListMap);
 			map.put("success", true);
