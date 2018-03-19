@@ -276,6 +276,7 @@ public class AdminController {
 				map.put("success", false);
 				map.put("msg", "权限不足，接口调用失败！");
 			} else {
+				// 1 地区分布
 				List<Map<String, Object>> resultList=new ArrayList<Map<String, Object>>();
 				List<Character> list = adminService.getAnalysisByProvince();
 				
@@ -292,8 +293,6 @@ public class AdminController {
 							isExist = true;
 							break;
 						}
-						System.out.println("即将要比的是"+ resultList.get(j).get("name"));
-						System.out.println("和"+ province);
 						if (resultList.get(j).get("name").equals(province)) {
 							isExist = true;
 							String name = (String) resultList.get(j).get("name");
@@ -315,14 +314,199 @@ public class AdminController {
 						resultList.add(provMap);
 					}
 				}
-				System.out.println(resultList);
-				
+
 				map.put("success", true);
 				map.put("relatedObject", resultList);
-				map.put("msg", "获取用户性格数据（地区）");
+				map.put("msg", "获取用户性格数据（地区a）");
 			}
 		}
 		return map;
 	}
 
+	//	获取用户性格数据（来自哪里）
+	@ResponseBody
+	@RequestMapping(value ="/getAnalysisByTaste")
+	public Map<String, Object> getAnalysisByTaste(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Integer utype=(Integer)session.getAttribute("utype_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid == null){
+			map.put("success", false);
+			map.put("msg", "session过期了，接口调用失败！");
+		} else {
+			if (utype == 0) {
+				map.put("success", false);
+				map.put("msg", "权限不足，接口调用失败！");
+			} else {
+				// 1 地区分布
+				List<Map<String, Object>> resultList=new ArrayList<Map<String, Object>>();
+				List<Character> list = adminService.getAnalysisByProvince();
+				
+				for (int i=0; i < list.size(); i++) {
+					String taste = list.get(i).getTaste();
+					boolean isExist = false;
+					for (int j=0; j < resultList.size() ||  j == 0; j++) {
+						// 第一次，产出的长度为0时
+						if (resultList.size() == 0) {
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", taste);
+							provMap.put("value", 1);
+							resultList.add(provMap);
+							isExist = true;
+							break;
+						}
+						if (resultList.get(j).get("name").equals(taste)) {
+							isExist = true;
+							String name = (String) resultList.get(j).get("name");
+							int count = (Integer) resultList.get(j).get("value");
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", name);
+							provMap.put("value", ++count);
+							resultList.set(j, provMap);
+							break;
+						} else {
+							// 没找到，应该是j网上加，再比
+						}
+					}
+					if (!isExist){
+						// 最后真美找到，再新增吧
+						Map<String, Object> provMap=new HashMap<String, Object>();
+						provMap.put("name", taste);
+						provMap.put("value", 1);
+						resultList.add(provMap);
+					}
+				}
+
+				map.put("success", true);
+				map.put("relatedObject", resultList);
+				map.put("msg", "获取用户口味");
+			}
+		}
+		return map;
+	}
+	
+
+
+	//	获取用户性格数据（来自哪里）
+	@ResponseBody
+	@RequestMapping(value ="/getAnalysisByPrepare")
+	public Map<String, Object> getAnalysisByPrepare(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Integer utype=(Integer)session.getAttribute("utype_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid == null){
+			map.put("success", false);
+			map.put("msg", "session过期了，接口调用失败！");
+		} else {
+			if (utype == 0) {
+				map.put("success", false);
+				map.put("msg", "权限不足，接口调用失败！");
+			} else {
+				// 1 地区分布
+				List<Map<String, Object>> resultList=new ArrayList<Map<String, Object>>();
+				List<Character> list = adminService.getAnalysisByProvince();
+				
+				for (int i=0; i < list.size(); i++) {
+					String taste = list.get(i).getPrepare();
+					boolean isExist = false;
+					for (int j=0; j < resultList.size() ||  j == 0; j++) {
+						// 第一次，产出的长度为0时
+						if (resultList.size() == 0) {
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", taste);
+							provMap.put("value", 1);
+							resultList.add(provMap);
+							isExist = true;
+							break;
+						}
+						if (resultList.get(j).get("name").equals(taste)) {
+							isExist = true;
+							String name = (String) resultList.get(j).get("name");
+							int count = (Integer) resultList.get(j).get("value");
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", name);
+							provMap.put("value", ++count);
+							resultList.set(j, provMap);
+							break;
+						} else {
+							// 没找到，应该是j网上加，再比
+						}
+					}
+					if (!isExist){
+						// 最后真美找到，再新增吧
+						Map<String, Object> provMap=new HashMap<String, Object>();
+						provMap.put("name", taste);
+						provMap.put("value", 1);
+						resultList.add(provMap);
+					}
+				}
+
+				map.put("success", true);
+				map.put("relatedObject", resultList);
+				map.put("msg", "获取用户倾向");
+			}
+		}
+		return map;
+	}
+	//	获取用户性格数据（来自哪里）
+	@ResponseBody
+	@RequestMapping(value ="/getAnalysisByHabits")
+	public Map<String, Object> getAnalysisByHabits(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
+		Integer utype=(Integer)session.getAttribute("utype_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(uid == null){
+			map.put("success", false);
+			map.put("msg", "session过期了，接口调用失败！");
+		} else {
+			if (utype == 0) {
+				map.put("success", false);
+				map.put("msg", "权限不足，接口调用失败！");
+			} else {
+				// 1 地区分布
+				List<Map<String, Object>> resultList=new ArrayList<Map<String, Object>>();
+				List<Character> list = adminService.getAnalysisByProvince();
+				
+				for (int i=0; i < list.size(); i++) {
+					String taste = list.get(i).getEatHabit();
+					boolean isExist = false;
+					for (int j=0; j < resultList.size() ||  j == 0; j++) {
+						// 第一次，产出的长度为0时
+						if (resultList.size() == 0) {
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", taste);
+							provMap.put("value", 1);
+							resultList.add(provMap);
+							isExist = true;
+							break;
+						}
+						if (resultList.get(j).get("name").equals(taste)) {
+							isExist = true;
+							String name = (String) resultList.get(j).get("name");
+							int count = (Integer) resultList.get(j).get("value");
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", name);
+							provMap.put("value", ++count);
+							resultList.set(j, provMap);
+							break;
+						} else {
+							// 没找到，应该是j网上加，再比
+						}
+					}
+					if (!isExist){
+						// 最后真美找到，再新增吧
+						Map<String, Object> provMap=new HashMap<String, Object>();
+						provMap.put("name", taste);
+						provMap.put("value", 1);
+						resultList.add(provMap);
+					}
+				}
+
+				map.put("success", true);
+				map.put("relatedObject", resultList);
+				map.put("msg", "获取用户饮食习惯");
+			}
+		}
+		return map;
+	}
 }
