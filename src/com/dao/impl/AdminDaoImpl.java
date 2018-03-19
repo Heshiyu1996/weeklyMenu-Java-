@@ -97,8 +97,8 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Character> getCharacterList() {
-		List<Character> list = sqlSession.selectList("queryCharacters");
+	public List<Character> getAnalysisByProvince() {
+		List<Character> list = sqlSession.selectList("queryAnalysisProvince");
 		return list;
 	}
 

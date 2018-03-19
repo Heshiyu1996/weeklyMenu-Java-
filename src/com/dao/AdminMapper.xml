@@ -85,7 +85,7 @@
 		where foodId = #{foodId,jdbcType=INTEGER}
 	</delete>
 	
-	<select id="queryCharacters" resultType="com.entity.Character">
+	<select id="queryAnalysisProvince" resultType="com.entity.Character">
 		select * from characters
 	</select>
 	

@@ -109,8 +109,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Character> getCharacterList() {
-		return adminDao.getCharacterList();
+	public List<Character> getAnalysisByProvince() {
+		return adminDao.getAnalysisByProvince();
 	}
 
 }

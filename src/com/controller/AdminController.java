@@ -3,6 +3,7 @@ package com.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.entity.Character;
 import com.entity.FeedBack;
 import com.entity.Food;
 import com.service.AdminService;
@@ -259,22 +261,66 @@ public class AdminController {
 	}
 
 
-	//	获取用户性格列表
+	//	获取用户性格数据（来自哪里）
 	@ResponseBody
-	@RequestMapping(value ="/getCharacterList")
-	public Map<String, Object> getCharacterList(HttpSession session){
+	@RequestMapping(value ="/getAnalysisByProvince")
+	public Map<String, Object> getAnalysisByProvince(HttpSession session){
+		String uid=(String)session.getAttribute("uid_session");
 		Integer utype=(Integer)session.getAttribute("utype_session");
 		Map<String,Object> map=new HashMap<String, Object>();
-		if(utype == 0){
+		if(uid == null){
 			map.put("success", false);
-			map.put("msg", "权限不足，接口调用失败！");
+			map.put("msg", "session过期了，接口调用失败！");
 		} else {
-//			List<FeedBack> feedBack = adminService.loadFeedBackList(isReplied, order);
-//			Map<String, Object> listMap=new HashMap<String, Object>();
-//			listMap.put("myList", feedBack);
-//			map.put("msg", "（管）获取反馈列表成功");
-//			map.put("relatedObject", listMap);
-//			map.put("success", true);
+			if (utype == 0) {
+				map.put("success", false);
+				map.put("msg", "权限不足，接口调用失败！");
+			} else {
+				List<Map<String, Object>> resultList=new ArrayList<Map<String, Object>>();
+				List<Character> list = adminService.getAnalysisByProvince();
+				
+				for (int i=0; i < list.size(); i++) {
+					String province = list.get(i).getProvince();
+					boolean isExist = false;
+					for (int j=0; j < resultList.size() ||  j == 0; j++) {
+						// 第一次，产出的长度为0时
+						if (resultList.size() == 0) {
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", province);
+							provMap.put("value", 1);
+							resultList.add(provMap);
+							isExist = true;
+							break;
+						}
+						System.out.println("即将要比的是"+ resultList.get(j).get("name"));
+						System.out.println("和"+ province);
+						if (resultList.get(j).get("name").equals(province)) {
+							isExist = true;
+							String name = (String) resultList.get(j).get("name");
+							int count = (Integer) resultList.get(j).get("value");
+							Map<String, Object> provMap=new HashMap<String, Object>();
+							provMap.put("name", name);
+							provMap.put("value", ++count);
+							resultList.set(j, provMap);
+							break;
+						} else {
+							// 没找到，应该是j网上加，再比
+						}
+					}
+					if (!isExist){
+						// 最后真美找到，再新增吧
+						Map<String, Object> provMap=new HashMap<String, Object>();
+						provMap.put("name", province);
+						provMap.put("value", 1);
+						resultList.add(provMap);
+					}
+				}
+				System.out.println(resultList);
+				
+				map.put("success", true);
+				map.put("relatedObject", resultList);
+				map.put("msg", "获取用户性格数据（地区）");
+			}
 		}
 		return map;
 	}

@@ -25,7 +25,7 @@ public interface AdminService {
 	public List<Food> getFoodsList();
 	// 获取菜品列表
 	public List<Food> getFoodsByKeyword(String keyword);
-	// 获取用户性格列表
-	public List<Character> getCharacterList();
+	// 获取用户性格列表（城市）
+	public List<Character> getAnalysisByProvince();
 	
 }

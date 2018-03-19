@@ -29,6 +29,6 @@ public interface AdminDao {
     
 	public List<Food> getFoodsList();
     
-	public List<Character> getCharacterList();
+	public List<Character> getAnalysisByProvince();
 	
 }
