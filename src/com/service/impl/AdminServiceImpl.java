@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.AdminDao;
+import com.entity.Character;
 import com.entity.FeedBack;
 import com.entity.Food;
 import com.tool.Encryption;
@@ -105,6 +106,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Food> getFoodsByKeyword(String keyword) {
 		return adminDao.getFoodsByKeyword(keyword);
+	}
+
+	@Override
+	public List<Character> getCharacterList() {
+		return adminDao.getCharacterList();
 	}
 
 }

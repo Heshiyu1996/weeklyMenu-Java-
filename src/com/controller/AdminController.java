@@ -257,4 +257,26 @@ public class AdminController {
 		map.put("success", true);
 		return map;
 	}
+
+
+	//	获取用户性格列表
+	@ResponseBody
+	@RequestMapping(value ="/getCharacterList")
+	public Map<String, Object> getCharacterList(HttpSession session){
+		Integer utype=(Integer)session.getAttribute("utype_session");
+		Map<String,Object> map=new HashMap<String, Object>();
+		if(utype == 0){
+			map.put("success", false);
+			map.put("msg", "权限不足，接口调用失败！");
+		} else {
+//			List<FeedBack> feedBack = adminService.loadFeedBackList(isReplied, order);
+//			Map<String, Object> listMap=new HashMap<String, Object>();
+//			listMap.put("myList", feedBack);
+//			map.put("msg", "（管）获取反馈列表成功");
+//			map.put("relatedObject", listMap);
+//			map.put("success", true);
+		}
+		return map;
+	}
+
 }

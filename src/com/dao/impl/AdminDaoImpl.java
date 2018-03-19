@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.dao.AdminDao;
 import com.dao.DBAccess;
 import com.dao.FeedBackDao;
+import com.entity.Character;
 import com.entity.FeedBack;
 import com.entity.Food;
 @Repository("adminDao")
@@ -93,6 +94,12 @@ public class AdminDaoImpl implements AdminDao {
 		int row =sqlSession.delete("deletePlanByFoodId", foodId);
 		sqlSession.commit();
 		return row;
+	}
+
+	@Override
+	public List<Character> getCharacterList() {
+		List<Character> list = sqlSession.selectList("queryCharacters");
+		return list;
 	}
 
 

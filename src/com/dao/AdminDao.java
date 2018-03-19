@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.entity.Character;
 import com.entity.FeedBack;
 import com.entity.Food;
 
@@ -27,5 +28,7 @@ public interface AdminDao {
     int deleteFood(int foodId);
     
 	public List<Food> getFoodsList();
+    
+	public List<Character> getCharacterList();
 	
 }
