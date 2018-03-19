@@ -94,4 +94,25 @@
 		and foodId = #{foodId,jdbcType=INTEGER}
 		order by A.day, B.pid asc
 	</select>
+	
+	<select id="queryFoodRecommondByOrder" resultType="com.entity.Food" parameterType="java.lang.Integer">
+		select foodId, name, imgUrl, material, description, markCount, visitCount, categoryId, price, cname as category from foods as C
+		natural join categories as D
+		where C.categoryId = D.cid
+		and foodId in (
+			select foodId from orderdetail
+			where orderId in (
+				SELECT orderId FROM orderdetail as A
+				natural join orders as B
+				where A.orderId = B.orderId
+				and foodId = #{foodId,jdbcType=INTEGER}
+			)
+			and foodId <![CDATA[<>]]> #{foodId,jdbcType=INTEGER}
+		)
+		order by rand()
+		limit 0,10
+	</select>
+	
+	
+	
 </mapper>

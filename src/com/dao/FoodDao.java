@@ -36,4 +36,6 @@ public interface FoodDao {
 	
 	List<Map<String, Object>> queryPlanByFoodId(int foodId);
 	
+	List<Food> queryFoodRecommondByOrder(int foodId);
+	
 }

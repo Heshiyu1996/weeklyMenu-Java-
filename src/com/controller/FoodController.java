@@ -110,9 +110,12 @@ public class FoodController {
 	}
 	
 //	加入收藏
-	@RequestMapping(value = "/insertMarks", method = RequestMethod.POST)
+	@RequestMapping(value = "/insertMarks")
 	public @ResponseBody
-	Map<String, Object> insertMarks(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam(value="foodId")int foodId, @RequestParam(value="userId")int userId) {
+	Map<String, Object> insertMarks(HttpServletRequest request, 
+			HttpServletResponse response, HttpSession session, 
+			@RequestParam(value="foodId")int foodId, 
+			@RequestParam(value="userId")int userId) {
 		boolean isAdd = foodService.insertMarks(foodId, userId, new Date());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (isAdd == true) {
@@ -218,6 +221,22 @@ public class FoodController {
 		map.put("msg", "获取菜品的供餐时段成功");
 		map.put("relatedObject", plansList);
 		map.put("success", true);
+		return map;
+	}
+	
+
+//	获取菜品列表
+	@ResponseBody
+	@RequestMapping(value ="/getFoodRecommondByOrder")
+	public Map<String, Object> getFoodRecommondByOrder(HttpSession session, 
+			@RequestParam(value="foodId")int foodId) throws ServletException, IOException{
+		Map<String,Object> map=new HashMap<String, Object>();
+			List<Food> foods = foodService.getFoodRecommondByOrder(foodId);
+			Map<String, Object> listMap=new HashMap<String, Object>();
+			listMap.put("foodRecommond", foods);
+			map.put("msg", "根据fooId获取其他用户购买过的信息成功");
+			map.put("relatedObject", listMap);
+			map.put("success", true);
 		return map;
 	}
 }

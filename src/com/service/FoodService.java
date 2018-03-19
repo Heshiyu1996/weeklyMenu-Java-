@@ -29,5 +29,7 @@ public interface FoodService {
 	public List<Category> getAllCategories();
 
 	public List<Map<String, Object>> getPlanByFoodId(int foodId);
+
+	public List<Food> getFoodRecommondByOrder(int foodId);
 	
 }

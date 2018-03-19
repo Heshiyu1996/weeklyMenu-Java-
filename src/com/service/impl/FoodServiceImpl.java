@@ -107,4 +107,9 @@ public class FoodServiceImpl implements FoodService {
 	public List<Map<String, Object>> getPlanByFoodId(int foodId) {
 		return foodDao.queryPlanByFoodId(foodId);
 	}
+
+	@Override
+	public List<Food> getFoodRecommondByOrder(int foodId) {
+		return foodDao.queryFoodRecommondByOrder(foodId);
+	}
 }

@@ -115,4 +115,11 @@ public class FoodDaoImpl implements FoodDao {
 		return list;
 	}
 
+	@Override
+	public List<Food> queryFoodRecommondByOrder(int foodId) {
+		List<Food> list = sqlSession.selectList("queryFoodRecommondByOrder", foodId);
+		System.out.println(list);
+		return list;
+	}
+
 }

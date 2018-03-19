@@ -1,5 +1,6 @@
 package com.tool;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import java.util.ArrayList;
 import java.util.Calendar;  
@@ -68,12 +69,22 @@ public class WeekCalendar {
     		calendarMap.put("today", todayDateMap);
 
         	// json对象：本周的日期
-            for(int i=-1; i<6; i++) {
-            	Map<String, Object> newDayMap=new HashMap<String, Object>();
-            	newDayMap.put("day", i+1);
-            	newDayMap.put("date", sdf.format(getThisWeek(date, i)));
-            	listObj.add(newDayMap);
-            }
+    		if (getWhichDay(date) == 7) {
+    			System.out.println("啊！原来今天是周日");
+                for(int i=6; i<13; i++) {
+                	Map<String, Object> newDayMap=new HashMap<String, Object>();
+                	newDayMap.put("day", i+1);
+                	newDayMap.put("date", sdf.format(getThisWeek(date, i)));
+                	listObj.add(newDayMap);
+                }
+    		} else {
+                for(int i=-1; i<6; i++) {
+                	Map<String, Object> newDayMap=new HashMap<String, Object>();
+                	newDayMap.put("day", i+1);
+                	newDayMap.put("date", sdf.format(getThisWeek(date, i)));
+                	listObj.add(newDayMap);
+                }
+    		}
     		calendarMap.put("weekCalendar", listObj);
         } catch (Exception e) {
             e.printStackTrace();
