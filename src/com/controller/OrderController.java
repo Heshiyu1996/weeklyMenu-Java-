@@ -172,15 +172,12 @@ public class OrderController {
 //	猜你喜欢
 	@ResponseBody
 	@RequestMapping(value ="/loadRecommendFoodsByDayPid")
-	public Map<String, Object> loadRecommendFoodsByDayPid(HttpSession session, 
-			@RequestParam(value="day")int day, 
-			@RequestParam(value="pid")int pid) {
+	public Map<String, Object> loadRecommendFoodsByDayPid(HttpSession session, @RequestParam(value="day")int day, @RequestParam(value="pid")int pid) {
 			String uid=(String)session.getAttribute("uid_session");
 			Map<String,Object> map=new HashMap<String, Object>();
 
 			List<Food> foods = orderService.getFoodsByDayPidCid2(day, pid, null);
-			System.out.println(foods);
-			//打分环节：
+			//权重计算环节：
 			for (int i=0; i<foods.size(); i++) {
 				int foodid = foods.get(i).getFoodId();
 				String foodname = foods.get(i).getName();
@@ -212,7 +209,6 @@ public class OrderController {
 						+ (markPoint * markTimes)
 						+ (buyPoint * buyTimes);
 						
-				System.out.println("id=" + foodid + "的得分是：" + totalPoint);
 				foods.get(i).setTotalPoint(totalPoint);
 			}
 			map.put("msg", "获取星期" + day + "的第" + pid + "时段的菜单成功！");
@@ -220,5 +216,4 @@ public class OrderController {
 			map.put("success", true);
 		return map;
 	}
-	
 }

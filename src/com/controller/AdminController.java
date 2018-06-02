@@ -260,7 +260,6 @@ public class AdminController {
 		return map;
 	}
 
-
 	//	获取用户性格数据（来自哪里）
 	@ResponseBody
 	@RequestMapping(value ="/getAnalysisByProvince")
@@ -323,7 +322,7 @@ public class AdminController {
 		return map;
 	}
 
-	//	获取用户性格数据（来自哪里）
+	//	获取用户性格数据（口味）
 	@ResponseBody
 	@RequestMapping(value ="/getAnalysisByTaste")
 	public Map<String, Object> getAnalysisByTaste(HttpSession session){
@@ -385,9 +384,7 @@ public class AdminController {
 		return map;
 	}
 	
-
-
-	//	获取用户性格数据（来自哪里）
+	//	获取用户性格数据（饮食偏好）
 	@ResponseBody
 	@RequestMapping(value ="/getAnalysisByPrepare")
 	public Map<String, Object> getAnalysisByPrepare(HttpSession session){
@@ -448,7 +445,7 @@ public class AdminController {
 		}
 		return map;
 	}
-	//	获取用户性格数据（来自哪里）
+	//	获取用户性格数据（饮食习惯）
 	@ResponseBody
 	@RequestMapping(value ="/getAnalysisByHabits")
 	public Map<String, Object> getAnalysisByHabits(HttpSession session){

@@ -43,21 +43,6 @@ public class FoodController {
 		this.foodService = foodService;
 	}
 
-//	根据keyword获取食物详情
-//	@ResponseBody
-//	@RequestMapping(value ="/getFoodsByKeyword")
-//	public Map<String, Object> getFoodsByKeyword(HttpSession session, @RequestParam(value="keyword")String keyword) throws ServletException, IOException{
-//		String word = new String(keyword.getBytes("iso8859-1"), "utf-8");
-//		Map<String,Object> map=new HashMap<String, Object>();
-//		List<Food> food = foodService.getFoodsByKeyword(word);
-//		Map<String, Object> listMap=new HashMap<String, Object>();
-//		listMap.put("myList", food);
-//		map.put("msg", "根据keyword获取食物信息成功");
-//		map.put("relatedObject", listMap);
-//		map.put("success", true);
-//		return map;
-//	}
-
 //	获取菜品列表
 	@ResponseBody
 	@RequestMapping(value ="/getFoodsByKeyword")
@@ -225,7 +210,7 @@ public class FoodController {
 	}
 	
 
-//	获取菜品列表
+//	获取菜品列表（购买过此菜品的用户还购买了）
 	@ResponseBody
 	@RequestMapping(value ="/getFoodRecommondByOrder")
 	public Map<String, Object> getFoodRecommondByOrder(HttpSession session, 

@@ -14,7 +14,6 @@ import org.codehaus.jackson.map.SerializerProvider;
  *
  */
 public class DateSerializer extends JsonSerializer<Date>{
-
 	@Override
 	public void serialize(Date date, JsonGenerator json, SerializerProvider arg2)
 			throws IOException, JsonProcessingException {
@@ -22,5 +21,4 @@ public class DateSerializer extends JsonSerializer<Date>{
 		String format=sdf.format(date);
 		json.writeString(format);
 	}
-
 }
